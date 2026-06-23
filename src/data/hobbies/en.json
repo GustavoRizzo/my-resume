@@ -30,7 +30,7 @@
             "body_html": "<p>I love taking a small everyday problem and building my own solution for it. A couple of them:</p><ul><li><b>Quem?</b> — a free, ad-free web version of a \"Who am I?\" party game I play with friends. The Play Store apps are buried in ads and paywalls, so I built my own.</li><li><b>PTAX Converter</b> — in Brazil, invoicing foreign clients means converting amounts with a special Central Bank rate. Their official site is painful, so I took their API and wrapped it in a nicer interface.</li></ul>",
             "links": [
                 { "label": "Play \"Quem?\"", "url": "https://gustavorizzo.github.io/game-quem-sou-eu/", "note": "Free · PT-BR only" },
-                { "label": "PTAX Converter", "url": "https://gustavorizzo.github.io/conversor-ptax-logger/", "note": "Free" }
+                { "label": "PTAX Converter", "url": "https://gustavorizzo.github.io/conversor-ptax-logger/", "note": "Free · PT-BR only" }
             ]
         }
     ]
