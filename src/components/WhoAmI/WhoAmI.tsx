@@ -8,8 +8,8 @@ import { About } from "../../types/About";
 // Easter egg: clicking the profile photo briefly swaps it for two alternate
 // images before returning to the original. Files live in `public/` and are
 // resolved against BASE_URL so they work under the `/my-resume/` GitHub Pages base.
-const EASTER_EGG_2 = `${import.meta.env.BASE_URL}perfil_easter_egg_2.png`;
-const EASTER_EGG_3 = `${import.meta.env.BASE_URL}perfil_easter_egg_3.png`;
+const EASTER_EGG_2 = `${import.meta.env.BASE_URL}perfil_easter_egg_2.webp`;
+const EASTER_EGG_3 = `${import.meta.env.BASE_URL}perfil_easter_egg_3.webp`;
 const STEP_2_MS = 300;
 const STEP_3_MS = 500;
 

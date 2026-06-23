@@ -27,10 +27,10 @@ describe("WhoAmI easter egg", () => {
     expect(img.src).toContain("perfil.png");
 
     fireEvent.click(img);
-    expect(getPerfil().src).toContain("perfil_easter_egg_2.png");
+    expect(getPerfil().src).toContain("perfil_easter_egg_2.webp");
 
     act(() => void vi.advanceTimersByTime(300));
-    expect(getPerfil().src).toContain("perfil_easter_egg_3.png");
+    expect(getPerfil().src).toContain("perfil_easter_egg_3.webp");
 
     act(() => void vi.advanceTimersByTime(500));
     expect(getPerfil().src).toContain("perfil.png");
@@ -42,11 +42,11 @@ describe("WhoAmI easter egg", () => {
 
     fireEvent.click(img);
     act(() => void vi.advanceTimersByTime(300));
-    expect(getPerfil().src).toContain("perfil_easter_egg_3.png");
+    expect(getPerfil().src).toContain("perfil_easter_egg_3.webp");
 
     // Click again before it finishes: should restart at image 2.
     fireEvent.click(getPerfil());
-    expect(getPerfil().src).toContain("perfil_easter_egg_2.png");
+    expect(getPerfil().src).toContain("perfil_easter_egg_2.webp");
 
     act(() => void vi.advanceTimersByTime(800));
     expect(getPerfil().src).toContain("perfil.png");
