@@ -16,6 +16,7 @@
     padding-top: 60px;
 
     &_img_perfil {
+      cursor: pointer;
       border-radius: 50%;
       width: min(90%, 400px);
       aspect-ratio: 1/1;
