@@ -24,6 +24,7 @@ export default function Navbar() {
                     <CustomLink to="/ListExpertises">List Expertise</CustomLink>
                     <CustomLink to="/About">About</CustomLink>
                     <CustomLink to="/CareerTimeline">CareerTimeline</CustomLink>
+                    <CustomLink to="/BeyondWork">Beyond Work</CustomLink>
                 </ul>
             )}
         </nav>

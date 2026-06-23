@@ -1,0 +1,170 @@
+@use "../../styles/variables" as *;
+
+.beyond-work {
+  display: grid;
+  justify-items: center;
+  margin-bottom: 5em;
+
+  &__subtitle {
+    max-width: min(95%, 720px);
+    text-align: center;
+    opacity: 0.8;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    width: min(95%, 1200px);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  }
+}
+
+/* --- Card (presentation layer — reskin target) --- */
+.hobby-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  color: $default-text-color;
+  background: $first-perfil-color;
+  border: 2px solid $card-border-color-expertise;
+  border-radius: 1em;
+  padding: 1.5rem;
+  font-family: inherit;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  &__emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  &__summary {
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  &__hint {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+    color: $highlight-color-timeline;
+  }
+}
+
+/* --- Modal --- */
+.hobby-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  animation: hobby-fade-in 0.15s ease-out;
+}
+
+.hobby-modal {
+  position: relative;
+  width: min(95%, 560px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: $background-color;
+  color: $default-text-color;
+  border: 2px solid $card-border-color-expertise;
+  border-radius: 1em;
+  padding: 2rem;
+  animation: hobby-scale-in 0.15s ease-out;
+
+  &__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: $default-text-color;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0;
+  }
+
+  &__emoji {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  &__body {
+    text-align: justify;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid $highlight-color-timeline;
+    border-radius: 2em;
+    color: $default-text-color;
+    text-decoration: none;
+    transition: background 0.15s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(156, 226, 189, 0.15);
+    }
+  }
+
+  &__badge {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1em;
+    background: $highlight-color-timeline;
+    color: $background-color;
+    white-space: nowrap;
+  }
+}
+
+@keyframes hobby-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hobby-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}

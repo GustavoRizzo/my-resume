@@ -40,6 +40,12 @@ describe("App routes", () => {
     expect(screen.getByText("Career Timeline")).toBeInTheDocument();
   });
 
+  it("renders BeyondWork route", () => {
+    renderWithRoute("/BeyondWork");
+
+    expect(screen.getByText("Beyond Work")).toBeInTheDocument();
+  });
+
   it("renders fallback for unknown route", () => {
     renderWithRoute("/not-found");
 

@@ -1,0 +1,37 @@
+{
+    "section": {
+        "title": "Beyond Work",
+        "subtitle": "What I get up to away from the keyboard — and a few things I build for fun."
+    },
+    "topics": [
+        {
+            "id": "outdoors",
+            "emoji": "🥾",
+            "title": "Adventures & Sports",
+            "summary": "Trails, peaks, volleyball and a good game of football.",
+            "body_html": "<p>I love the outdoors, and hiking is my thing 🏔️. I've climbed some of the highest peaks in Brazil and once walked a <b>250&nbsp;km</b> long-distance trail. My next big dream — which I plan to make happen soon — is to walk the <b>Camino de Santiago</b>. When I'm not on a trail you'll find me playing volleyball 🏐 or, like any good Brazilian, football ⚽.</p>",
+            "links": []
+        },
+        {
+            "id": "open-source",
+            "emoji": "🌱",
+            "title": "Open Source",
+            "summary": "Building on each other's solutions so we all get better tech.",
+            "body_html": "<p>I love the idea of open source: a solution to one person's problem can become a stepping stone for someone else's — and they can give back the same way. In the end we all benefit from more mature, more capable technology.</p><p>Right now I'm contributing to a <b>Django&nbsp;+&nbsp;HTMX</b> component library, where I've been compiling the patterns I reach for every day building real projects.</p>",
+            "links": [
+                { "label": "django-sample-components", "url": "https://pypi.org/project/django-sample-components/", "note": "PyPI" }
+            ]
+        },
+        {
+            "id": "side-projects",
+            "emoji": "🛠️",
+            "title": "Tools & Pastimes I Build",
+            "summary": "Taking small everyday annoyances and coding my own fix.",
+            "body_html": "<p>I love taking a small everyday problem and building my own solution for it. A couple of them:</p><ul><li><b>Quem?</b> — a free, ad-free web version of a \"Who am I?\" party game I play with friends. The Play Store apps are buried in ads and paywalls, so I built my own.</li><li><b>PTAX Converter</b> — in Brazil, invoicing foreign clients means converting amounts with a special Central Bank rate. Their official site is painful, so I took their API and wrapped it in a nicer interface.</li></ul>",
+            "links": [
+                { "label": "Play \"Quem?\"", "url": "https://gustavorizzo.github.io/game-quem-sou-eu/", "note": "Free · PT-BR only" },
+                { "label": "PTAX Converter", "url": "https://gustavorizzo.github.io/conversor-ptax-logger/", "note": "Free" }
+            ]
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 import About from "../About";
 import CareerTimeline from "../CareerTimeline";
 import ListExpertises from "../ListExpertises";
+import BeyondWork from "../BeyondWork";
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
         <About />
         <ListExpertises />
         <CareerTimeline />
+        <BeyondWork />
       </main>
     );
   }
