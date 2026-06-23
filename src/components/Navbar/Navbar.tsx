@@ -1,8 +1,10 @@
 import { ReactNode, useState } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import data from '../../data/data.json';
 import './style.scss'
 
 export default function Navbar() {
+    const siteTitle = data.about.name;
     const [isHidden, setIsHidden] = useState(true);
 
     const toggleVisibility = () => {
@@ -11,7 +13,7 @@ export default function Navbar() {
 
     return (
         <nav className="navbar">
-            <Link to="/" className="navbar__title">Sketch Curriculum Components</Link>
+            <Link to="/" className="navbar__title">{siteTitle}</Link>
             <button onClick={toggleVisibility} className="navbar__toggle-button">
                 <span role="img" aria-label="Hide/Show">
                 👁️

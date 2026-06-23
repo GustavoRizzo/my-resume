@@ -25,3 +25,7 @@ dist-ssr
 
 # Antigravity agent configuration folder
 .agents/
+
+# Claude Code files
+CLAUDE.md
+.claude/
