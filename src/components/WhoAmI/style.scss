@@ -1,0 +1,70 @@
+@use "../../styles/variables" as *;
+
+
+  body {
+    background: $background-color;
+    color: $default-text-color;
+    font-family: $default-font-family;
+  }
+
+  .about {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    min-height: 90vh;
+    width: 100wh;
+    padding-top: 60px;
+
+    &_img_perfil {
+      border-radius: 50%;
+      width: min(90%, 400px);
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 2px #a6ddd9 solid;
+      box-shadow: rgba(200, 200, 200, 0.45) 5px 5px 25px;
+      filter: contrast(110%);
+      background-image: linear-gradient(
+        to bottom,
+        $first-perfil-color,
+        $secound-perfil-color
+      );
+    }
+  }
+
+  //  CONSOLE
+  .hidden {
+    opacity: 0;
+  }
+  .console-container {
+    font-family: $font-console;
+    font-size: 1.9em;
+    text-align: center;
+    height: 2em;
+    display: block;
+    color: white;
+    margin: auto;
+  }
+  .console-underscore {
+    font-family: $font-console;
+    color: $color-cursor-console;
+    display: inline-block;
+    top: -0.14em;
+    left: 10px;
+  }
+
+  // Contact
+
+  .list_contato {
+    display: flex;
+    gap: 30px;
+
+    .linkedin {
+      width: 30px;
+      border-radius: 15%;
+    }
+
+    .github {
+      width: 30px;
+      border-radius: 15%;
+    }
+  }

@@ -1,0 +1,82 @@
+@use "../../styles/variables" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+
+body {
+    background: $background-color;
+    color: $default-text-color;
+    font-family: $default-font-family;
+}
+
+.rb-container {
+    font-family: $default-font-family;
+    text-align: justify;
+    width: min(95%, 800px);
+    display: block;
+    position: relative;
+
+    ul.rb {
+        margin-bottom: 2.5em;
+        margin-left: ($logo-radio+$logo-border-width);
+        padding: 0;
+        display: inline-block;
+
+        li {
+            list-style: none;
+            margin: auto;
+            min-height: 50px;
+            border-left: 1px dashed $border-color-timeline;
+            padding-left: 12px+($logo-radio+$logo-border-width);
+            padding-bottom: 50px;
+            position: relative;
+
+            &:last-child {
+                border-left: 0;
+            }
+
+            .company-logo {
+                position: absolute;
+                left: -($logo-radio+$logo-border-width);
+                top: -$logo-border-width;
+                content: " ";
+                border: $logo-border-width solid $border-color-timeline;
+                border-radius: 500%;
+                background: $highlight-color-timeline;
+                width: $logo-radio*2;
+                aspect-ratio: 1/1;
+                transition: all 500ms ease-in-out;
+                background-image: url(https://media.licdn.com/dms/image/D4D0BAQEtWByVQ99IBA/company-logo_200_200/0/1667215242490?e=2147483647&v=beta&t=uqvZyEa7rij57GkghRugBr6dPjvySTzX3cyd5h_uM5s);
+                background-position: center center;
+                background-size: contain;
+
+                &:hover {
+                    border: 1px solid transparent;
+                    scale: $logo-scale;
+                    left: -(($logo-radio*$logo-scale)-$logo-border-width);
+                    top: 1px;
+                    transition: all 1000ms ease-in-out;
+                }
+            }
+
+            .title {
+                color: $highlight-color-timeline;
+                position: relative;
+                font-size: 1.2rem;
+            }
+
+            .intial-date {
+                color: $secound-highlight-color-timeline;
+            }
+
+            .sub-title {
+                color: $highlight-color-timeline;
+                position: relative;
+                font-size: 0.75rem;
+            }
+        }
+    }
+
+    .text {
+        color: #fff;
+    }
+}

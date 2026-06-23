@@ -1,0 +1,23 @@
+// Colors
+$background-color: #202530;
+$default-text-color: white;
+// Colors - Perfil
+$first-perfil-color: #212a3e;
+$secound-perfil-color: #394258;
+$color-cursor-console: white;
+// Colors - Expertise
+$card-border-color-expertise: white;
+// Colors - Timeline
+$border-color-timeline: white;
+$highlight-color-timeline: #9ce2bd;
+$secound-highlight-color-timeline: #e2dd9c;
+$logo-radio: 20px;
+$logo-border-width: 7px;
+$logo-scale: calc( ($logo-radio + $logo-border-width) / $logo-radio);
+// Languages Selector
+$gap-between-buttons: 0.8rem;
+
+// Fonts
+$default-font-family: "Roboto Mono", Sans-serif;
+$font-family-experience: "PT Sans", Sans-serif;
+$font-console: Consolas, monospace;
