@@ -46,12 +46,13 @@ export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, con
 
     return (
         <section className="about">
-            <img
-                className="about_img_perfil"
-                src={currentImg}
-                alt="perfil"
-                onClick={playEasterEgg}
-            />
+            <div className="about_perfil_wrap" onClick={playEasterEgg}>
+                <img
+                    className="about_img_perfil"
+                    src={currentImg}
+                    alt="perfil"
+                />
+            </div>
             <h1>{name}</h1>
             < ConsoleTextAnimated console_phrases={console_phrases} />
             <div className="list_contato">
