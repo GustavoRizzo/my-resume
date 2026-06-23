@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import "./style.scss";
 import HobbyCard from "./HobbyCard";
 import HobbyModal from "./HobbyModal";
@@ -16,9 +16,17 @@ export default function SectionBeyondWork() {
             <h1 style={{ marginTop: "5px" }}>{data.section.title}</h1>
             <p className="beyond-work__subtitle">{data.section.subtitle}</p>
 
-            <div className="beyond-work__grid">
-                {data.topics.map((topic) => (
-                    <HobbyCard key={topic.id} topic={topic} onOpen={setOpenId} />
+            <div
+                className="beyond-work__fan"
+                style={{ "--total": data.topics.length } as CSSProperties}
+            >
+                {data.topics.map((topic, index) => (
+                    <HobbyCard
+                        key={topic.id}
+                        topic={topic}
+                        index={index}
+                        onOpen={setOpenId}
+                    />
                 ))}
             </div>
 

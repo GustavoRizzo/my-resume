@@ -13,16 +13,39 @@
     margin-bottom: 2rem;
   }
 
-  &__grid {
-    width: min(95%, 1200px);
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  /* The fan container. Cards are absolutely positioned and rotate around a
+     pivot point well below the deck, so they spread out like a hand of cards.
+     At rest the fan is slightly closed; on hover/focus-within it opens wider. */
+  &__fan {
+    --angle-step: 9deg;
+    --pivot: 460px; // how far below the cards the rotation pivot sits
+    position: relative;
+    width: min(95%, 1000px);
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    @media (hover: hover) {
+      &:hover {
+        --angle-step: 15deg;
+      }
+    }
   }
 }
 
-/* --- Card (presentation layer — reskin target) --- */
+/* --- Card (presentation layer — fan/deck reskin target) --- */
 .hobby-card {
+  // Offset from the centre of the fan, e.g. -1, 0, 1 for three cards.
+  --offset: calc(var(--i) - (var(--total) - 1) / 2);
+  --rot: calc(var(--offset) * var(--angle-step));
+
+  position: absolute;
+  bottom: 0;
+  width: 220px;
+  height: 300px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -35,12 +58,21 @@
   border-radius: 1em;
   padding: 1.5rem;
   font-family: inherit;
-  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
-  &:hover,
-  &:focus-visible {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transform-origin: 50% var(--pivot);
+  transform: rotate(var(--rot));
+  transition: transform 0.3s ease, box-shadow 0.2s ease-in-out,
+    background 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus-visible {
+      // Lift the card outward along its own rotated axis and bring it forward.
+      transform: rotate(var(--rot)) translateY(-40px) scale(1.05);
+      background: $secound-perfil-color;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      z-index: 100;
+    }
   }
 
   &__emoji {
@@ -50,11 +82,12 @@
 
   &__title {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   &__summary {
     margin: 0;
+    font-size: 0.95rem;
     opacity: 0.85;
   }
 
@@ -63,6 +96,25 @@
     padding-top: 0.5rem;
     font-size: 0.85rem;
     color: $highlight-color-timeline;
+  }
+}
+
+/* On touch devices (no hover) the fan can't be opened, so fall back to a
+   simple stacked column where every card is fully readable and tappable. */
+@media (hover: none) {
+  .beyond-work__fan {
+    position: static;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hobby-card {
+    position: static;
+    width: min(95%, 360px);
+    height: auto;
+    transform: none;
   }
 }
 
