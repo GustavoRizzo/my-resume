@@ -16,7 +16,7 @@ describe("App routes", () => {
 
     expect(screen.getByText("Career Timeline")).toBeInTheDocument();
     expect(
-      screen.getByText("Gustavo Rizzo Soares Mendes de Albuquerque")
+      screen.getByText("Gustavo Rizzo S. M. de Albuquerque")
     ).toBeInTheDocument();
   });
 
@@ -24,7 +24,7 @@ describe("App routes", () => {
     renderWithRoute("/About");
 
     expect(
-      screen.getByText("Gustavo Rizzo Soares Mendes de Albuquerque")
+      screen.getByText("Gustavo Rizzo S. M. de Albuquerque")
     ).toBeInTheDocument();
   });
 

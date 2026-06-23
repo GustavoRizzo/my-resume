@@ -11,7 +11,7 @@ describe('Navbar Component', () => {
     );
 
     // Title should be present
-    expect(screen.getByText('Gustavo Rizzo Soares Mendes de Albuquerque')).toBeInTheDocument();
+    expect(screen.getByText('Gustavo Rizzo S. M. de Albuquerque')).toBeInTheDocument();
 
     // Menu options should be hidden by default (isHidden is true)
     expect(screen.queryByText('List Expertise')).not.toBeInTheDocument();
