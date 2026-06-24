@@ -9,17 +9,12 @@ interface ExperiencesTimelineProps {
 
 const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences }) => {
   const listRef = useRef<HTMLUListElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
+  const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
 
   useEffect(() => {
     const node = listRef.current;
-    if (!node) return;
-
-    // Fallback for environments without IntersectionObserver (e.g. jsdom): reveal at once.
-    if (typeof IntersectionObserver === 'undefined') {
-      setVisible(true);
-      return;
-    }
+    if (!node || typeof IntersectionObserver === 'undefined') return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -8,17 +8,12 @@ import data from '../../data/data.json';
 export default function SectionExpertisesV3() {
     const expertises: Expertise[] = data.expertises;
     const gridRef = useRef<HTMLDivElement>(null);
-    const [visible, setVisible] = useState(false);
+    // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
+    const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
 
     useEffect(() => {
         const node = gridRef.current;
-        if (!node) return;
-
-        // Fallback for environments without IntersectionObserver (e.g. jsdom): reveal at once.
-        if (typeof IntersectionObserver === 'undefined') {
-            setVisible(true);
-            return;
-        }
+        if (!node || typeof IntersectionObserver === 'undefined') return;
 
         const observer = new IntersectionObserver(
             ([entry]) => {
