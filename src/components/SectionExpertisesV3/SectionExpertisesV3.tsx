@@ -9,7 +9,7 @@ export default function SectionExpertisesV3() {
 
     return (
         <section className="expertise-v3">
-            <h1 className="expertise-v3__title">My Expertise</h1>
+            <h1>My Expertise</h1>
 
             <div className="expertise-v3__grid">
                 {expertises.map((item) => {

@@ -1,5 +1,5 @@
 @use "../../styles/variables" as *;
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap");
 
 .expertise-v2 {
   width: min(92%, 1200px);
@@ -22,9 +22,8 @@
   }
 
   &__title {
-    font-family: "Playfair Display", serif;
-    font-style: italic;
-    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
     font-size: clamp(2.4rem, 6vw, 3.6rem);
     margin: 0;
     color: $default-text-color;
@@ -74,8 +73,8 @@
   }
 
   &__name {
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
     font-size: 1.35rem;
     letter-spacing: 0.01em;
     margin: 1rem 0 0;
