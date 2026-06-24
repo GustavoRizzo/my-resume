@@ -86,7 +86,7 @@ body {
             .paragraph {
                 // padding cancelled by equal negative margin so layout doesn't shift,
                 // leaving room for a subtle darkening highlight on hover
-                padding: 0.6rem 0.9rem;
+                padding: 0.4rem 0.9rem;
                 margin: -0.6rem -0.9rem;
                 border-radius: 8px;
                 transition: background 300ms ease;
@@ -116,19 +116,34 @@ body {
             .title {
                 color: $highlight-color-timeline;
                 position: relative;
-                font-size: 1.2rem;
+                font-family: $default-font-family; // mono / "tech" feel
+                font-size: 1.25rem;
+                font-weight: 700;
+                letter-spacing: 0.03em;
+                line-height: 1.25;
             }
 
             .sub-title {
-                color: $highlight-color-timeline;
+                color: rgba($highlight-color-timeline, 0.65);
                 position: relative;
-                font-size: 0.75rem;
+                font-family: $default-font-family;
+                font-size: 0.7rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 0.22em;
+                margin-top: 0.15rem;
             }
         }
     }
 
     .text {
-        color: #fff;
+        // editorial body contrasting with the mono headings
+        color: rgba(#fff, 0.82);
+        font-family: $font-family-experience; // PT Sans
+        font-size: 0.98rem;
+        font-weight: 400;
+        line-height: 1.65;
+        margin-top: 0.5rem;
     }
 }
 

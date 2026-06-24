@@ -13,7 +13,8 @@
 
   &__item {
     padding: 2rem 1.75rem;
-    border: 2px solid $default-text-color;
+    border: 1px solid $default-text-color;
+    border-radius: 0.4rem;
     background: #1a191d;
 
     // start hidden, then reveal one-by-one once the grid is in view
@@ -179,6 +180,7 @@
   }
 
   .expertise-v3__item {
-    border: 2px solid $default-text-color;
+    border: 1px solid $default-text-color;
+    border-radius: 0.4rem;
   }
 }
