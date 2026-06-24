@@ -13,6 +13,7 @@ export default function SectionExpertisesV3() {
             <div className="expertise-v3__grid">
                 {expertises.map((item) => {
                     const [firstWord, ...rest] = item.title.split(' ');
+                    const codeTag = item.code_tag ?? 'div';
                     return (
                         <article className="expertise-v3__item" key={item.title}>
                             <div className="expertise-v3__headline">
@@ -29,12 +30,12 @@ export default function SectionExpertisesV3() {
                             </div>
 
                             <div className="expertise-v3__code">
-                                <span className="expertise-v3__tag">&lt;h3&gt;</span>
+                                <span className="expertise-v3__tag">&lt;{codeTag}&gt;</span>
                                 <div
                                     className="expertise-v3__text"
                                     dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.html_text) }}
                                 />
-                                <span className="expertise-v3__tag">&lt;/h3&gt;</span>
+                                <span className="expertise-v3__tag">&lt;/{codeTag}&gt;</span>
                             </div>
                         </article>
                     );
