@@ -1,6 +1,7 @@
 import './style.scss'
 import { Expertise } from '../../types/Expertise';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
+import ExpertiseIcon from '../ExpertiseIcon/ExpertiseIcon';
 import data from '../../data/data.json';
 
 export default function SectionExpertisesV3() {
@@ -18,7 +19,7 @@ export default function SectionExpertisesV3() {
                         <article className="expertise-v3__item" key={item.title}>
                             <div className="expertise-v3__headline">
                                 <div className="expertise-v3__icon">
-                                    <img src={item.url_img} alt={item.title} />
+                                    <ExpertiseIcon icon={item.icon} url_img={item.url_img} title={item.title} />
                                 </div>
                                 <h5 className="expertise-v3__name">
                                     <span className={`expertise-v3__underline ${item.underline_class_css}`}>
