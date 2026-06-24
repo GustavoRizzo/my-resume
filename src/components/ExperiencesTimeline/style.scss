@@ -20,19 +20,31 @@ body {
         margin-left: ($logo-radio+$logo-border-width);
         padding: 0;
         display: inline-block;
+        position: relative;
+
+        // continuous gradient line running down the whole timeline
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: $logo-radio;
+            left: 0;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(
+                to bottom,
+                $highlight-color-timeline,
+                $secound-highlight-color-timeline
+            );
+        }
 
         li {
             list-style: none;
             margin: auto;
             min-height: 50px;
-            border-left: 1px dashed $border-color-timeline;
             padding-left: 12px+($logo-radio+$logo-border-width);
             padding-bottom: 50px;
             position: relative;
-
-            &:last-child {
-                border-left: 0;
-            }
 
             // start hidden, reveal one-by-one once the list scrolls into view
             opacity: 0;
@@ -71,14 +83,40 @@ body {
                 }
             }
 
+            .paragraph {
+                // padding cancelled by equal negative margin so layout doesn't shift,
+                // leaving room for a subtle darkening highlight on hover
+                padding: 0.6rem 0.9rem;
+                margin: -0.6rem -0.9rem;
+                border-radius: 8px;
+                transition: background 300ms ease;
+            }
+
+            &:hover .paragraph {
+                background: linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0)
+                );
+            }
+
+            .date-pill {
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                padding: 0.15rem 0.7rem;
+                border-radius: 999px;
+                font-family: $font-console;
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.05em;
+                color: $background-color;
+                background: $secound-highlight-color-timeline;
+            }
+
             .title {
                 color: $highlight-color-timeline;
                 position: relative;
                 font-size: 1.2rem;
-            }
-
-            .intial-date {
-                color: $secound-highlight-color-timeline;
             }
 
             .sub-title {
