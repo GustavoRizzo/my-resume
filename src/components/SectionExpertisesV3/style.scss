@@ -15,6 +15,15 @@
     padding: 2rem 1.75rem;
     border: 2px solid $default-text-color;
     background: #1a191d;
+
+    // start hidden, then reveal one-by-one once the grid is in view
+    opacity: 0;
+    transform: translateY(28px);
+
+    .is-visible & {
+      animation: expertise-v3-reveal 0.6s ease forwards;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
   }
 
   // ---- headline: icon on the left + two-line title ----
@@ -144,6 +153,22 @@
         color: rgba($default-text-color, 0.45);
       }
     }
+  }
+}
+
+@keyframes expertise-v3-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// respect users who prefer reduced motion: show cards immediately
+@media (prefers-reduced-motion: reduce) {
+  .expertise-v3__item {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 
