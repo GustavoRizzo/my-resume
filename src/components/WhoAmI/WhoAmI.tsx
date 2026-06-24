@@ -53,7 +53,7 @@ export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, con
                     alt="perfil"
                 />
             </div>
-            <h1>{name}</h1>
+            <h1 className="hero-title">{name}</h1>
             < ConsoleTextAnimated console_phrases={console_phrases} />
             <div className="list_contato">
                 <a href={url_linkedin}>

@@ -7,7 +7,7 @@ export default function CareerTimeline() {
 
       return (
         <section style={{ display: 'grid', justifyItems: 'center', alignContent: 'center' }}>
-          <h1>Career Timeline</h1>
+          <h1 className="section-title">Career Timeline</h1>
           <ExperiencesTimeline experiences={experiences} />
         </section>
       );

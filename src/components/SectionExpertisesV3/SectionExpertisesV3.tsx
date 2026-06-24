@@ -36,7 +36,7 @@ export default function SectionExpertisesV3() {
 
     return (
         <section className="expertise-v3">
-            <h1>My Expertise</h1>
+            <h1 className="section-title">My Expertise</h1>
 
             <div
                 ref={gridRef}

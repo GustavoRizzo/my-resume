@@ -13,7 +13,7 @@ export default function SectionBeyondWork() {
 
     return (
         <section className="beyond-work">
-            <h1 style={{ marginTop: "5px" }}>{data.section.title}</h1>
+            <h1 className="section-title">{data.section.title}</h1>
             <p className="beyond-work__subtitle">{data.section.subtitle}</p>
 
             <div
