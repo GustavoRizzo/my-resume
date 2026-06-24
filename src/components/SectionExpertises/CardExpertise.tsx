@@ -1,16 +1,18 @@
 import { Expertise } from "../../types/Expertise";
 import { sanitizeHtml } from "../../utils/sanitizeHtml";
+import ExpertiseIcon from "../ExpertiseIcon/ExpertiseIcon";
 
-export default function CardExpertise( {title, html_text, url_img, underline_class_css}:Expertise ) {
+export default function CardExpertise( {title, html_text, url_img, underline_class_css, icon}:Expertise ) {
     const safeHtmlText = sanitizeHtml(html_text);
 
     return (
         <div className="card">
             <div className="card__icon">
-                <img
+                <ExpertiseIcon
                     className="icon"
-                    src={url_img}
-                    alt={title}
+                    icon={icon}
+                    url_img={url_img}
+                    title={title}
                 />
             </div>
             <h2>

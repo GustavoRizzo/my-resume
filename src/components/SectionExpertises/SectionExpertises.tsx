@@ -18,6 +18,7 @@ export default function SectionExpertises() {
                         html_text={item.html_text}
                         url_img={item.url_img}
                         underline_class_css= {item.underline_class_css}
+                        icon={item.icon}
                     />
                 ))}
 

@@ -43,8 +43,15 @@ body {
     right: 0;
     left: 0;
 
-    .icon {
+    img.icon {
       filter: invert(1);
+    }
+
+    span.icon {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      color: $default-text-color;
     }
   }
 

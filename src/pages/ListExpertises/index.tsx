@@ -1,7 +1,7 @@
-import SectionExpertises from '../../components/SectionExpertises/SectionExpertises';
+import SectionExpertisesV3 from '../../components/SectionExpertisesV3/SectionExpertisesV3';
 
 export default function ListExpertises() {
     return (
-      <SectionExpertises />
+      <SectionExpertisesV3 />
     );
   }

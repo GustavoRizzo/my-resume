@@ -28,6 +28,7 @@
             "title": "Software Developer",
             "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS)</li></ul></p>",
             "url_img": "https://cdn-icons-png.flaticon.com/32/9423/9423061.png",
+            "icon": "web",
             "underline_class_css": "underline-megenta",
             "initial_date": "2023-02-01"
         },
@@ -35,6 +36,7 @@
             "title": "Data Analyst",
             "html_text": "<p><b>Data Visualization Tool:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>ETL Tools:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Database:</b></p><ul style='text-align: left'><li><b>Relational:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
             "url_img": "https://cdn-icons-png.flaticon.com/32/2329/2329087.png",
+            "icon": "presentation",
             "underline_class_css": "underline-blue",
             "initial_date": "2023-02-01"
         },
@@ -42,6 +44,7 @@
             "title": "Project Manager",
             "html_text": "Managed both internal and external teams in <b>financial market projects</b>, focusing on stock trading systems, investment funds, and risk management. Ensured timely reporting and progress updates to the C-level executives of the company.",
             "url_img": "https://cdn-icons-png.flaticon.com/32/1556/1556324.png",
+            "icon": "engine",
             "underline_class_css": "underline-orange",
             "initial_date": "2023-02-01"
         }

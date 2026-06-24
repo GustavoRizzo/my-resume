@@ -31,7 +31,7 @@ describe("App routes", () => {
   it("renders ListExpertises route", () => {
     renderWithRoute("/ListExpertises");
 
-    expect(screen.getByText("Experience")).toBeInTheDocument();
+    expect(screen.getByText("My Expertise")).toBeInTheDocument();
   });
 
   it("renders CareerTimeline route", () => {
