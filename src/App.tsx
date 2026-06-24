@@ -9,27 +9,24 @@ import BeyondWork from './pages/BeyondWork';
 
 function App() {
   return (
-    <>
-      <div className='container'>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ListExpertises" element={<ListExpertises />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/CareerTimeline" element={<CareerTimeline />} />
-          <Route path="/BeyondWork" element={<BeyondWork />} />
+    <div className='container'>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ListExpertises" element={<ListExpertises />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/CareerTimeline" element={<CareerTimeline />} />
+        <Route path="/BeyondWork" element={<BeyondWork />} />
 
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
-
-      </div>
-    </>
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
+    </div>
   )
 }
 
