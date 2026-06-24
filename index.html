@@ -23,6 +23,21 @@
     content="Resume of Gustavo Rizzo — Software Developer, Data Analyst and Project Manager." />
   <meta name="twitter:image" content="https://gustavorizzo.github.io/my-resume/perfil.png" />
   <title>Gustavo Rizzo — Software Developer</title>
+  <!-- Single Page Apps for GitHub Pages
+       https://github.com/rafgraph/spa-github-pages
+       Restores the original URL after the 404.html redirect, so deep links
+       and page refreshes work on GitHub Pages static hosting. -->
+  <script>
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash);
+      }
+    })(window.location);
+  </script>
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
