@@ -1,0 +1,139 @@
+@use "../../styles/variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;500;700&display=swap");
+
+.expertise-v2 {
+  width: min(92%, 1200px);
+  margin: 0 auto 6em;
+  font-family: "Inter", $default-font-family;
+
+  &__header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-family: $default-font-family;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: $highlight-color-timeline;
+    margin-bottom: 0.4rem;
+  }
+
+  &__title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    margin: 0;
+    color: $default-text-color;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  &__item {
+    padding: 2rem 1.75rem;
+    border-top: 1px solid rgba($default-text-color, 0.12);
+    border-left: 1px solid rgba($default-text-color, 0.12);
+    transition: background-color 0.25s ease, transform 0.25s ease;
+
+    // close the right/bottom edges of the grid
+    &:last-child {
+      border-right: 1px solid rgba($default-text-color, 0.12);
+    }
+    border-bottom: 1px solid rgba($default-text-color, 0.12);
+
+    &:hover {
+      background-color: rgba($default-text-color, 0.03);
+    }
+
+    &:hover .expertise-v2__index {
+      color: $highlight-color-timeline;
+      opacity: 1;
+    }
+
+    &:hover .expertise-v2__divider {
+      width: 64px;
+    }
+  }
+
+  &__index {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 500;
+    color: $default-text-color;
+    opacity: 0.25;
+    transition: color 0.25s ease, opacity 0.25s ease;
+  }
+
+  &__name {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.01em;
+    margin: 1rem 0 0;
+    color: $default-text-color;
+  }
+
+  &__divider {
+    display: block;
+    height: 2px;
+    width: 32px;
+    background: $highlight-color-timeline;
+    margin: 0.9rem 0 1.25rem;
+    transition: width 0.25s ease;
+  }
+
+  &__text {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba($default-text-color, 0.78);
+
+    p {
+      margin: 0 0 0.85rem;
+    }
+
+    b {
+      color: $default-text-color;
+      font-weight: 700;
+    }
+
+    ul {
+      margin: 0.25rem 0 1rem;
+      padding-left: 1.1rem;
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.3rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: $highlight-color-timeline;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .expertise-v2__item {
+    border-left: 1px solid rgba($default-text-color, 0.12);
+    border-right: 1px solid rgba($default-text-color, 0.12);
+  }
+}
