@@ -1,10 +1,16 @@
 import { ReactNode, useState } from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import data from '../../data/data.json';
+import { Link, useMatch, useResolvedPath } from "react-router";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "../../i18n/types";
 import './style.scss'
 
-export default function Navbar() {
-    const siteTitle = data.about.name;
+interface NavbarProps {
+    name: string;
+    lang: Lang;
+}
+
+export default function Navbar({ name, lang }: NavbarProps) {
+    const { t } = useTranslation();
     const [isHidden, setIsHidden] = useState(true);
 
     const toggleVisibility = () => {
@@ -13,18 +19,18 @@ export default function Navbar() {
 
     return (
         <nav className="navbar">
-            <Link to="/" className="navbar__title">{siteTitle}</Link>
+            <Link to={`/${lang}`} className="navbar__title">{name}</Link>
             <button onClick={toggleVisibility} className="navbar__toggle-button">
-                <span role="img" aria-label="Hide/Show">
+                <span role="img" aria-label={t('nav.toggleMenu')}>
                 👁️
                 </span>
             </button>
             {!isHidden && (
                 <ul className="navbar__options">
-                    <CustomLink to="/ListExpertises">List Expertise</CustomLink>
-                    <CustomLink to="/About">About</CustomLink>
-                    <CustomLink to="/CareerTimeline">CareerTimeline</CustomLink>
-                    <CustomLink to="/BeyondWork">Beyond Work</CustomLink>
+                    <CustomLink to={`/${lang}/expertises`}>{t('nav.expertises')}</CustomLink>
+                    <CustomLink to={`/${lang}/about`}>{t('nav.about')}</CustomLink>
+                    <CustomLink to={`/${lang}/career`}>{t('nav.career')}</CustomLink>
+                    <CustomLink to={`/${lang}/beyond-work`}>{t('nav.beyondWork')}</CustomLink>
                 </ul>
             )}
         </nav>
@@ -37,7 +43,7 @@ interface CustumLinkProps {
 }
 
 function CustomLink({ to, children, ...props }:CustumLinkProps) {
-    // The CustomLink do the same thing of Link (react-router-dom) component, but also add the style classe "active", if the URL match the router link.
+    // The CustomLink do the same thing of Link (react-router) component, but also add the style classe "active", if the URL match the router link.
     const resolvedPath = useResolvedPath(to);
     const isActive = useMatch({path: resolvedPath.pathname, end: true});
 

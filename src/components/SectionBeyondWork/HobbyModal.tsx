@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { HobbyTopic } from "../../types/Hobby";
 import { sanitizeHtml } from "../../utils/sanitizeHtml";
 
@@ -10,6 +11,7 @@ interface HobbyModalProps {
 // Accessible overlay with the full detail of a topic.
 // Closes on overlay click, the ✕ button, and the Esc key.
 export default function HobbyModal({ topic, onClose }: HobbyModalProps) {
+    const { t } = useTranslation();
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") onClose();
@@ -33,7 +35,7 @@ export default function HobbyModal({ topic, onClose }: HobbyModalProps) {
                     type="button"
                     className="hobby-modal__close"
                     onClick={onClose}
-                    aria-label="Close"
+                    aria-label={t("a11y.close")}
                 >
                     ✕
                 </button>

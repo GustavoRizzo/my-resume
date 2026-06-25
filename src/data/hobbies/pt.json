@@ -1,0 +1,37 @@
+{
+    "section": {
+        "title": "Além do Trabalho",
+        "subtitle": "O que eu faço longe do teclado — e algumas coisas que construo só por diversão."
+    },
+    "topics": [
+        {
+            "id": "outdoors",
+            "emoji": "🥾",
+            "title": "Aventuras & Esportes",
+            "summary": "Trilhas, montanhas, vôlei e uma boa pelada de futebol.",
+            "body_html": "<p>Adoro a natureza, e fazer trilhas é a minha praia 🏔️. Já escalei alguns dos picos mais altos do Brasil e uma vez completei uma trilha de longa distância de <b>250&nbsp;km</b>. Meu próximo grande sonho — que pretendo realizar em breve — é caminhar pelo <b>Caminho de Santiago</b>. Quando não estou em uma trilha, você me encontra jogando vôlei 🏐 ou, como todo bom brasileiro, futebol ⚽.</p>",
+            "links": []
+        },
+        {
+            "id": "open-source",
+            "emoji": "🌱",
+            "title": "Código Aberto",
+            "summary": "Construindo sobre as soluções uns dos outros para que todos tenhamos uma tecnologia melhor.",
+            "body_html": "<p>Adoro a ideia por trás do código aberto: a solução de uma pessoa pode se tornar um trampolim para o problema de outra — e essa pessoa pode retribuir da mesma forma. No fim, todos nos beneficiamos de uma tecnologia mais madura e mais capaz.</p><p>No momento estou contribuindo com uma biblioteca de componentes <b>Django&nbsp;+&nbsp;HTMX</b>, onde venho reunindo os padrões que uso todos os dias enquanto construo projetos reais.</p>",
+            "links": [
+                { "label": "django-sample-components", "url": "https://pypi.org/project/django-sample-components/", "note": "PyPI" }
+            ]
+        },
+        {
+            "id": "side-projects",
+            "emoji": "🛠️",
+            "title": "Ferramentas & Passatempos que Crio",
+            "summary": "Pegando pequenos incômodos do dia a dia e programando minha própria solução.",
+            "body_html": "<p>Adoro pegar um pequeno problema do dia a dia e construir minha própria solução para ele. Aqui estão alguns deles:</p><ul><li><b>Quem?</b> — uma versão web gratuita e sem anúncios do jogo de festa \"Quem sou eu?\" que jogo com os amigos. Os apps na Play Store são tomados por anúncios e barreiras pagas, então criei o meu próprio.</li><li><b>Conversor PTAX</b> — no Brasil, faturar para clientes estrangeiros significa converter os valores usando uma taxa especial do Banco Central. O site oficial é difícil de usar, então peguei a API deles e a embrulhei em uma interface mais agradável.</li></ul>",
+            "links": [
+                { "label": "Jogar \"Quem?\"", "url": "https://gustavorizzo.github.io/game-quem-sou-eu/", "note": "Grátis · só PT-BR" },
+                { "label": "Conversor PTAX", "url": "https://gustavorizzo.github.io/conversor-ptax-logger/", "note": "Grátis · só PT-BR" }
+            ]
+        }
+    ]
+}

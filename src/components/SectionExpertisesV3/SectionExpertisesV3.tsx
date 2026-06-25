@@ -1,12 +1,16 @@
 import './style.scss'
 import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Expertise } from '../../types/Expertise';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
 import ExpertiseIcon from '../ExpertiseIcon/ExpertiseIcon';
-import data from '../../data/data.json';
 
-export default function SectionExpertisesV3() {
-    const expertises: Expertise[] = data.expertises;
+interface SectionExpertisesV3Props {
+    expertises: Expertise[];
+}
+
+export default function SectionExpertisesV3({ expertises }: SectionExpertisesV3Props) {
+    const { t } = useTranslation();
     const gridRef = useRef<HTMLDivElement>(null);
     // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
     const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
@@ -31,7 +35,7 @@ export default function SectionExpertisesV3() {
 
     return (
         <section className="expertise-v3">
-            <h1 className="section-title">My Expertise</h1>
+            <h1 className="section-title">{t('sections.myExpertise')}</h1>
 
             <div
                 ref={gridRef}

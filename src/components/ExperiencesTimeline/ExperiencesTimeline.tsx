@@ -5,9 +5,11 @@ import './style.scss'
 
 interface ExperiencesTimelineProps {
   experiences: ExperienceType[];
+  /** BCP-47 locale for the date pill (e.g. "en-US", "pt-BR"). */
+  locale?: string;
 }
 
-const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences }) => {
+const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences, locale = 'en-US' }) => {
   const listRef = useRef<HTMLUListElement>(null);
   // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
   const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
@@ -32,7 +34,7 @@ const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences }
 
   const formattedDate = (str_date: string) => {
     const dateObj = new Date(str_date);
-    const month = dateObj.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+    const month = dateObj.toLocaleString(locale, { month: 'short' }).toUpperCase();
     const year = dateObj.getFullYear();
     return `${month} ${year}`;
   };

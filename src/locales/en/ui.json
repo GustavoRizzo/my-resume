@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "expertises": "Expertise",
+    "about": "About",
+    "career": "Career",
+    "beyondWork": "Beyond Work",
+    "toggleMenu": "Hide/Show menu"
+  },
+  "sections": {
+    "myExpertise": "My Expertise",
+    "careerTimeline": "Career Timeline"
+  },
+  "beyondWork": {
+    "readMore": "Read more →"
+  },
+  "a11y": {
+    "close": "Close",
+    "openDetails": "Open details about {{title}}"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "portuguese": "Portuguese"
+  }
+}
