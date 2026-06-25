@@ -1,5 +1,6 @@
-import React, { CSSProperties, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import { Experience as ExperienceType } from "../../types/Experience";
+import { useRevealOnScroll } from '../../utils/useRevealOnScroll';
 import './style.scss'
 
 
@@ -10,27 +11,7 @@ interface ExperiencesTimelineProps {
 }
 
 const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences, locale = 'en-US' }) => {
-  const listRef = useRef<HTMLUListElement>(null);
-  // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
-  const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
-
-  useEffect(() => {
-    const node = listRef.current;
-    if (!node || typeof IntersectionObserver === 'undefined') return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: listRef, visible } = useRevealOnScroll<HTMLUListElement>(0.1);
 
   const formattedDate = (str_date: string) => {
     const dateObj = new Date(str_date);

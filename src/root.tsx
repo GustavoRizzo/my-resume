@@ -47,6 +47,15 @@ export function Layout({ children }: { children: ReactNode }) {
         <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
         <script dangerouslySetInnerHTML={{ __html: SPA_RESTORE }} />
         <script dangerouslySetInnerHTML={{ __html: GTM }} />
+        {/* Scroll-reveal sections start hidden and reveal via JS. Without JS,
+            force them visible so the prerendered content stays readable. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              "<style>.expertise-v3__item{opacity:1!important;transform:none!important}" +
+              "ul.rb li{opacity:1!important;transform:none!important}</style>",
+          }}
+        />
         <Meta />
         <Links />
       </head>
