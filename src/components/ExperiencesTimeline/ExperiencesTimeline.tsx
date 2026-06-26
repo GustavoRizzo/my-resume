@@ -28,10 +28,16 @@ const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences, 
             key={`${experience.title}-${experience.initial_date}`}
             style={{ '--reveal-delay': `${index * 200}ms` } as CSSProperties}
           >
-            <a className="company-logo"
-              style={{ backgroundImage: `url(${experience.company_logo})` }}
-              href={experience.company_url} target="_blank" rel="noreferrer"
+            {experience.company_url ? (
+              <a className="company-logo"
+                style={{ backgroundImage: `url(${experience.company_logo})` }}
+                href={experience.company_url} target="_blank" rel="noreferrer"
               ></a>
+            ) : (
+              <div className="company-logo"
+                style={{ backgroundImage: `url(${experience.company_logo})` }}
+              ></div>
+            )}
             <div className="paragraph">
               <span className="date-pill">{formattedDate(experience.initial_date)}</span>
               <div className="title">{experience.title}</div>
