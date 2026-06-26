@@ -7,6 +7,12 @@ export const loader = contentLoader((content, lang) => ({
   lang,
   experiences: content.experiences,
 }));
+// Re-run on client navigation so a language switch re-resolves the content.
+// Defined standalone (not `= loader`) so it survives route-module splitting.
+export const clientLoader = contentLoader((content, lang) => ({
+  lang,
+  experiences: content.experiences,
+}));
 export const meta = pageMeta("career", "/career");
 
 export default function CareerRoute() {
