@@ -1,21 +1,11 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
-import { resolveLangParam } from "../i18n/resolveLang";
-import { getContent } from "../i18n/content";
-import { buildPageMeta } from "../i18n/seo";
-import type { Lang } from "../i18n/types";
-import type { HobbiesData } from "../types/Hobby";
+import { useLoaderData } from "react-router";
+import { contentLoader, pageMeta } from "./route-helpers";
 import SectionBeyondWork from "../components/SectionBeyondWork/SectionBeyondWork";
 
-export function loader({ params }: LoaderFunctionArgs) {
-  const lang = resolveLangParam(params.lang);
-  return { hobbies: getContent(lang).hobbies };
-}
-
-export function meta({ params }: { params: { lang?: string } }) {
-  return buildPageMeta(params.lang as Lang, "beyondWork", "/beyond-work");
-}
+export const loader = contentLoader((content) => ({ hobbies: content.hobbies }));
+export const meta = pageMeta("beyondWork", "/beyond-work");
 
 export default function BeyondWorkRoute() {
-  const { hobbies } = useLoaderData() as { hobbies: HobbiesData };
+  const { hobbies } = useLoaderData<typeof loader>();
   return <SectionBeyondWork hobbies={hobbies} />;
 }

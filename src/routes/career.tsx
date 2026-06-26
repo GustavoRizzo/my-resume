@@ -1,21 +1,15 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
-import { resolveLangParam } from "../i18n/resolveLang";
-import { getContent } from "../i18n/content";
-import { buildPageMeta } from "../i18n/seo";
-import { LOCALE_BY_LANG, type Lang } from "../i18n/types";
-import type { Experience } from "../types/Experience";
+import { useLoaderData } from "react-router";
+import { contentLoader, pageMeta } from "./route-helpers";
+import { LOCALE_BY_LANG } from "../i18n/types";
 import CareerSection from "../components/CareerSection/CareerSection";
 
-export function loader({ params }: LoaderFunctionArgs) {
-  const lang = resolveLangParam(params.lang);
-  return { lang, experiences: getContent(lang).experiences };
-}
-
-export function meta({ params }: { params: { lang?: string } }) {
-  return buildPageMeta(params.lang as Lang, "career", "/career");
-}
+export const loader = contentLoader((content, lang) => ({
+  lang,
+  experiences: content.experiences,
+}));
+export const meta = pageMeta("career", "/career");
 
 export default function CareerRoute() {
-  const { lang, experiences } = useLoaderData() as { lang: Lang; experiences: Experience[] };
+  const { lang, experiences } = useLoaderData<typeof loader>();
   return <CareerSection experiences={experiences} locale={LOCALE_BY_LANG[lang]} />;
 }
