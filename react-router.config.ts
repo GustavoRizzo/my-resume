@@ -1,7 +1,6 @@
 import type { Config } from "@react-router/dev/config";
+import { SUPPORTED_LANGS } from "./src/i18n/types";
 
-// Languages the site is published in. Keep in sync with src/i18n/types.ts.
-const LANGS = ["en", "pt"] as const;
 // Page sub-paths under each language prefix ("" is the language home).
 const PAGES = ["", "/about", "/expertises", "/career", "/beyond-work"] as const;
 
@@ -16,7 +15,7 @@ export default {
   // so crawlers get fully-rendered, per-language content without running JS.
   async prerender() {
     const paths = ["/"];
-    for (const lang of LANGS) {
+    for (const lang of SUPPORTED_LANGS) {
       for (const page of PAGES) paths.push(`/${lang}${page}`);
     }
     return paths;

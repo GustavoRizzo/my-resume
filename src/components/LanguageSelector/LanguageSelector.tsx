@@ -1,6 +1,6 @@
 import './style.scss'
 import { useLocation, useNavigate } from 'react-router';
-import { SUPPORTED_LANGS, type Lang } from '../../i18n/types';
+import { LANG_PREFIX_RE, SUPPORTED_LANGS, type Lang } from '../../i18n/types';
 
 interface LanguageSelectorProps {
     lang: Lang;
@@ -14,7 +14,7 @@ const LanguageSelector = ({ lang }: LanguageSelectorProps) => {
 
     const switchTo = (next: Lang) => {
         if (next === lang) return;
-        const rest = pathname.replace(/^\/(en|pt)(?=\/|$)/, '');
+        const rest = pathname.replace(LANG_PREFIX_RE, '');
         if (typeof window !== 'undefined') {
             window.localStorage.setItem('resume.lang', next);
         }
