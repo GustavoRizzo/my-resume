@@ -41,7 +41,20 @@ const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences, 
             <div className="paragraph">
               <span className="date-pill">{formattedDate(experience.initial_date)}</span>
               <div className="title">{experience.title}</div>
-              <div className="sub-title">{experience.subtitle}</div>
+              <div className="sub-title">
+                {experience.company_url ? (
+                  <a
+                    className="sub-title-link"
+                    href={experience.company_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {experience.subtitle}
+                  </a>
+                ) : (
+                  experience.subtitle
+                )}
+              </div>
               <div className="text">{experience.text}</div>
             </div>
           </li>
