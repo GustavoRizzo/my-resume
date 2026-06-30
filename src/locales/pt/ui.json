@@ -7,8 +7,8 @@
     "toggleMenu": "Ocultar/Mostrar menu"
   },
   "sections": {
-    "myExpertise": "Minhas Especialidades",
-    "careerTimeline": "Linha do Tempo da Carreira"
+    "myExpertise": "Especialidades",
+    "careerTimeline": "Linha do Tempo"
   },
   "beyondWork": {
     "readMore": "Ler mais →"

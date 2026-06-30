@@ -34,7 +34,7 @@
         },
         {
             "title": "Analista de Dados",
-            "html_text": "<p><b>Ferramentas de Visualização de Dados:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>Ferramentas de ETL:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Banco de Dados:</b></p><ul style='text-align: left'><li><b>Relacional:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
+            "html_text": "<p><b>Data Visualization Tools:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>ETL Tools:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Databases:</b></p><ul style='text-align: left'><li><b>Relational:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
             "url_img": "https://cdn-icons-png.flaticon.com/32/2329/2329087.png",
             "icon": "presentation",
             "underline_class_css": "underline-blue",
@@ -42,7 +42,7 @@
         },
         {
             "title": "Gerente de Projetos",
-            "html_text": "Gerenciei equipes internas e externas em <b>projetos do mercado financeiro</b>, com foco em sistemas de negociação de ações, fundos de investimento e gestão de risco. Garanti relatórios e atualizações de progresso pontuais para os executivos C-level da empresa.",
+            "html_text": "Gerenciei tanto equipes internas de desenvolvimento quanto terceirizadas em projetos das squads de plataforma de trade, fundos de investimento e gestão de risco.",
             "url_img": "https://cdn-icons-png.flaticon.com/32/1556/1556324.png",
             "icon": "engine",
             "underline_class_css": "underline-orange",
@@ -53,7 +53,7 @@
         {
             "title": "DESENVOLVEDOR FULL STACK",
             "subtitle": "na VISIAN SYSTEMS",
-            "text": "Trabalhei em uma software house atendendo clientes do Reino Unido, desenvolvendo projetos como plataformas de e-commerce, sistemas de clusterização de clientes e um sistema de rastreamento de funcionários de segurança para o Aeroporto de Heathrow. Construí software sob medida para o Governo Francês para gerenciar e distribuir projetos de ONGs na África.",
+            "text": "Atuação como Desenvolvedor Sênior em uma software house britânica com projetos globais. Desenvolvimento de plataformas de e-commerce, sistemas de inteligência de clusterização de clientes e soluções de alta segurança, como o sistema de rastreamento de funcionários para o Aeroporto de Heathrow e a plataforma de avaliação de projetos de ONGs para captação de recursos junto ao Governo Francês.",
             "company_logo": "logo-visian.jpg",
             "company_url": "https://www.visiansystems.com/",
             "initial_date": "2023-02-01"
@@ -61,14 +61,14 @@
         {
             "title": "FUNDADOR",
             "subtitle": "na DANDO SOPA",
-            "text": "Após anos no mundo corporativo, eu e meu sócio nos aventuramos no empreendedorismo, fundando a Dando Sopa — um negócio de e-commerce de varejo. O nome foi inspirado na expressão brasileira que remete a algo 'fácil de conseguir'.",
+            "text": "Após anos no mundo corporativo, me aventurei com mais um sócio no empreendedorismo, fundando a Dando Sopa — um negócio de e-commerce varejista.",
             "company_logo": "logo-dando-sopa.png",
             "initial_date": "2022-08-01"
         },
         {
             "title": "ANALISTA DE DADOS",
             "subtitle": "na ATIVA INVESTIMENTOS",
-            "text": "Cofundei uma equipe responsável por todo o ambiente analítico da empresa. Extraí e tratei dados (usando Pentaho e SSIS), reestruturei e enriqueci dados para estabelecer um Data Warehouse (utilizando Python e SSAS) e apresentei informações por meio de dashboards (usando Power BI) tanto para os colaboradores quanto para os executivos C-level da empresa.",
+            "text": "Cofundei a equipe de dados da companhia, estruturando todo o ambiente analítico desde a extração e enriquecimento de dados com Pentaho e SSIS, até a modelagem em Data Warehouse via Python e SSAS, finalizando na entrega de dashboards em Power BI. O objetivo era não apenas fornecer dados estratégicos para o nível executivo, mas também disseminar a cultura analítica e o ferramental necessário para empoderar as áreas operacionais.",
             "company_logo": "logo-ativa.jpg",
             "company_url": "https://www.ativainvestimentos.com.br/",
             "initial_date": "2020-11-01"
@@ -84,7 +84,7 @@
         {
             "title": "DESENVOLVEDOR DE SOFTWARE",
             "subtitle": "na ATIVA INVESTIMENTOS",
-            "text": "Responsável pela evolução e manutenção de aplicações web utilizadas por usuários finais externos e clientes internos da empresa. Stack: Azure, C# (.Net Core), Asp.Net e VUE.js.",
+            "text": "Responsável pela evolução e manutenção tanto de aplicações utilizadas pelos clientes da empresa quanto das plataformas internas dos funcionários. Stack: Azure, C# (.Net Core), Asp.Net e VUE.js.",
             "company_logo": "logo-ativa.jpg",
             "company_url": "https://www.ativainvestimentos.com.br/",
             "initial_date": "2018-01-01"
@@ -100,7 +100,7 @@
         {
             "title": "ESTAGIÁRIO DE RELACIONAMENTO COM O CLIENTE",
             "subtitle": "na STONE CO",
-            "text": "A função envolvia atender dúvidas e necessidades dos clientes por e-mail, telefone e chat, esclarecer questões relacionadas aos produtos e conduzir negociações relacionadas à tributação comercial.",
+            "text": "Responsável pelo atendimento a dúvidas e necessidades dos clientes via e-mail, telefone e chat, esclarecendo questões relacionadas aos produtos e conduzindo renegociações de taxas.",
             "company_logo": "logo-stone.jpg",
             "company_url": "https://investors.stone.co/",
             "initial_date": "2017-05-01"

@@ -34,7 +34,7 @@
         },
         {
             "title": "Data Analyst",
-            "html_text": "<p><b>Data Visualization Tool:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>ETL Tools:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Database:</b></p><ul style='text-align: left'><li><b>Relational:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
+            "html_text": "<p><b>Data Visualization Tools:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>ETL Tools:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Database:</b></p><ul style='text-align: left'><li><b>Relational:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
             "url_img": "https://cdn-icons-png.flaticon.com/32/2329/2329087.png",
             "icon": "presentation",
             "underline_class_css": "underline-blue",
