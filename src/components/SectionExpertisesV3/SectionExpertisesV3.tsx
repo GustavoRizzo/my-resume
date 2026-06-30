@@ -1,37 +1,22 @@
 import './style.scss'
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { CSSProperties } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Expertise } from '../../types/Expertise';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
+import { useRevealOnScroll } from '../../utils/useRevealOnScroll';
 import ExpertiseIcon from '../ExpertiseIcon/ExpertiseIcon';
-import data from '../../data/data.json';
 
-export default function SectionExpertisesV3() {
-    const expertises: Expertise[] = data.expertises;
-    const gridRef = useRef<HTMLDivElement>(null);
-    // Fallback for environments without IntersectionObserver (e.g. jsdom): start revealed.
-    const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined');
+interface SectionExpertisesV3Props {
+    expertises: Expertise[];
+}
 
-    useEffect(() => {
-        const node = gridRef.current;
-        if (!node || typeof IntersectionObserver === 'undefined') return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        observer.observe(node);
-        return () => observer.disconnect();
-    }, []);
+export default function SectionExpertisesV3({ expertises }: SectionExpertisesV3Props) {
+    const { t } = useTranslation();
+    const { ref: gridRef, visible } = useRevealOnScroll<HTMLDivElement>(0.2);
 
     return (
         <section className="expertise-v3">
-            <h1 className="section-title">My Expertise</h1>
+            <h1 className="section-title">{t('sections.myExpertise')}</h1>
 
             <div
                 ref={gridRef}

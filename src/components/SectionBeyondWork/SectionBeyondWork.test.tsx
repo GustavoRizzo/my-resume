@@ -1,12 +1,26 @@
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
+import { I18nextProvider } from "react-i18next";
+import { getI18n } from "../../i18n/config";
+import enHobbies from "../../data/hobbies/en.json";
+import type { HobbiesData } from "../../types/Hobby";
 import SectionBeyondWork from "./SectionBeyondWork";
 
 afterEach(cleanup);
 
+const hobbies = enHobbies as HobbiesData;
+
+function renderSection() {
+  return render(
+    <I18nextProvider i18n={getI18n("en")}>
+      <SectionBeyondWork hobbies={hobbies} />
+    </I18nextProvider>
+  );
+}
+
 describe("SectionBeyondWork", () => {
   it("renders the section title and the topic cards", () => {
-    render(<SectionBeyondWork />);
+    renderSection();
 
     expect(screen.getByText("Beyond Work")).toBeInTheDocument();
     expect(screen.getByText("Adventures & Sports")).toBeInTheDocument();
@@ -15,7 +29,7 @@ describe("SectionBeyondWork", () => {
   });
 
   it("opens a modal with the topic detail when a card is clicked", () => {
-    render(<SectionBeyondWork />);
+    renderSection();
 
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
@@ -31,7 +45,7 @@ describe("SectionBeyondWork", () => {
   });
 
   it("closes the modal with the close button", () => {
-    render(<SectionBeyondWork />);
+    renderSection();
 
     fireEvent.click(
       screen.getByRole("button", { name: /Open details about Open Source/i })

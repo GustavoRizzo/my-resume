@@ -5,7 +5,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default tseslint.config(
-  { ignores: ["dist", "coverage"] },
+  { ignores: ["dist", "build", "coverage", ".react-router"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
@@ -33,6 +33,14 @@ export default tseslint.config(
         ...globals.browser,
         ...globals.jest,
       },
+    },
+  },
+  {
+    // Route modules legitimately export loader/meta alongside the component,
+    // which the React Fast Refresh heuristic doesn't expect.
+    files: ["src/root.tsx", "src/routes.ts", "src/routes/**/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
     },
   }
 );

@@ -1,27 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home -->
   <url>
-    <loc>https://gustavorizzo.github.io/my-resume/</loc>
+    <loc>https://gustavorizzo.github.io/my-resume/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://gustavorizzo.github.io/my-resume/About</loc>
+    <loc>https://gustavorizzo.github.io/my-resume/pt</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://gustavorizzo.github.io/my-resume/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/about"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/about"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gustavorizzo.github.io/my-resume/CareerTimeline</loc>
+    <loc>https://gustavorizzo.github.io/my-resume/pt/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/about"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Expertise -->
+  <url>
+    <loc>https://gustavorizzo.github.io/my-resume/en/expertises</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/expertises"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/expertises"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/expertises"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gustavorizzo.github.io/my-resume/ListExpertises</loc>
+    <loc>https://gustavorizzo.github.io/my-resume/pt/expertises</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/expertises"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/expertises"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/expertises"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Career -->
+  <url>
+    <loc>https://gustavorizzo.github.io/my-resume/en/career</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/career"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/career"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/career"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gustavorizzo.github.io/my-resume/BeyondWork</loc>
+    <loc>https://gustavorizzo.github.io/my-resume/pt/career</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/career"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/career"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/career"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Beyond Work -->
+  <url>
+    <loc>https://gustavorizzo.github.io/my-resume/en/beyond-work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/beyond-work"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/beyond-work"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/beyond-work"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gustavorizzo.github.io/my-resume/pt/beyond-work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gustavorizzo.github.io/my-resume/en/beyond-work"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gustavorizzo.github.io/my-resume/pt/beyond-work"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gustavorizzo.github.io/my-resume/en/beyond-work"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -3,10 +3,12 @@ import "./style.scss";
 import HobbyCard from "./HobbyCard";
 import HobbyModal from "./HobbyModal";
 import { HobbiesData } from "../../types/Hobby";
-import hobbies from "../../data/hobbies/en.json";
 
-export default function SectionBeyondWork() {
-    const data = hobbies as HobbiesData;
+interface SectionBeyondWorkProps {
+    hobbies: HobbiesData;
+}
+
+export default function SectionBeyondWork({ hobbies: data }: SectionBeyondWorkProps) {
     const [openId, setOpenId] = useState<string | null>(null);
 
     const openTopic = data.topics.find((topic) => topic.id === openId) ?? null;

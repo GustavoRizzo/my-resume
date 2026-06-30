@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "expertises": "Especialidades",
+    "about": "Sobre",
+    "career": "Carreira",
+    "beyondWork": "Além do Trabalho",
+    "toggleMenu": "Ocultar/Mostrar menu"
+  },
+  "sections": {
+    "myExpertise": "Especialidades",
+    "careerTimeline": "Linha do Tempo"
+  },
+  "beyondWork": {
+    "readMore": "Ler mais →"
+  },
+  "a11y": {
+    "close": "Fechar",
+    "openDetails": "Abrir detalhes sobre {{title}}"
+  },
+  "language": {
+    "label": "Idioma",
+    "english": "Inglês",
+    "portuguese": "Português"
+  }
+}

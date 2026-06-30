@@ -1,0 +1,117 @@
+{
+    "about": {
+        "perfil_img": "perfil.png",
+        "name": "Gustavo Rizzo S. M. de Albuquerque",
+        "url_linkedin": "https://www.linkedin.com/in/gustavo-albuquerque/",
+        "url_github": "https://github.com/GustavoRizzo",
+        "console_phrases": [
+            {
+                "phrase": "Desenvolvedor de Software",
+                "color": "tomato"
+            },
+            {
+                "phrase": "Analista de Dados",
+                "color": "fuchsia"
+            },
+            {
+                "phrase": "Gerente de Projetos",
+                "color": "gold"
+            },
+            {
+                "phrase": "Apaixonado por Tecnologia",
+                "color": "chartreuse"
+            }
+        ]
+    },
+    "expertises": [
+        {
+            "title": "Desenvolvedor de Software",
+            "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS)</li></ul></p>",
+            "url_img": "https://cdn-icons-png.flaticon.com/32/9423/9423061.png",
+            "icon": "web",
+            "underline_class_css": "underline-megenta",
+            "initial_date": "2023-02-01"
+        },
+        {
+            "title": "Analista de Dados",
+            "html_text": "<p><b>Data Visualization Tools:</b></p><ul><li>Power BI</li><li>Streamlit</li></ul><p><b>ETL Tools:</b></p><ul><li>Apache Spark</li><li>SSIS</li><li>Pentaho</li></ul><p><b>Databases:</b></p><ul style='text-align: left'><li><b>Relational:</b> <span>SQLServer, Oracle, PostgreSQL, MySQL</span></li><li><b>NoSQL:</b> <span>MongoDB</span></li><li><b>OLAP:</b> <span>SSAS, DuckDB</span></li></ul>",
+            "url_img": "https://cdn-icons-png.flaticon.com/32/2329/2329087.png",
+            "icon": "presentation",
+            "underline_class_css": "underline-blue",
+            "initial_date": "2023-02-01"
+        },
+        {
+            "title": "Gerente de Projetos",
+            "html_text": "Gerenciei tanto equipes internas de desenvolvimento quanto terceirizadas em projetos das squads de plataforma de trade, fundos de investimento e gestão de risco.",
+            "url_img": "https://cdn-icons-png.flaticon.com/32/1556/1556324.png",
+            "icon": "engine",
+            "underline_class_css": "underline-orange",
+            "initial_date": "2023-02-01"
+        }
+    ],
+    "experiences": [
+        {
+            "title": "DESENVOLVEDOR FULL STACK",
+            "subtitle": "na VISIAN SYSTEMS",
+            "text": "Atuação como Desenvolvedor Sênior em uma software house britânica com projetos globais. Desenvolvimento de plataformas de e-commerce, sistemas de inteligência de clusterização de clientes e soluções de alta segurança, como o sistema de rastreamento de funcionários para o Aeroporto de Heathrow e a plataforma de avaliação de projetos de ONGs para captação de recursos junto ao Governo Francês.",
+            "company_logo": "logo-visian.jpg",
+            "company_url": "https://www.visiansystems.com/",
+            "initial_date": "2023-02-01"
+        },
+        {
+            "title": "FUNDADOR",
+            "subtitle": "na DANDO SOPA",
+            "text": "Após anos no mundo corporativo, me aventurei com mais um sócio no empreendedorismo, fundando a Dando Sopa — um negócio de e-commerce varejista.",
+            "company_logo": "logo-dando-sopa.png",
+            "initial_date": "2022-08-01"
+        },
+        {
+            "title": "ANALISTA DE DADOS",
+            "subtitle": "na ATIVA INVESTIMENTOS",
+            "text": "Cofundei a equipe de dados da companhia, estruturando todo o ambiente analítico desde a extração e enriquecimento de dados com Pentaho e SSIS, até a modelagem em Data Warehouse via Python e SSAS, finalizando na entrega de dashboards em Power BI. O objetivo era não apenas fornecer dados estratégicos para o nível executivo, mas também disseminar a cultura analítica e o ferramental necessário para empoderar as áreas operacionais.",
+            "company_logo": "logo-ativa.jpg",
+            "company_url": "https://www.ativainvestimentos.com.br/",
+            "initial_date": "2020-11-01"
+        },
+        {
+            "title": "GERENTE DE PROJETOS",
+            "subtitle": "na ATIVA INVESTIMENTOS",
+            "text": "Gerenciei tanto equipes internas de desenvolvimento quanto membros terceirizados. Prestei orientação e suporte na área de sistemas de corretagem de ações, gestão de risco, fundos de investimento e captação de clientes.",
+            "company_logo": "logo-ativa.jpg",
+            "company_url": "https://www.ativainvestimentos.com.br/",
+            "initial_date": "2019-07-01"
+        },
+        {
+            "title": "DESENVOLVEDOR DE SOFTWARE",
+            "subtitle": "na ATIVA INVESTIMENTOS",
+            "text": "Responsável pela evolução e manutenção tanto de aplicações utilizadas pelos clientes da empresa quanto das plataformas internas dos funcionários. Stack: Azure, C# (.Net Core), Asp.Net e VUE.js.",
+            "company_logo": "logo-ativa.jpg",
+            "company_url": "https://www.ativainvestimentos.com.br/",
+            "initial_date": "2018-01-01"
+        },
+        {
+            "title": "ANALISTA DE DADOS EM LOGÍSTICA",
+            "subtitle": "na STONE CO",
+            "text": "Responsável por gerar e automatizar relatórios de KPIs sobre a logística interna em todo o Brasil e discuti-los com os líderes de cada filial para criar planos de melhoria.",
+            "company_logo": "logo-stone.jpg",
+            "company_url": "https://investors.stone.co/",
+            "initial_date": "2017-11-01"
+        },
+        {
+            "title": "ESTAGIÁRIO DE RELACIONAMENTO COM O CLIENTE",
+            "subtitle": "na STONE CO",
+            "text": "Responsável pelo atendimento a dúvidas e necessidades dos clientes via e-mail, telefone e chat, esclarecendo questões relacionadas aos produtos e conduzindo renegociações de taxas.",
+            "company_logo": "logo-stone.jpg",
+            "company_url": "https://investors.stone.co/",
+            "initial_date": "2017-05-01"
+        },
+        {
+            "title": "ESTAGIÁRIO DE DESENVOLVIMENTO WEB",
+            "subtitle": "na PUC-RIO no LIRA, o LABORATÓRIO de INTELIGÊNCIA ROBÓTICA APLICADA",
+            "text": "Atuei na manutenção e atualização do site do laboratório, além de auxiliar os pesquisadores em pequenas tarefas.",
+            "company_logo": "PUC-Rio-Logo.jpg",
+            "company_url": "https://www.puc-rio.br/",
+            "initial_date": "2017-02-01"
+        }
+    ]
+}
