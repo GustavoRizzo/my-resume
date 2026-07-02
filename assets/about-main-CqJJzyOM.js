@@ -1,1 +1,0 @@
-import{E as e,k as t}from"./chunk-4ZMWKKQ3-FnsuXI-q.js";import{t as n}from"./jsx-runtime-BUQC76ri.js";import{n as r}from"./route-helpers-j4qLI5JW.js";import{t as i}from"./WhoAmI-DYjhXAam.js";import"./about-client-loader-D3cWCvoD.js";var a=n(),o=r(`about`,`/about`),s=t(function(){let{about:t}=e();return(0,a.jsx)(i,{...t})});export{s as default,o as meta};
