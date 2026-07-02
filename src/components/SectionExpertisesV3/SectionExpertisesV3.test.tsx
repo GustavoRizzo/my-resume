@@ -25,7 +25,7 @@ describe("SectionExpertisesV3", () => {
 
   it("renders the Portuguese title and translated expertise items", () => {
     renderFor("pt");
-    expect(screen.getByText("Minhas Especialidades")).toBeInTheDocument();
+    expect(screen.getByText("Especialidades")).toBeInTheDocument();
     expect(screen.getByLabelText("Desenvolvedor de Software")).toBeInTheDocument();
   });
 });

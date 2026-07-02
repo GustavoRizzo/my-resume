@@ -4,7 +4,7 @@ import { getI18n } from "./config";
 describe("getI18n", () => {
   it("translates UI strings in the requested language", () => {
     expect(getI18n("en").t("sections.myExpertise")).toBe("My Expertise");
-    expect(getI18n("pt").t("sections.myExpertise")).toBe("Minhas Especialidades");
+    expect(getI18n("pt").t("sections.myExpertise")).toBe("Especialidades");
   });
 
   it("interpolates values", () => {
