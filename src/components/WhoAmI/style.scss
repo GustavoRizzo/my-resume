@@ -12,7 +12,7 @@
     justify-items: center;
     align-content: center;
     min-height: 90vh;
-    width: 100wh;
+    width: 100%;
     padding-top: 60px;
 
     &_perfil_wrap {
@@ -91,6 +91,17 @@
     display: block;
     color: white;
     margin: auto;
+    // The typed phrase is a single unbroken line growing letter by letter.
+    // As a grid item its automatic min-width defaults to its content's
+    // max-content, so a long phrase would otherwise push this cell (and the
+    // whole page) wider while typing, causing horizontal scroll that grows
+    // and shrinks in sync with the animation. Clip instead of wrapping (which
+    // would trade the horizontal growth for a vertical one) or growing the page.
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .console-underscore {
     font-family: $font-console;
