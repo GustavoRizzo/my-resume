@@ -134,6 +134,7 @@
 .hobby-modal {
   position: relative;
   width: min(95%, 560px);
+  min-width: 0;
   max-height: 85vh;
   overflow-y: auto;
   background: $background-color;
@@ -175,6 +176,7 @@
 
   &__body {
     text-align: justify;
+    overflow-wrap: anywhere;
   }
 
   &__links {
@@ -189,10 +191,12 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
+    max-width: 100%;
     border: 2px solid $highlight-color-timeline;
     border-radius: 2em;
     color: $default-text-color;
     text-decoration: none;
+    overflow-wrap: anywhere;
     transition: background 0.15s ease-in-out;
 
     &:hover,
