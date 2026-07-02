@@ -1,0 +1,1 @@
+import{k as e}from"./chunk-4ZMWKKQ3-FnsuXI-q.js";import{t}from"./jsx-runtime-BUQC76ri.js";var n=t();function r(){return[{title:`Not Found — Gustavo Rizzo`}]}var i=e(function(){return(0,n.jsx)(`main`,{style:{padding:`1rem`},children:(0,n.jsx)(`p`,{children:`There's nothing here!`})})});export{i as default,r as meta};

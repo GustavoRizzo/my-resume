@@ -1,0 +1,1 @@
+import{t as e}from"./route-helpers-j4qLI5JW.js";var t=e(e=>({hobbies:e.hobbies}));export{t as clientLoader};

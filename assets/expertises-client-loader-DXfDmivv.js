@@ -1,0 +1,1 @@
+import{t as e}from"./route-helpers-j4qLI5JW.js";var t=e(e=>({expertises:e.expertises}));export{t as clientLoader};
