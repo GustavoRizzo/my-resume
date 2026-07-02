@@ -133,7 +133,13 @@
 
 .hobby-modal {
   position: relative;
-  width: min(95%, 560px);
+  // Sized off `vw`, not `%` of the flex overlay — `%` is relative to the
+  // overlay's own content box, which can shift a few pixels when the page
+  // gains/loses a scrollbar (its width becomes indirectly scroll-dependent).
+  // `vw` is fixed to the viewport regardless of any scrollbar, so the modal's
+  // width stays stable no matter what the rest of the page is doing.
+  width: min(92vw, 560px);
+  max-width: calc(100vw - 2rem);
   min-width: 0;
   max-height: 85vh;
   overflow-y: auto;
