@@ -1,14 +1,16 @@
-import { SUPPORTED_LANGS, type Lang } from "./types";
+import perfil from "../assets/perfil.png";
+import { SUPPORTED_LANGS, type Lang } from "./index";
 
 // Canonical site origin (GitHub Pages project page).
-const SITE = "https://gustavorizzo.github.io/my-resume";
-const OG_IMAGE = `${SITE}/perfil.png`;
-const AUTHOR = "Gustavo Rizzo S. M. de Albuquerque";
+const ORIGIN = "https://gustavorizzo.github.io";
+const SITE = `${ORIGIN}/my-resume`;
+// perfil.src already carries the /my-resume/ base and content hash.
+const OG_IMAGE = `${ORIGIN}${perfil.src}`;
+export const AUTHOR = "Gustavo Rizzo S. M. de Albuquerque";
 
 export type PageKey = "home" | "about" | "expertises" | "career" | "beyondWork";
 
-// Per-language, per-page <title>/description. Kept here (not in i18next) because
-// meta() runs outside React and has no access to the t() hook.
+// Per-language, per-page <title>/description (same copy as the React site).
 const SEO: Record<Lang, Record<PageKey, { title: string; description: string }>> = {
   en: {
     home: {
@@ -45,7 +47,8 @@ const SEO: Record<Lang, Record<PageKey, { title: string; description: string }>>
     },
     expertises: {
       title: "Especialidades — Gustavo Rizzo",
-      description: "As especialidades de Gustavo Rizzo: desenvolvimento de software, análise de dados e gestão de projetos.",
+      description:
+        "As especialidades de Gustavo Rizzo: desenvolvimento de software, análise de dados e gestão de projetos.",
     },
     career: {
       title: "Carreira — Gustavo Rizzo",
@@ -58,32 +61,16 @@ const SEO: Record<Lang, Record<PageKey, { title: string; description: string }>>
   },
 };
 
-// Build the full meta descriptor list for a route: title, description, Open
-// Graph, Twitter, canonical and hreflang alternates (en/pt/x-default).
-export function buildPageMeta(lang: Lang, page: PageKey, path: string) {
+export function pageSeo(lang: Lang, page: PageKey, path: string) {
   const { title, description } = SEO[lang][page];
-  const url = `${SITE}/${lang}${path}`;
-
-  return [
-    { title },
-    { name: "description", content: description },
-    { name: "author", content: AUTHOR },
-    { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:type", content: "website" },
-    { property: "og:url", content: url },
-    { property: "og:image", content: OG_IMAGE },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: title },
-    { name: "twitter:description", content: description },
-    { name: "twitter:image", content: OG_IMAGE },
-    { tagName: "link", rel: "canonical", href: url },
-    ...SUPPORTED_LANGS.map((l) => ({
-      tagName: "link",
-      rel: "alternate",
-      hrefLang: l,
-      href: `${SITE}/${l}${path}`,
-    })),
-    { tagName: "link", rel: "alternate", hrefLang: "x-default", href: `${SITE}/en${path}` },
-  ];
+  return {
+    title,
+    description,
+    url: `${SITE}/${lang}${path}`,
+    ogImage: OG_IMAGE,
+    alternates: [
+      ...SUPPORTED_LANGS.map((l) => ({ hreflang: l as string, href: `${SITE}/${l}${path}` })),
+      { hreflang: "x-default", href: `${SITE}/en${path}` },
+    ],
+  };
 }

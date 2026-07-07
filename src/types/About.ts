@@ -1,4 +1,4 @@
-import { ConsolePhrase } from "./ConsolePhrase";
+import type { ConsolePhrase } from "./ConsolePhrase";
 
 export type About = {
     name: string;

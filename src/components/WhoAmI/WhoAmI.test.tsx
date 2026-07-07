@@ -3,7 +3,6 @@ import WhoAmI from "./WhoAmI";
 
 const props = {
   name: "Test Name",
-  perfil_img: "perfil.png",
   url_linkedin: "https://linkedin.test",
   url_github: "https://github.test",
   console_phrases: [{ phrase: "hello" }],

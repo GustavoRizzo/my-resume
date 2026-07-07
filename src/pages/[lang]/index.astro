@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
+import WhoAmI from "../../components/WhoAmI/WhoAmI";
+import SectionExpertises from "../../components/SectionExpertises/SectionExpertises.astro";
+import CareerTimeline from "../../components/CareerTimeline/CareerTimeline.astro";
+import BeyondWork from "../../components/SectionBeyondWork/BeyondWork.astro";
+import { getEntry } from "astro:content";
+import { SUPPORTED_LANGS, type Lang } from "../../i18n";
+
+export function getStaticPaths() {
+  return SUPPORTED_LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const resume = (await getEntry("resume", lang))!.data;
+---
+
+<BaseLayout lang={lang} page="home" path="">
+  <LanguageSelector lang={lang} />
+  <main style="padding: 0 1rem">
+    <WhoAmI client:load {...resume.about} />
+    <SectionExpertises lang={lang} expertises={resume.expertises} />
+    <CareerTimeline lang={lang} experiences={resume.experiences} />
+    <BeyondWork lang={lang} />
+  </main>
+</BaseLayout>

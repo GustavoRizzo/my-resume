@@ -1,0 +1,81 @@
+---
+import "./style.scss";
+import { LOCALE_BY_LANG, t, type Lang } from "../../i18n";
+
+type Experience = {
+  title: string;
+  subtitle: string;
+  text: string;
+  company_logo: string;
+  company_url?: string;
+  initial_date: string;
+};
+
+interface Props {
+  lang: Lang;
+  experiences: Experience[];
+}
+
+const { lang, experiences } = Astro.props;
+const locale = LOCALE_BY_LANG[lang];
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// Dates are formatted at build time, per language ("JUN 2024" / "JUN. 2024").
+const formattedDate = (str: string) => {
+  const date = new Date(str);
+  const month = date.toLocaleString(locale, { month: "short" }).toUpperCase();
+  return `${month} ${date.getFullYear()}`;
+};
+
+const items = experiences.map((exp, index) => ({
+  ...exp,
+  date: formattedDate(exp.initial_date),
+  // Logos live in public/; anchor them to the base so they load from any URL.
+  logoUrl: `${base}/${exp.company_logo}`,
+  delay: `${index * 200}ms`,
+}));
+---
+
+<section style="display: grid; justify-items: center; align-content: center;">
+  <h1 class="section-title">{t(lang, "sections.careerTimeline")}</h1>
+  <div class="rb-container">
+    <ul class="rb" data-reveal>
+      {
+        items.map((exp) => (
+          <li class="rb-item" style={`--reveal-delay: ${exp.delay}`}>
+            {exp.company_url ? (
+              <a
+                class="company-logo"
+                style={`background-image: url(${exp.logoUrl})`}
+                href={exp.company_url}
+                target="_blank"
+                rel="noreferrer"
+              />
+            ) : (
+              <div class="company-logo" style={`background-image: url(${exp.logoUrl})`} />
+            )}
+            <div class="paragraph">
+              <span class="date-pill">{exp.date}</span>
+              <div class="title">{exp.title}</div>
+              <div class="sub-title">
+                {exp.company_url ? (
+                  <a class="sub-title-link" href={exp.company_url} target="_blank" rel="noreferrer">
+                    {exp.subtitle}
+                  </a>
+                ) : (
+                  exp.subtitle
+                )}
+              </div>
+              <div class="text">{exp.text}</div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { revealOnScroll } from "../../scripts/revealOnScroll";
+  revealOnScroll("ul.rb[data-reveal]", 0.1);
+</script>

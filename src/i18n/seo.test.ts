@@ -1,35 +1,25 @@
-import { describe, it, expect } from "vitest";
-import { buildPageMeta } from "./seo";
+import { describe, expect, it } from "vitest";
+import { pageSeo } from "./seo";
 
-type LinkDescriptor = { tagName: "link"; rel: string; hrefLang?: string; href: string };
-type TitleDescriptor = { title: string };
-
-describe("buildPageMeta", () => {
-  it("sets a language-specific title", () => {
-    const en = buildPageMeta("en", "home", "") as TitleDescriptor[];
-    const pt = buildPageMeta("pt", "home", "") as TitleDescriptor[];
-    expect(en.find((m) => "title" in m)?.title).toBe("Gustavo Rizzo — Software Developer");
-    expect(pt.find((m) => "title" in m)?.title).toBe("Gustavo Rizzo — Desenvolvedor de Software");
+describe("pageSeo", () => {
+  it("builds canonical URL under the language prefix", () => {
+    expect(pageSeo("pt", "career", "/career").url).toBe(
+      "https://gustavorizzo.github.io/my-resume/pt/career",
+    );
   });
 
-  it("builds a canonical URL from the language and path", () => {
-    const meta = buildPageMeta("pt", "about", "/about") as LinkDescriptor[];
-    const canonical = meta.find((m) => m.rel === "canonical");
-    expect(canonical?.href).toBe("https://gustavorizzo.github.io/my-resume/pt/about");
+  it("lists en, pt and x-default alternates for the same path", () => {
+    const { alternates } = pageSeo("en", "home", "");
+    expect(alternates.map((a) => a.hreflang)).toEqual(["en", "pt", "x-default"]);
+    expect(alternates.at(-1)?.href).toContain("/en");
   });
 
-  it("emits hreflang alternates for both languages plus x-default", () => {
-    const meta = buildPageMeta("en", "expertises", "/expertises") as LinkDescriptor[];
-    const alternates = meta.filter((m) => m.rel === "alternate");
-    const byHrefLang = Object.fromEntries(alternates.map((a) => [a.hrefLang, a.href]));
-    expect(byHrefLang.en).toBe("https://gustavorizzo.github.io/my-resume/en/expertises");
-    expect(byHrefLang.pt).toBe("https://gustavorizzo.github.io/my-resume/pt/expertises");
-    expect(byHrefLang["x-default"]).toBe("https://gustavorizzo.github.io/my-resume/en/expertises");
+  it("localizes title and description", () => {
+    expect(pageSeo("en", "home", "").title).toContain("Software Developer");
+    expect(pageSeo("pt", "home", "").title).toContain("Desenvolvedor de Software");
   });
 
-  it("exposes Open Graph and Twitter image tags", () => {
-    const meta = buildPageMeta("en", "home", "") as Array<{ property?: string; name?: string }>;
-    expect(meta.some((m) => m.property === "og:image")).toBe(true);
-    expect(meta.some((m) => m.name === "twitter:card")).toBe(true);
+  it("uses an absolute OG image URL", () => {
+    expect(pageSeo("en", "home", "").ogImage).toMatch(/^https:\/\/gustavorizzo\.github\.io\//);
   });
 });

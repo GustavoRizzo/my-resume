@@ -1,14 +1,17 @@
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
+import type { CSSProperties } from "react";
 import "./style.scss";
 import HobbyCard from "./HobbyCard";
 import HobbyModal from "./HobbyModal";
-import { HobbiesData } from "../../types/Hobby";
+import type { HobbiesData } from "../../types/Hobby";
+import type { BeyondWorkLabels } from "./labels";
 
 interface SectionBeyondWorkProps {
     hobbies: HobbiesData;
+    labels: BeyondWorkLabels;
 }
 
-export default function SectionBeyondWork({ hobbies: data }: SectionBeyondWorkProps) {
+export default function SectionBeyondWork({ hobbies: data, labels }: SectionBeyondWorkProps) {
     const [openId, setOpenId] = useState<string | null>(null);
 
     const openTopic = data.topics.find((topic) => topic.id === openId) ?? null;
@@ -28,12 +31,13 @@ export default function SectionBeyondWork({ hobbies: data }: SectionBeyondWorkPr
                         topic={topic}
                         index={index}
                         onOpen={setOpenId}
+                        labels={labels}
                     />
                 ))}
             </div>
 
             {openTopic && (
-                <HobbyModal topic={openTopic} onClose={() => setOpenId(null)} />
+                <HobbyModal topic={openTopic} onClose={() => setOpenId(null)} labels={labels} />
             )}
         </section>
     );

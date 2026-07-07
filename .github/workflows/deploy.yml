@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: production-files
-          path: ./build/client
+          path: ./dist
 
   deploy:
     name: Deploy

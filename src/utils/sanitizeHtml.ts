@@ -1,5 +1,5 @@
-// isomorphic-dompurify wires up jsdom on the server, so sanitization works
-// identically during static prerendering and in the browser.
+// Content HTML (expertises, hobby bodies) is sanitized at BUILD time — pages
+// are fully prerendered, so the browser only ever receives clean markup.
 import DOMPurify from "isomorphic-dompurify";
 
 const ALLOWED_TAGS = ["p", "b", "strong", "i", "em", "ul", "ol", "li", "br", "span"];

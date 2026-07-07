@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ConsolePhrase } from "../../types/ConsolePhrase";
+import type { ConsolePhrase } from "../../types/ConsolePhrase";
 
 export default function ConsoleTextAnimated ({console_phrases}:{console_phrases: ConsolePhrase[]}) {
   const textRef = useRef<HTMLSpanElement>(null);

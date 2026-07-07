@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
+import BeyondWork from "../../components/SectionBeyondWork/BeyondWork.astro";
+
+import { SUPPORTED_LANGS, type Lang } from "../../i18n";
+
+export function getStaticPaths() {
+  return SUPPORTED_LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<BaseLayout lang={lang} page="beyondWork" path="/beyond-work">
+  <LanguageSelector lang={lang} />
+  <main style="padding: 0 1rem">
+    <BeyondWork lang={lang} />
+  </main>
+</BaseLayout>

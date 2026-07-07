@@ -1,6 +1,6 @@
 import { render, act } from '@testing-library/react';
 import ConsoleTextAnimated from './ConsoleTextAnimated';
-import { ConsolePhrase } from '../../types/ConsolePhrase';
+import type { ConsolePhrase } from '../../types/ConsolePhrase';
 
 describe('ConsoleTextAnimated Component', () => {
   const mockPhrases: ConsolePhrase[] = [

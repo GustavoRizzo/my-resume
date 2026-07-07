@@ -1,21 +1,20 @@
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { I18nextProvider } from "react-i18next";
-import { getI18n } from "../../i18n/config";
-import enHobbies from "../../data/hobbies/en.json";
+import allHobbies from "../../content/hobbies.json";
 import type { HobbiesData } from "../../types/Hobby";
 import SectionBeyondWork from "./SectionBeyondWork";
 
 afterEach(cleanup);
 
-const hobbies = enHobbies as HobbiesData;
+const hobbies = allHobbies.en as HobbiesData;
+const labels = {
+  readMore: "Read more →",
+  close: "Close",
+  openDetails: "Open details about {{title}}",
+};
 
 function renderSection() {
-  return render(
-    <I18nextProvider i18n={getI18n("en")}>
-      <SectionBeyondWork hobbies={hobbies} />
-    </I18nextProvider>
-  );
+  return render(<SectionBeyondWork hobbies={hobbies} labels={labels} />);
 }
 
 describe("SectionBeyondWork", () => {

@@ -1,22 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
-import linkedin from '../../../public/images/linkedIn_logo.png';
-import github from "../../../public/images/github_logo.png";
+import linkedin from '../../assets/linkedIn_logo.png';
+import github from "../../assets/github_logo.png";
+import perfil from "../../assets/perfil.png";
+import easterEgg2 from "../../assets/perfil_easter_egg_2.webp";
+import easterEgg3 from "../../assets/perfil_easter_egg_3.webp";
 import './style.scss'
 import ConsoleTextAnimated from "../../components/ConsoleTextAnimated/ConsoleTextAnimated";
-import { About } from "../../types/About";
-import { assetUrl } from "../../utils/assetUrl";
+import type { About } from "../../types/About";
 
 // Easter egg: clicking the profile photo briefly swaps it for two alternate
-// images before returning to the original. Files live in `public/` and are
-// resolved against BASE_URL so they work under the `/my-resume/` GitHub Pages base.
-const EASTER_EGG_2 = `${import.meta.env.BASE_URL}perfil_easter_egg_2.webp`;
-const EASTER_EGG_3 = `${import.meta.env.BASE_URL}perfil_easter_egg_3.webp`;
+// images before returning to the original. All images are bundled imports, so
+// Vite emits hashed URLs under the configured base — no runtime path math.
+const EASTER_EGG_2 = easterEgg2.src;
+const EASTER_EGG_3 = easterEgg3.src;
 const STEP_2_MS = 300;
 const STEP_3_MS = 500;
 
-export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, console_phrases}:About ) {
+export default function WhoAmI( {name, url_linkedin, url_github, console_phrases}:Omit<About, "perfil_img"> ) {
 
-    const perfilSrc = assetUrl(perfil_img);
+    const perfilSrc = perfil.src;
     const [currentImg, setCurrentImg] = useState(perfilSrc);
     const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -61,14 +63,14 @@ export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, con
                 <a href={url_linkedin}>
                     <img
                         className="linkedin"
-                        src={linkedin}
+                        src={linkedin.src}
                         alt="linkedin"
                     />
                 </a>
                 <a href={url_github}>
                     <img
                         className="github"
-                        src={github}
+                        src={github.src}
                         alt="github"
                     />
                 </a>

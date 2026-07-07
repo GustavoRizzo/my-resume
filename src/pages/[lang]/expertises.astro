@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
+import SectionExpertises from "../../components/SectionExpertises/SectionExpertises.astro";
+import { getEntry } from "astro:content";
+import { SUPPORTED_LANGS, type Lang } from "../../i18n";
+
+export function getStaticPaths() {
+  return SUPPORTED_LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const resume = (await getEntry("resume", lang))!.data;
+---
+
+<BaseLayout lang={lang} page="expertises" path="/expertises">
+  <LanguageSelector lang={lang} />
+  <main style="padding: 0 1rem">
+    <SectionExpertises lang={lang} expertises={resume.expertises} />
+  </main>
+</BaseLayout>
