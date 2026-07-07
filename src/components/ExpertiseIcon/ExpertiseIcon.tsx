@@ -1,6 +1,7 @@
 import webIcon from './icons/web.svg?raw';
 import presentationIcon from './icons/presentation.svg?raw';
 import engineIcon from './icons/engine.svg?raw';
+import { assetUrl } from '../../utils/assetUrl';
 
 type Props = {
     icon?: string;
@@ -31,5 +32,5 @@ export default function ExpertiseIcon({ icon, url_img, title, className }: Props
         );
     }
 
-    return <img className={className} src={url_img} alt={title} />;
+    return <img className={className} src={assetUrl(url_img)} alt={title} />;
 }

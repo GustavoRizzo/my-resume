@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { Experience as ExperienceType } from "../../types/Experience";
 import { useRevealOnScroll } from '../../utils/useRevealOnScroll';
+import { assetUrl } from '../../utils/assetUrl';
 import './style.scss'
 
 
@@ -30,12 +31,12 @@ const ExperiencesTimeline: React.FC<ExperiencesTimelineProps> = ({ experiences, 
           >
             {experience.company_url ? (
               <a className="company-logo"
-                style={{ backgroundImage: `url(${experience.company_logo})` }}
+                style={{ backgroundImage: `url(${assetUrl(experience.company_logo)})` }}
                 href={experience.company_url} target="_blank" rel="noreferrer"
               ></a>
             ) : (
               <div className="company-logo"
-                style={{ backgroundImage: `url(${experience.company_logo})` }}
+                style={{ backgroundImage: `url(${assetUrl(experience.company_logo)})` }}
               ></div>
             )}
             <div className="paragraph">

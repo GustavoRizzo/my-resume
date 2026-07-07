@@ -4,6 +4,7 @@ import github from "../../../public/images/github_logo.png";
 import './style.scss'
 import ConsoleTextAnimated from "../../components/ConsoleTextAnimated/ConsoleTextAnimated";
 import { About } from "../../types/About";
+import { assetUrl } from "../../utils/assetUrl";
 
 // Easter egg: clicking the profile photo briefly swaps it for two alternate
 // images before returning to the original. Files live in `public/` and are
@@ -15,7 +16,8 @@ const STEP_3_MS = 500;
 
 export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, console_phrases}:About ) {
 
-    const [currentImg, setCurrentImg] = useState(perfil_img);
+    const perfilSrc = assetUrl(perfil_img);
+    const [currentImg, setCurrentImg] = useState(perfilSrc);
     const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
     // Preload the easter egg images so the swap is instant.
@@ -40,7 +42,7 @@ export default function WhoAmI( {name, perfil_img, url_linkedin, url_github, con
         setCurrentImg(EASTER_EGG_2);
         timeoutsRef.current.push(
             setTimeout(() => setCurrentImg(EASTER_EGG_3), STEP_2_MS),
-            setTimeout(() => setCurrentImg(perfil_img), STEP_2_MS + STEP_3_MS)
+            setTimeout(() => setCurrentImg(perfilSrc), STEP_2_MS + STEP_3_MS)
         );
     }
 
