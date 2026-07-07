@@ -22,21 +22,21 @@
 
 ## 2. Features que NÃO podem faltar (checklist de paridade)
 
-- [ ] Rotas bilíngues: `/{en,pt}/`, `/{en,pt}/about`, `/expertises`, `/career`, `/beyond-work` — todas pré-renderizadas.
-- [ ] `/` redireciona para idioma salvo em `localStorage` (`resume.lang`) ou detectado do navegador, fallback `en`.
-- [ ] Seletor de idioma preservando a sub-página atual (`/en/career` → `/pt/career`) e gravando a preferência.
+- [x] Rotas bilíngues: `/{en,pt}/`, `/{en,pt}/about`, `/expertises`, `/career`, `/beyond-work` — todas pré-renderizadas.
+- [x] `/` redireciona para idioma salvo em `localStorage` (`resume.lang`) ou detectado do navegador, fallback `en`.
+- [x] Seletor de idioma preservando a sub-página atual (`/en/career` → `/pt/career`) e gravando a preferência.
 - ~~Navbar~~ — descoberto na Fase 2 que o componente existe na `main` mas **não é usado por nenhuma página** (código morto); não será portado.
-- [ ] **WhoAmI**: foto de perfil + easter egg do triplo clique (troca de imagens com timeouts) + animação de console (`ConsoleTextAnimated`) sem causar scroll no mobile (fix do commit `531b936`).
-- [ ] **Expertises**: ícones SVG inline (web/presentation/engine) com fallback `url_img`.
-- [ ] **Career/Timeline**: logos das empresas, data formatada por locale (`en-US`/`pt-BR`), animação reveal-on-scroll com delay escalonado.
-- [ ] **Beyond Work**: cards de hobbies + modal (largura corrigida no mobile — commits `74bd2fc`/`ae608c3`), `body_html` sanitizado (DOMPurify).
-- [ ] SEO: `<title>`/description por página × idioma, `hreflang` alternates, canonical, `og:` tags (paridade com `src/i18n/seo.ts`).
-- [ ] `sitemap.xml` (usar `@astrojs/sitemap`) e `robots.txt`.
-- [ ] Página 404 estilizada.
-- [ ] Base path `/my-resume/` em TODAS as URLs (config `base` do Astro).
-- [ ] Deploy automático no GitHub Pages a cada push na `main` (lint → test → build → publish).
-- [ ] **Google Tag Manager** (`GTM-W6HR4FW5`, hoje em `root.tsx`): snippet no `<head>` do BaseLayout. Baixa prioridade, mas obrigatório antes do corte.
-- [ ] Todos os caminhos de imagem absolutos sob a base (regressão do bug corrigido em `assetUrl.ts`).
+- [x] **WhoAmI**: foto de perfil + easter egg do triplo clique (troca de imagens com timeouts) + animação de console (`ConsoleTextAnimated`) sem causar scroll no mobile (fix do commit `531b936`).
+- [x] **Expertises**: ícones SVG inline (web/presentation/engine) com fallback `url_img`.
+- [x] **Career/Timeline**: logos das empresas, data formatada por locale (`en-US`/`pt-BR`), animação reveal-on-scroll com delay escalonado.
+- [x] **Beyond Work**: cards de hobbies + modal (largura corrigida no mobile — commits `74bd2fc`/`ae608c3`), `body_html` sanitizado (DOMPurify).
+- [x] SEO: `<title>`/description por página × idioma, `hreflang` alternates, canonical, `og:` tags (paridade com `src/i18n/seo.ts`).
+- [x] `sitemap.xml` (usar `@astrojs/sitemap`) e `robots.txt`.
+- [x] Página 404 estilizada.
+- [x] Base path `/my-resume/` em TODAS as URLs (config `base` do Astro).
+- [x] Deploy automático no GitHub Pages a cada push na `main` (lint → test → build → publish).
+- [x] **Google Tag Manager** (`GTM-W6HR4FW5`, hoje em `root.tsx`): snippet no `<head>` do BaseLayout. Baixa prioridade, mas obrigatório antes do corte.
+- [x] Todos os caminhos de imagem absolutos sob a base (regressão do bug corrigido em `assetUrl.ts`).
 
 ## 3. Passo a passo — fases pequenas e testáveis
 
