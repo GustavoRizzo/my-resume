@@ -3,8 +3,9 @@
 // route is a prerendered HTML file, so no SPA-restore trickery is needed.
 import "../styles/global.scss";
 import { DEFAULT_LANG } from "../i18n";
+import { withBase } from "../utils/withBase";
 
-const home = `${import.meta.env.BASE_URL}${DEFAULT_LANG}/`;
+const home = withBase(`${DEFAULT_LANG}/`);
 ---
 
 <html lang={DEFAULT_LANG}>
@@ -12,7 +13,7 @@ const home = `${import.meta.env.BASE_URL}${DEFAULT_LANG}/`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
     <title>Not Found — Gustavo Rizzo</title>
   </head>
   <body>

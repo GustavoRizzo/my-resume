@@ -2,9 +2,11 @@
 // Bare "/" picks a language client-side (saved choice → browser language →
 // default) and redirects to /en or /pt. The meta refresh is the no-JS fallback.
 import { DEFAULT_LANG, SUPPORTED_LANGS } from "../i18n";
+import { withBase } from "../utils/withBase";
 
-const base = import.meta.env.BASE_URL;
-const fallback = `${base}${DEFAULT_LANG}/`;
+// Base with a guaranteed trailing slash — the script appends the lang to it.
+const base = withBase("");
+const fallback = withBase(`${DEFAULT_LANG}/`);
 ---
 
 <html lang={DEFAULT_LANG}>

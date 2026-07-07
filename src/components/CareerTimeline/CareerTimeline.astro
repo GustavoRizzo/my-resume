@@ -1,6 +1,7 @@
 ---
 import "./style.scss";
 import { LOCALE_BY_LANG, t, type Lang } from "../../i18n";
+import { withBase } from "../../utils/withBase";
 
 type Experience = {
   title: string;
@@ -18,7 +19,6 @@ interface Props {
 
 const { lang, experiences } = Astro.props;
 const locale = LOCALE_BY_LANG[lang];
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 // Dates are formatted at build time, per language ("JUN 2024" / "JUN. 2024").
 const formattedDate = (str: string) => {
@@ -31,7 +31,7 @@ const items = experiences.map((exp, index) => ({
   ...exp,
   date: formattedDate(exp.initial_date),
   // Logos live in public/; anchor them to the base so they load from any URL.
-  logoUrl: `${base}/${exp.company_logo}`,
+  logoUrl: withBase(exp.company_logo),
   delay: `${index * 200}ms`,
 }));
 ---
