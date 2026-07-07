@@ -1,0 +1,1 @@
+function e(e){return/^(https?:)?\/\//.test(e)?e:`/my-resume/${e.replace(/^\//,``)}`}export{e as t};
