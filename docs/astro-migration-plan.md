@@ -25,7 +25,7 @@
 - [ ] Rotas bilíngues: `/{en,pt}/`, `/{en,pt}/about`, `/expertises`, `/career`, `/beyond-work` — todas pré-renderizadas.
 - [ ] `/` redireciona para idioma salvo em `localStorage` (`resume.lang`) ou detectado do navegador, fallback `en`.
 - [ ] Seletor de idioma preservando a sub-página atual (`/en/career` → `/pt/career`) e gravando a preferência.
-- [ ] Navbar com navegação entre seções.
+- ~~Navbar~~ — descoberto na Fase 2 que o componente existe na `main` mas **não é usado por nenhuma página** (código morto); não será portado.
 - [ ] **WhoAmI**: foto de perfil + easter egg do triplo clique (troca de imagens com timeouts) + animação de console (`ConsoleTextAnimated`) sem causar scroll no mobile (fix do commit `531b936`).
 - [ ] **Expertises**: ícones SVG inline (web/presentation/engine) com fallback `url_img`.
 - [ ] **Career/Timeline**: logos das empresas, data formatada por locale (`en-US`/`pt-BR`), animação reveal-on-scroll com delay escalonado.

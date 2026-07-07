@@ -1,0 +1,41 @@
+---
+import "./style.scss";
+import { SUPPORTED_LANGS, switchLangPath, type Lang } from "../../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Target URL for each language is computed at build time — switching language
+// is a plain navigation, no client-side router involved.
+const options = SUPPORTED_LANGS.map((code) => ({
+  code,
+  checked: code === lang,
+  href: switchLangPath(Astro.url.pathname, code),
+}));
+---
+
+<div class="language-selector">
+  <div class="justabox">
+    {
+      options.map(({ code, checked, href }) => (
+        <div class="option">
+          <input id={code} type="radio" name="lang" value={code} checked={checked} data-href={href} />
+          <label for={code} class={`${code}-lang label`} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  // Remember the choice (read by the "/" language redirect) and navigate.
+  document.querySelectorAll<HTMLInputElement>('.language-selector input[name="lang"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      window.localStorage.setItem("resume.lang", input.value);
+      window.location.assign(input.dataset.href!);
+    });
+  });
+</script>
