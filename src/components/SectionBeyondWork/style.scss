@@ -1,0 +1,232 @@
+@use "../../styles/variables" as *;
+
+.beyond-work {
+  display: grid;
+  justify-items: center;
+  margin-bottom: 5em;
+
+  &__subtitle {
+    max-width: min(95%, 720px);
+    text-align: center;
+    opacity: 0.8;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  /* The fan container. Cards are absolutely positioned and rotate around a
+     pivot point well below the deck, so they spread out like a hand of cards.
+     At rest the fan is slightly closed; on hover/focus-within it opens wider. */
+  &__fan {
+    --angle-step: 9deg;
+    --pivot: 460px; // how far below the cards the rotation pivot sits
+    position: relative;
+    width: min(95%, 1000px);
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    @media (hover: hover) {
+      &:hover {
+        --angle-step: 15deg;
+      }
+    }
+  }
+}
+
+/* --- Card (presentation layer — fan/deck reskin target) --- */
+.hobby-card {
+  // Offset from the centre of the fan, e.g. -1, 0, 1 for three cards.
+  --offset: calc(var(--i) - (var(--total) - 1) / 2);
+  --rot: calc(var(--offset) * var(--angle-step));
+
+  position: absolute;
+  bottom: 0;
+  width: 220px;
+  height: 300px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  color: $default-text-color;
+  background: $first-perfil-color;
+  border: 2px solid $card-border-color-expertise;
+  border-radius: 1em;
+  padding: 1.5rem;
+  font-family: inherit;
+
+  transform-origin: 50% var(--pivot);
+  transform: rotate(var(--rot));
+  transition: transform 0.3s ease, box-shadow 0.2s ease-in-out,
+    background 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus-visible {
+      // Lift the card outward along its own rotated axis and bring it forward.
+      transform: rotate(var(--rot)) translateY(-40px) scale(1.05);
+      background: $secound-perfil-color;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      z-index: 100;
+    }
+  }
+
+  &__emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  &__summary {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  &__hint {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+    color: $highlight-color-timeline;
+  }
+}
+
+/* On touch devices (no hover) the fan can't be opened, so fall back to a
+   simple stacked column where every card is fully readable and tappable. */
+@media (hover: none) {
+  .beyond-work__fan {
+    position: static;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hobby-card {
+    position: static;
+    width: min(95%, 360px);
+    height: auto;
+    transform: none;
+  }
+}
+
+/* --- Modal --- */
+.hobby-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  animation: hobby-fade-in 0.15s ease-out;
+}
+
+.hobby-modal {
+  position: relative;
+  // Sized off `vw`, not `%` of the flex overlay — `%` is relative to the
+  // overlay's own content box, which can shift a few pixels when the page
+  // gains/loses a scrollbar (its width becomes indirectly scroll-dependent).
+  // `vw` is fixed to the viewport regardless of any scrollbar, so the modal's
+  // width stays stable no matter what the rest of the page is doing.
+  width: min(92vw, 560px);
+  max-width: calc(100vw - 2rem);
+  min-width: 0;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: $background-color;
+  color: $default-text-color;
+  border: 2px solid $card-border-color-expertise;
+  border-radius: 1em;
+  padding: 2rem;
+  animation: hobby-scale-in 0.15s ease-out;
+
+  &__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: $default-text-color;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0;
+  }
+
+  &__emoji {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  &__body {
+    text-align: justify;
+    overflow-wrap: anywhere;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    max-width: 100%;
+    border: 2px solid $highlight-color-timeline;
+    border-radius: 2em;
+    color: $default-text-color;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: background 0.15s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(156, 226, 189, 0.15);
+    }
+  }
+
+  &__badge {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1em;
+    background: $highlight-color-timeline;
+    color: $background-color;
+    white-space: nowrap;
+  }
+}
+
+@keyframes hobby-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hobby-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}

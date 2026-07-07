@@ -1,0 +1,27 @@
+---
+import { getEntry } from "astro:content";
+import SectionBeyondWork from "./SectionBeyondWork";
+import { sanitizeHtml } from "../../utils/sanitizeHtml";
+import { t, type Lang } from "../../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const hobbies = (await getEntry("hobbies", lang))!.data;
+
+// Sanitize every body_html now, at build — the island then treats it as safe.
+const safeHobbies = {
+  ...hobbies,
+  topics: hobbies.topics.map((topic) => ({ ...topic, body_html: sanitizeHtml(topic.body_html) })),
+};
+
+const labels = {
+  readMore: t(lang, "beyondWork.readMore"),
+  close: t(lang, "a11y.close"),
+  openDetails: t(lang, "a11y.openDetails"),
+};
+---
+
+<SectionBeyondWork client:visible hobbies={safeHobbies} labels={labels} />

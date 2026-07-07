@@ -4,6 +4,7 @@ import LanguageSelector from "../../components/LanguageSelector/LanguageSelector
 import WhoAmI from "../../components/WhoAmI/WhoAmI";
 import SectionExpertises from "../../components/SectionExpertises/SectionExpertises.astro";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline.astro";
+import BeyondWork from "../../components/SectionBeyondWork/BeyondWork.astro";
 import { getEntry } from "astro:content";
 import { SUPPORTED_LANGS, t, type Lang } from "../../i18n";
 
@@ -21,6 +22,6 @@ const resume = (await getEntry("resume", lang))!.data;
     <WhoAmI client:load {...resume.about} />
     <SectionExpertises lang={lang} expertises={resume.expertises} />
     <CareerTimeline lang={lang} experiences={resume.experiences} />
-    <!-- Fase 6: BeyondWork -->
+    <BeyondWork lang={lang} />
   </main>
 </BaseLayout>
