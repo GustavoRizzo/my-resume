@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
+import CareerTimeline from "../../components/CareerTimeline/CareerTimeline.astro";
 import { getEntry } from "astro:content";
 import { SUPPORTED_LANGS, t, type Lang } from "../../i18n";
 
@@ -15,7 +16,6 @@ const resume = (await getEntry("resume", lang))!.data;
 <BaseLayout lang={lang} title={`${t(lang, "nav.career")} — ${resume.about.name}`}>
   <LanguageSelector lang={lang} />
   <main style="padding: 0 1rem">
-    <h2 class="section-title">{t(lang, "sections.careerTimeline")}</h2>
-    <!-- Fase 5: ExperiencesTimeline -->
+    <CareerTimeline lang={lang} experiences={resume.experiences} />
   </main>
 </BaseLayout>
