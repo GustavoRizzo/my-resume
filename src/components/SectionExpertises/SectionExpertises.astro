@@ -1,0 +1,87 @@
+---
+import "./style.scss";
+import webIcon from "./icons/web.svg?raw";
+import presentationIcon from "./icons/presentation.svg?raw";
+import engineIcon from "./icons/engine.svg?raw";
+import { sanitizeHtml } from "../../utils/sanitizeHtml";
+import { t, type Lang } from "../../i18n";
+
+type Expertise = {
+  title: string;
+  html_text: string;
+  url_img: string;
+  underline_class_css: string;
+  code_tag?: string;
+  icon?: string;
+};
+
+interface Props {
+  lang: Lang;
+  expertises: Expertise[];
+}
+
+const { lang, expertises } = Astro.props;
+
+// Map an icon key (from the content JSON) to the raw SVG markup of its file.
+// To edit an icon, just change the corresponding file in ./icons/.
+const ICONS: Record<string, string> = {
+  web: webIcon,
+  presentation: presentationIcon,
+  engine: engineIcon,
+};
+
+const items = expertises.map((item, index) => {
+  const [firstWord, ...rest] = item.title.split(" ");
+  return {
+    ...item,
+    firstWord,
+    restOfTitle: rest.join(" "),
+    codeTag: item.code_tag ?? "div",
+    svg: item.icon ? ICONS[item.icon] : undefined,
+    // Fallback icon path from content JSON is public/-relative; anchor it to the base.
+    imgSrc: /^https?:/.test(item.url_img)
+      ? item.url_img
+      : `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${item.url_img}`,
+    delay: `${index * 150}ms`,
+    cleanHtml: sanitizeHtml(item.html_text),
+  };
+});
+---
+
+<section class="expertise-v3">
+  <h1 class="section-title">{t(lang, "sections.myExpertise")}</h1>
+
+  <div class="expertise-v3__grid" data-reveal>
+    {
+      items.map((item) => (
+        <article class="expertise-v3__item" style={`--reveal-delay: ${item.delay}`}>
+          <div class="expertise-v3__headline">
+            <div class="expertise-v3__icon">
+              {item.svg ? (
+                <span role="img" aria-label={item.title} set:html={item.svg} />
+              ) : (
+                <img src={item.imgSrc} alt={item.title} />
+              )}
+            </div>
+            <h5 class="expertise-v3__name">
+              <span class={`expertise-v3__underline ${item.underline_class_css}`}>{item.firstWord}</span>
+              <br />
+              {item.restOfTitle}
+            </h5>
+          </div>
+
+          <div class="expertise-v3__code">
+            <span class="expertise-v3__tag">&lt;{item.codeTag}&gt;</span>
+            <div class="expertise-v3__text" set:html={item.cleanHtml} />
+            <span class="expertise-v3__tag">&lt;/{item.codeTag}&gt;</span>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { revealOnScroll } from "../../scripts/revealOnScroll";
+  revealOnScroll(".expertise-v3__grid[data-reveal]", 0.2);
+</script>
