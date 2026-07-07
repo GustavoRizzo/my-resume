@@ -12,8 +12,8 @@ const consolePhrase = z.object({
 const about = z.object({
   perfil_img: z.string(),
   name: z.string(),
-  url_linkedin: z.string().url(),
-  url_github: z.string().url(),
+  url_linkedin: z.url(),
+  url_github: z.url(),
   console_phrases: z.array(consolePhrase),
 });
 
@@ -32,7 +32,7 @@ const experience = z.object({
   subtitle: z.string(),
   text: z.string(),
   company_logo: z.string(),
-  company_url: z.string().url().optional(),
+  company_url: z.url().optional(),
   initial_date: z.string(),
 });
 
@@ -55,7 +55,7 @@ const hobbyTopic = z.object({
   links: z.array(
     z.object({
       label: z.string(),
-      url: z.string().url(),
+      url: z.url(),
       note: z.string().optional(),
     }),
   ),

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
+import WhoAmI from "../../components/WhoAmI/WhoAmI";
 import { getEntry } from "astro:content";
 import { SUPPORTED_LANGS, t, type Lang } from "../../i18n";
 
@@ -15,7 +16,6 @@ const resume = (await getEntry("resume", lang))!.data;
 <BaseLayout lang={lang} title={`${t(lang, "nav.about")} — ${resume.about.name}`}>
   <LanguageSelector lang={lang} />
   <main style="padding: 0 1rem">
-    <h1 class="hero-title">{resume.about.name}</h1>
-    <!-- Fase 3: WhoAmI island -->
+    <WhoAmI client:load {...resume.about} />
   </main>
 </BaseLayout>
