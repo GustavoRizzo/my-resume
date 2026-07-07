@@ -14,7 +14,7 @@ const hobbies = (await getEntry("hobbies", lang))!.data;
 const resume = (await getEntry("resume", lang))!.data;
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "nav.beyondWork")} — ${resume.about.name}`}>
+<BaseLayout lang={lang} page="beyondWork" path="/beyond-work">
   <LanguageSelector lang={lang} />
   <main style="padding: 0 1rem">
     <BeyondWork lang={lang} />

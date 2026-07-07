@@ -13,7 +13,7 @@ const lang = Astro.params.lang as Lang;
 const resume = (await getEntry("resume", lang))!.data;
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "nav.expertises")} — ${resume.about.name}`}>
+<BaseLayout lang={lang} page="expertises" path="/expertises">
   <LanguageSelector lang={lang} />
   <main style="padding: 0 1rem">
     <SectionExpertises lang={lang} expertises={resume.expertises} />

@@ -13,7 +13,7 @@ const lang = Astro.params.lang as Lang;
 const resume = (await getEntry("resume", lang))!.data;
 ---
 
-<BaseLayout lang={lang} title={`${t(lang, "nav.career")} — ${resume.about.name}`}>
+<BaseLayout lang={lang} page="career" path="/career">
   <LanguageSelector lang={lang} />
   <main style="padding: 0 1rem">
     <CareerTimeline lang={lang} experiences={resume.experiences} />
