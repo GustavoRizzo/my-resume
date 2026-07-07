@@ -18,9 +18,9 @@ const fallback = `${base}${DEFAULT_LANG}/`;
       is:inline
       define:vars={{ base, langs: SUPPORTED_LANGS, fallbackLang: DEFAULT_LANG }}
     >
-      var saved = window.localStorage.getItem("resume.lang");
-      var browser = (navigator.language || "").slice(0, 2);
-      var lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : fallbackLang;
+      const saved = window.localStorage.getItem("resume.lang");
+      const browser = (navigator.language || "").slice(0, 2);
+      const lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : fallbackLang;
       window.location.replace(base + lang + "/");
     </script>
   </head>

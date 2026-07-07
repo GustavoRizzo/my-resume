@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector.astro";
 import CareerTimeline from "../../components/CareerTimeline/CareerTimeline.astro";
 import { getEntry } from "astro:content";
-import { SUPPORTED_LANGS, t, type Lang } from "../../i18n";
+import { SUPPORTED_LANGS, type Lang } from "../../i18n";
 
 export function getStaticPaths() {
   return SUPPORTED_LANGS.map((lang) => ({ params: { lang } }));
