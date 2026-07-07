@@ -1,1 +1,0 @@
-import{t as e}from"./route-helpers-D_cmd8lU.js";var t=e((e,t)=>({lang:t,content:e}));export{t as clientLoader};

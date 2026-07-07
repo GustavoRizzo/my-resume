@@ -1,1 +1,0 @@
-var e=[`en`,`pt`];function t(t){return typeof t==`string`&&e.includes(t)}var n=RegExp(`^/(${e.join(`|`)})(?=/|$)`),r={en:`en-US`,pt:`pt-BR`};export{t as i,r as n,e as r,n as t};

@@ -1,0 +1,1 @@
+function e(e,t=.2){typeof IntersectionObserver>`u`||document.querySelectorAll(e).forEach(e=>{let n=new IntersectionObserver(([t])=>{t.isIntersecting&&(e.classList.add(`is-visible`),n.disconnect())},{threshold:t});n.observe(e)})}export{e as t};
