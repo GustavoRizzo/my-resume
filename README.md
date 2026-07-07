@@ -67,3 +67,7 @@ and build on every push to `main`, publishing `dist/` to GitHub Pages.
 The build pre-renders every language × page to a real static HTML file under
 the `/my-resume/` sub-path, so deep links and refreshes just work — no SPA
 redirect tricks needed.
+
+> **Gotcha:** Astro's `import.meta.env.BASE_URL` has **no trailing slash**
+> (`/my-resume`). Any URL built from it must go through
+> [`src/utils/withBase.ts`](src/utils/withBase.ts) — never concatenate by hand.
