@@ -125,13 +125,16 @@
     display: flex;
     gap: 30px;
 
+    // LinkedIn's white comes from a <rect> inside the svg (see WhoAmI.tsx);
+    // GitHub is the white cat drawing on a black rounded tile.
     .linkedin {
       width: 30px;
-      border-radius: 15%;
     }
 
     .github {
       width: 30px;
+      height: 30px;
       border-radius: 15%;
+      background: white;
     }
   }

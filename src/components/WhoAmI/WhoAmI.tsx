@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import linkedin from '../../assets/linkedIn_logo.png';
-import github from "../../assets/github_logo.png";
 import perfil from "../../assets/perfil.png";
+import linkedinIcon from "../../assets/icons/linkedin.svg";
+import githubIcon from "../../assets/icons/github.svg";
 import easterEgg2 from "../../assets/perfil_easter_egg_2.webp";
 import easterEgg3 from "../../assets/perfil_easter_egg_3.webp";
 import './style.scss'
@@ -60,19 +60,11 @@ export default function WhoAmI( {name, url_linkedin, url_github, console_phrases
             <h1 className="hero-title">{name}</h1>
             < ConsoleTextAnimated console_phrases={console_phrases} />
             <div className="list_contato">
-                <a href={url_linkedin}>
-                    <img
-                        className="linkedin"
-                        src={linkedin.src}
-                        alt="linkedin"
-                    />
+                <a href={url_linkedin} aria-label="LinkedIn">
+                    <img className="linkedin" src={linkedinIcon.src} alt="" />
                 </a>
-                <a href={url_github}>
-                    <img
-                        className="github"
-                        src={github.src}
-                        alt="github"
-                    />
+                <a href={url_github} aria-label="GitHub">
+                    <img className="github" src={githubIcon.src} alt="" />
                 </a>
             </div>
         </section>
