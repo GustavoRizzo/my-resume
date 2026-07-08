@@ -17,6 +17,30 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+
+/* Subtle "aurora" backdrop over the flat #202530: two very diffuse radial
+   glows in the site's accent colors — cyan (hero halo) top-left, green
+   (timeline) bottom-right. A fixed pseudo-element (not background-attachment:
+   fixed, which iOS Safari mishandles) keeps it still while content scrolls
+   over it. Keep body itself background-free or this gets painted over. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 75% 60% at 12% 8%,
+      rgba(28, 149, 151, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 75% 60% at 92% 112%,
+      rgba(158, 233, 193, 0.1),
+      transparent 70%
+    );
+}
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap");
 
 #root {

@@ -2,8 +2,9 @@
 
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
+/* No `background` here: the page background lives on :root/body::before in
+   global.scss (dot grid); an opaque body background would paint over it. */
 body {
-    background: $background-color;
     color: $default-text-color;
     font-family: $default-font-family;
 }
