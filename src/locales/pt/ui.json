@@ -15,7 +15,10 @@
   },
   "a11y": {
     "close": "Fechar",
-    "openDetails": "Abrir detalhes sobre {{title}}"
+    "openDetails": "Abrir detalhes sobre {{title}}",
+    "expandImage": "Expandir imagem: {{alt}}",
+    "previousImage": "Imagem anterior",
+    "nextImage": "Próxima imagem"
   },
   "language": {
     "label": "Idioma",

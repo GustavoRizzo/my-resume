@@ -52,6 +52,10 @@ const hobbyTopic = z.object({
   title: z.string(),
   summary: z.string(),
   body_html: z.string(),
+  // Paths under public/, resolved with withBase() at render time.
+  images: z
+    .array(z.object({ src: z.string(), alt: z.string() }))
+    .default([]),
   links: z.array(
     z.object({
       label: z.string(),

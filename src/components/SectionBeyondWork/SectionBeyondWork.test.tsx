@@ -11,6 +11,9 @@ const labels = {
   readMore: "Read more →",
   close: "Close",
   openDetails: "Open details about {{title}}",
+  expandImage: "Expand image: {{alt}}",
+  previousImage: "Previous image",
+  nextImage: "Next image",
 };
 
 function renderSection() {
@@ -52,6 +55,34 @@ describe("SectionBeyondWork", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Close" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("expands an image in a lightbox and navigates with the arrows", () => {
+    renderSection();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /Open details about Tech Events/i })
+    );
+
+    const firstImage = hobbies.topics.find((t) => t.id === "tech-events")!.images[0];
+    fireEvent.click(
+      screen.getByRole("button", { name: `Expand image: ${firstImage.alt}` })
+    );
+
+    const lightbox = screen.getByRole("dialog", { name: firstImage.alt });
+    expect(lightbox).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Next image" }));
+    expect(screen.queryByRole("dialog", { name: firstImage.alt })).not.toBeInTheDocument();
+
+    // Esc closes the lightbox first, keeping the topic modal open.
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(
+      screen.getByRole("dialog", { name: "Tech Events & Hackathons" })
+    ).toBeInTheDocument();
+
+    fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });

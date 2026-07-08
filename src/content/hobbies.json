@@ -11,6 +11,7 @@
         "title": "Adventures & Sports",
         "summary": "Trails, peaks, volleyball, and a good game of football.",
         "body_html": "<p>I love the outdoors, and hiking is my thing 🏔️. I've climbed some of the highest peaks in Brazil and once completed a <b>250&nbsp;km</b> long-distance trek. My next big dream — one I plan to make happen soon — is to walk the <b>Camino de Santiago</b>. When I'm not on a trail, you'll find me playing volleyball 🏐 or, like any good Brazilian, soccer ⚽.</p>",
+        "images": [],
         "links": []
       },
       {
@@ -19,6 +20,7 @@
         "title": "Open Source",
         "summary": "Building on each other's solutions so we all get better technology.",
         "body_html": "<p>I love the idea behind open source: one person's solution can become a stepping stone for someone else's problem — and that person can give back in the same way. In the end, we all benefit from more mature, more capable technology.</p><p>Right now I'm contributing to a <b>Django&nbsp;+&nbsp;HTMX</b> component library, where I've been collecting the patterns I reach for every day while building real projects.</p>",
+        "images": [],
         "links": [
           {
             "label": "django-sample-components",
@@ -33,6 +35,7 @@
         "title": "Tools & Pastimes I Build",
         "summary": "Taking small everyday annoyances and coding my own fix.",
         "body_html": "<p>I love taking a small everyday problem and building my own solution for it. Here are a couple of them:</p><ul><li><b>Quem?</b> — a free, ad-free web version of the \"Who am I?\" party game I play with friends. The Play Store apps are buried in ads and paywalls, so I built my own.</li><li><b>PTAX Converter</b> — in Brazil, invoicing foreign clients means converting the amounts using a special Central Bank rate. The official site is painful to use, so I took their API and wrapped it in a nicer interface.</li></ul>",
+        "images": [],
         "links": [
           {
             "label": "Play \"Quem?\"",
@@ -45,6 +48,36 @@
             "note": "Free · PT-BR only"
           }
         ]
+      },
+      {
+        "id": "tech-events",
+        "emoji": "🏆",
+        "title": "Tech Events & Hackathons",
+        "summary": "Meetups, conferences, and the thrill of winning my first hackathon.",
+        "body_html": "<p>I've always loved going to tech events, because that's where you find the true enthusiasts of the field! 🤖 It all started back in college, tutoring classmates and taking part in the <b>IEEE</b> (Institute of Electrical and Electronics Engineers). And I'll never forget the moment I won my first <b>Hackathon</b>. 🏆 To this day, whenever I can, I go to events and watch my friends give talks.</p>",
+        "images": [
+          {
+            "src": "hobbies/tech-events-1-inov-week.webp",
+            "alt": "Photo mosaic from Inov Week"
+          },
+          {
+            "src": "hobbies/tech-events-2-vista.webp",
+            "alt": "View of the HackingRio event venue"
+          },
+          {
+            "src": "hobbies/tech-events-3-time.webp",
+            "alt": "My team at HackingRio"
+          },
+          {
+            "src": "hobbies/tech-events-4-premio.webp",
+            "alt": "Receiving the hackathon prize"
+          },
+          {
+            "src": "hobbies/tech-events-5-ieee.webp",
+            "alt": "With the IEEE group in college"
+          }
+        ],
+        "links": []
       }
     ]
   },
@@ -60,6 +93,7 @@
         "title": "Aventuras & Esportes",
         "summary": "Trilhas, montanhas, vôlei e uma boa pelada de futebol.",
         "body_html": "<p>Adoro natureza, e fazer trilhas 🏔️. Já escalei alguns dos picos mais altos do Brasil e já fiz uma trilha de <b>250&nbsp;km</b> de distância até Aparecida. Meu próximo grande sonho — que pretendo realizar em breve — é fazer o <b>Caminho de Santiago</b>. Quando não estou em uma trilha, você me encontra jogando vôlei 🏐 ou, como todo bom brasileiro, futebol ⚽.</p>",
+        "images": [],
         "links": []
       },
       {
@@ -68,6 +102,7 @@
         "title": "Código Aberto",
         "summary": "Construindo sobre as soluções uns dos outros para que todos tenhamos uma tecnologia melhor.",
         "body_html": "<p>Adoro a ideia por trás do código aberto: a solução de uma pessoa pode se tornar um trampolim para o problema de outra — e essa pessoa pode retribuir da mesma forma. No fim, todos nos beneficiamos de uma tecnologia mais madura e mais capaz.</p><p>No momento estou contribuindo com uma biblioteca de componentes <b>Django&nbsp;+&nbsp;HTMX</b>, onde venho reunindo os padrões que uso todos os dias enquanto construo projetos reais.</p>",
+        "images": [],
         "links": [
           {
             "label": "django-sample-components",
@@ -82,6 +117,7 @@
         "title": "Ferramentas & Passatempos que Crio",
         "summary": "Pegando pequenos incômodos do dia a dia e programando minha própria solução.",
         "body_html": "<p>Adoro pegar um pequeno problema do dia a dia e construir minha própria solução para ele. Aqui estão alguns deles:</p><ul><li><b>Quem?</b> — uma versão web gratuita e sem anúncios do jogo de festa \"Quem sou eu?\" que jogo com os amigos. Os apps na Play Store são tomados por anúncios e barreiras pagas, então criei o meu próprio.</li><li><b>Conversor PTAX</b> — no Brasil, faturar para clientes estrangeiros significa converter os valores usando uma taxa especial do Banco Central. O site oficial é difícil de usar, então peguei a API deles e a embrulhei em uma interface mais agradável.</li></ul>",
+        "images": [],
         "links": [
           {
             "label": "Jogar \"Quem?\"",
@@ -94,6 +130,36 @@
             "note": "Grátis · só PT-BR"
           }
         ]
+      },
+      {
+        "id": "tech-events",
+        "emoji": "🏆",
+        "title": "Eventos de Tecnologia & Hackathons",
+        "summary": "Meetups, conferências e a emoção de ganhar meu primeiro hackathon.",
+        "body_html": "<p>Sempre gostei de frequentar eventos de tecnologia, porque é onde encontramos os verdadeiros entusiastas da área! 🤖 Tudo começou lá atrás, na faculdade, dando monitoria e participando do <b>IEEE</b> (Instituto de Engenheiros Eletricistas e Eletrônicos). E nunca vou me esquecer do momento que ganhei o primeiro <b>Hackathon</b>. 🏆 Ainda hoje, sempre que posso, vou aos eventos e assisto aos amigos palestrarem.</p>",
+        "images": [
+          {
+            "src": "hobbies/tech-events-1-inov-week.webp",
+            "alt": "Mosaico de fotos do Inov Week"
+          },
+          {
+            "src": "hobbies/tech-events-2-vista.webp",
+            "alt": "Vista do local do evento HackingRio"
+          },
+          {
+            "src": "hobbies/tech-events-3-time.webp",
+            "alt": "Meu time no HackingRio"
+          },
+          {
+            "src": "hobbies/tech-events-4-premio.webp",
+            "alt": "Recebendo o prêmio do hackathon"
+          },
+          {
+            "src": "hobbies/tech-events-5-ieee.webp",
+            "alt": "Com o grupo do IEEE na faculdade"
+          }
+        ],
+        "links": []
       }
     ]
   }

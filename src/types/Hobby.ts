@@ -4,12 +4,18 @@ export type HobbyLink = {
   note?: string;
 };
 
+export type HobbyImage = {
+  src: string;
+  alt: string;
+};
+
 export type HobbyTopic = {
   id: string;
   emoji: string;
   title: string;
   summary: string;
   body_html: string;
+  images: HobbyImage[];
   links: HobbyLink[];
 };
 

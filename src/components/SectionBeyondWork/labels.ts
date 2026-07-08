@@ -5,4 +5,8 @@ export type BeyondWorkLabels = {
   close: string;
   /** Template with a {{title}} placeholder. */
   openDetails: string;
+  /** Template with an {{alt}} placeholder. */
+  expandImage: string;
+  previousImage: string;
+  nextImage: string;
 };
