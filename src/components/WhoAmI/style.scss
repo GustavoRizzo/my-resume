@@ -10,6 +10,13 @@
 
   .about {
     display: grid;
+    // A single explicit minmax(0, 1fr) column, NOT the implicit `auto` track:
+    // an auto track is sized by its items' max-content, so the console's
+    // one-line phrase would widen the whole grid letter by letter while it
+    // types, creating a horizontal scroll that grows with the animation.
+    // Locking the track to the container lets .console-container's
+    // overflow: hidden actually clip the text instead.
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     align-content: center;
     min-height: 90vh;

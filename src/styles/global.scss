@@ -18,6 +18,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Decorative elements are allowed to poke past the viewport — the rotating
+   profile halo (a transformed box's scroll overflow is its rotated square's
+   bounding box, even when it paints as a circle), the fanned hobby cards, the
+   console's typing line — without creating horizontal scroll. Clipping at
+   <main>, whose padding box spans the viewport, cuts only what is already
+   off-screen. (body { overflow-x } can't do this: it propagates to the
+   viewport, where `clip` downgrades to `hidden` and stays scrollable.) */
+main {
+  overflow-x: clip;
+}
+
 /* Subtle "aurora" backdrop over the flat #202530: two very diffuse radial
    glows in the site's accent colors — cyan (hero halo) top-left, green
    (timeline) bottom-right. A fixed pseudo-element (not background-attachment:
