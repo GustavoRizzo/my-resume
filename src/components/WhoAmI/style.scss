@@ -1,4 +1,16 @@
+@use "sass:math";
 @use "../../styles/variables" as *;
+
+// Easter-egg hint timing: edit these; everything below derives from them.
+$hint-hidden: 3s; // fully invisible
+$hint-visible: 2s; // readable (fades eat into this window)
+$hint-fade: 0.5s; // fade-in / fade-out ramps
+$hint-cycle: $hint-hidden + $hint-visible;
+
+// A moment in the cycle → keyframe percentage.
+@function hint-stop($time) {
+  @return math.percentage(math.div($time, $hint-cycle));
+}
 
 
   /* No `background` here: the page background lives on :root/body::before in
@@ -80,10 +92,55 @@
     }
   }
 
+  // Easter-egg hint: "click" circling the photo. Two animations compose: a
+  // slow continuous rotation (reusing perfil-spin) and an opacity cycle whose
+  // keyframes are computed from $hint-hidden/$hint-visible/$hint-fade (top of
+  // this file) — tweak those durations, never the percentages.
+  .about_click_hint {
+    // THE radius knob: how far the ring sits beyond the photo's edge.
+    // inset/width/height all derive from it, keeping the rotation axis
+    // centred on the photo (any mismatch offsets the orbit).
+    --hint-offset: 6em;
+    position: absolute;
+    inset: calc(-1 * var(--hint-offset));
+    width: calc(100% + 2 * var(--hint-offset));
+    height: calc(100% + 2 * var(--hint-offset));
+    z-index: 2; // above the photo (z-index 1) and halo (z-index 0)
+    pointer-events: none; // clicks fall through to the photo
+    fill: $highlight-color-timeline;
+    font-family: $font-console;
+    font-size: 3.4px; // viewBox units — scales with the photo
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation:
+      perfil-spin 30s linear infinite,
+      click-hint-fade $hint-cycle ease-in-out infinite;
+  }
+
+  @keyframes click-hint-fade {
+    0%,
+    #{hint-stop($hint-hidden)} {
+      opacity: 0;
+    }
+    #{hint-stop($hint-hidden + $hint-fade)},
+    #{hint-stop($hint-cycle - $hint-fade)} {
+      opacity: 0.4; // deliberately faint — it's a hint, not a caption
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
   // Respect users who prefer no motion: keep the glow, drop the animation.
   @media (prefers-reduced-motion: reduce) {
     .about_perfil_wrap::before {
       animation: none;
+    }
+
+    // Hint stops rotating/blinking but stays as a faint static suggestion.
+    .about_click_hint {
+      animation: none;
+      opacity: 0.3;
     }
   }
 

@@ -56,6 +56,20 @@ export default function WhoAmI( {name, url_linkedin, url_github, console_phrases
                     src={currentImg}
                     alt="perfil"
                 />
+                {/* Easter-egg hint: "click" twice around the photo, slowly
+                    rotating, fading in and out on a cycle (see style.scss). */}
+                <svg className="about_click_hint" viewBox="0 0 100 100" aria-hidden="true">
+                    <defs>
+                        <path
+                            id="click-hint-circle"
+                            d="M 50,50 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
+                        />
+                    </defs>
+                    <text>
+                        <textPath href="#click-hint-circle" startOffset="0%">click</textPath>
+                        <textPath href="#click-hint-circle" startOffset="50%">click</textPath>
+                    </text>
+                </svg>
             </div>
             <h1 className="hero-title">{name}</h1>
             < ConsoleTextAnimated console_phrases={console_phrases} />
