@@ -9,16 +9,19 @@ import type { BeyondWorkLabels } from "./labels";
 interface SectionBeyondWorkProps {
     hobbies: HobbiesData;
     labels: BeyondWorkLabels;
+    /** Heading level of the section title: 1 on its own page, 2 inside the home. */
+    level?: 1 | 2;
 }
 
-export default function SectionBeyondWork({ hobbies: data, labels }: SectionBeyondWorkProps) {
+export default function SectionBeyondWork({ hobbies: data, labels, level = 1 }: SectionBeyondWorkProps) {
     const [openId, setOpenId] = useState<string | null>(null);
+    const SectionHeading = `h${level}` as const;
 
     const openTopic = data.topics.find((topic) => topic.id === openId) ?? null;
 
     return (
         <section className="beyond-work">
-            <h1 className="section-title">{data.section.title}</h1>
+            <SectionHeading className="section-title">{data.section.title}</SectionHeading>
             <p className="beyond-work__subtitle">{data.section.subtitle}</p>
 
             <div
@@ -32,6 +35,7 @@ export default function SectionBeyondWork({ hobbies: data, labels }: SectionBeyo
                         index={index}
                         onOpen={setOpenId}
                         labels={labels}
+                        headingLevel={level === 1 ? 2 : 3}
                     />
                 ))}
             </div>

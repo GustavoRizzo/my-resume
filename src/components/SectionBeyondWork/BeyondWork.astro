@@ -6,9 +6,11 @@ import { t, type Lang } from "../../i18n";
 
 interface Props {
   lang: Lang;
+  /** Heading level of the section title: 1 on its own page, 2 inside the home. */
+  level?: 1 | 2;
 }
 
-const { lang } = Astro.props;
+const { lang, level = 1 } = Astro.props;
 const hobbies = (await getEntry("hobbies", lang))!.data;
 
 // Sanitize every body_html now, at build — the island then treats it as safe.
@@ -27,4 +29,4 @@ const labels = {
 };
 ---
 
-<SectionBeyondWork client:visible hobbies={safeHobbies} labels={labels} />
+<SectionBeyondWork client:visible hobbies={safeHobbies} labels={labels} level={level} />

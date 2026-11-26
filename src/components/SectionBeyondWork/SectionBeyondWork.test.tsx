@@ -30,6 +30,23 @@ describe("SectionBeyondWork", () => {
     expect(screen.getByText("Tools & Pastimes I Build")).toBeInTheDocument();
   });
 
+  it("uses real headings for the cards, one level below the section title", () => {
+    const { unmount } = renderSection();
+    expect(screen.getByRole("heading", { level: 1, name: "Beyond Work" })).toBeInTheDocument();
+    const cardTitles = screen.getAllByRole("heading", { level: 2 });
+    expect(cardTitles).toHaveLength(hobbies.topics.length);
+    // The open control sits inside the heading, never the other way round.
+    for (const title of cardTitles) {
+      expect(title.closest("button")).toBeNull();
+      expect(title.querySelector("button")).not.toBeNull();
+    }
+    unmount();
+
+    render(<SectionBeyondWork hobbies={hobbies} labels={labels} level={2} />);
+    expect(screen.getByRole("heading", { level: 2, name: "Beyond Work" })).toBeInTheDocument();
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(hobbies.topics.length);
+  });
+
   it("opens a modal with the topic detail when a card is clicked", () => {
     renderSection();
 
