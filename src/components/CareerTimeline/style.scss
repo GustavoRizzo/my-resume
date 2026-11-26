@@ -3,6 +3,14 @@
 // Logo "bead" geometry ($logo-*) stays in Sass: it drives offsets via math.
 $logo-offset: $logo-radio + $logo-border-width;
 
+.career {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    // the last item's bottom padding already adds --space-48
+    margin-bottom: calc(var(--section-gap) - var(--space-48));
+}
+
 .rb-container {
     text-align: start;
     // Sized to the reading measure (+ the logo column), not to the viewport:
@@ -12,8 +20,7 @@ $logo-offset: $logo-radio + $logo-border-width;
     position: relative;
 
     ul.rb {
-        margin-bottom: 2.5em;
-        margin-left: $logo-offset;
+        margin: 0 0 0 $logo-offset;
         padding: 0;
         display: inline-block;
         position: relative;
@@ -110,7 +117,9 @@ $logo-offset: $logo-radio + $logo-border-width;
 
             // Role: the primary line of each entry
             .title {
+                margin: 0;
                 color: var(--color-highlight);
+                font-family: var(--font-display);
                 font-size: var(--fs-xl);
                 font-weight: var(--fw-bold);
                 line-height: var(--lh-snug);

@@ -21,9 +21,9 @@ const experiences = [
   },
 ];
 
-const render = async (lang: "en" | "pt") => {
+const render = async (lang: "en" | "pt", level?: 1 | 2) => {
   const container = await AstroContainer.create();
-  return container.renderToString(CareerTimeline, { props: { lang, experiences } });
+  return container.renderToString(CareerTimeline, { props: { lang, experiences, level } });
 };
 
 describe("CareerTimeline.astro", () => {
@@ -48,6 +48,21 @@ describe("CareerTimeline.astro", () => {
     const html = await render("en");
     expect(html).toContain("url(/logo-acme.jpg)");
     expect(html).not.toContain("url(logo-acme.jpg)");
+  });
+
+  it("titles each role one level below the section title", async () => {
+    const page = await render("en");
+    expect(page).toMatch(/<h1 class="section-title"/);
+    expect(page.match(/<h2 class="title"/g)).toHaveLength(2);
+
+    const home = await render("en", 2);
+    expect(home).toMatch(/<h2 class="section-title"/);
+    expect(home.match(/<h3 class="title"/g)).toHaveLength(2);
+  });
+
+  it("marks the start date up as a machine-readable <time>", async () => {
+    const html = await render("en");
+    expect(html).toMatch(/<time class="date-pill" datetime="2024-06-15"[^>]*>JUN 2024<\/time>/);
   });
 
   it("staggers reveal delays by 200ms per item", async () => {
