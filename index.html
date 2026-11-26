@@ -1,9 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/my-resume/en/"><title>Gustavo Rizzo — Résumé</title><script>(function(){const base = "/my-resume/";
-const langs = ["en","pt"];
-const fallbackLang = "en";
-
-      const saved = window.localStorage.getItem("resume.lang");
-      const browser = (navigator.language || "").slice(0, 2);
-      const lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : fallbackLang;
-      window.location.replace(base + lang + "/");
-    })();</script></head><body></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/my-resume/en/"><title>Gustavo Rizzo — Résumé</title><!-- Build-time values travel as data-* attributes (not define:vars, whose
+         injected names `astro check` can't see and flags as undefined). --><script data-base="/my-resume/" data-langs="en,pt" data-fallback="en">
+      (function () {
+        const data = document.currentScript.dataset;
+        const langs = data.langs.split(",");
+        const saved = window.localStorage.getItem("resume.lang");
+        const browser = (navigator.language || "").slice(0, 2);
+        const lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : data.fallback;
+        window.location.replace(data.base + lang + "/");
+      })();
+    </script></head><body></body></html>
