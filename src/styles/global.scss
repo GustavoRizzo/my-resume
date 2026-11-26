@@ -1,18 +1,21 @@
-/* Self-hosted fonts (Fontsource, latin subset only — en/pt need nothing more).
-   Only the Poppins weights actually used: 800 (.hero-title) and 700
+// Design tokens (CSS custom properties on :root) — see _tokens.scss.
+@use "tokens";
+
+/* Self-hosted display font (Fontsource, latin subset only — en/pt need nothing
+   more). Only the Poppins weights actually used: 800 (.hero-title) and 700
    (.section-title, expertise card titles). Bundled by Vite with hashed URLs,
-   so they follow the deploy target's base and add no third-party origin. */
+   so they follow the deploy target's base and add no third-party origin.
+   Body text uses the system font stack (--font-sans): zero bytes. */
 @import "@fontsource/poppins/latin-700.css";
 @import "@fontsource/poppins/latin-800.css";
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.5rem;
-  font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #202530;
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

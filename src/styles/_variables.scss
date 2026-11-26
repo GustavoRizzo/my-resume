@@ -20,7 +20,7 @@ $logo-scale: calc( ($logo-radio + $logo-border-width) / $logo-radio);
 // Languages Selector
 $gap-between-buttons: 0.8rem;
 
-// Fonts
-$default-font-family: "Roboto Mono", Sans-serif;
-$font-family-experience: "PT Sans", Sans-serif;
-$font-console: Consolas, monospace;
+// Fonts — legacy names, now pointing at the tokens in _tokens.scss
+$default-font-family: var(--font-sans);
+$font-family-experience: var(--font-sans);
+$font-console: var(--font-mono);

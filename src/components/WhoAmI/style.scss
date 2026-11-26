@@ -12,14 +12,6 @@ $hint-cycle: $hint-hidden + $hint-visible;
   @return math.percentage(math.div($time, $hint-cycle));
 }
 
-
-  /* No `background` here: the page background lives on :root/body::before in
-     global.scss (dot grid); an opaque body background would paint over it. */
-  body {
-    color: $default-text-color;
-    font-family: $default-font-family;
-  }
-
   .about {
     display: grid;
     // A single explicit minmax(0, 1fr) column, NOT the implicit `auto` track:

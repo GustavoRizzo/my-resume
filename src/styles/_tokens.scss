@@ -1,0 +1,159 @@
+// =============================================================================
+// Design tokens + project personality. Emitted once by global.scss
+// (`@use "tokens"`); components consume them as var(--*).
+// Legacy Sass names in _variables.scss keep working during the migration.
+// =============================================================================
+//
+// PERSONALITY ("friendly terminal")
+//   Theme ..... dark only. Slate-blue background; no light theme.
+//   Tone ...... technical with playful touches (typing console, easter egg,
+//               fanned cards). Play lives in the hero and the finishing
+//               touches; content (timeline, expertises) stays sober.
+//   Fonts ..... Poppins 700/800 = display/titles · system-ui = body ·
+//               system monospace = console, code, dates.
+//   Color ..... primary cyan (halo, bars, focus); mint for text highlights;
+//               straw only for dates. Category colors (magenta/blue/orange)
+//               only in expertise underlines and console phrases.
+//   Radius .... 8px small pieces, 16px cards and modals, pill for chips,
+//               circle for avatars and logos.
+//   Voice ..... first person, direct and casual.
+//   Motion .... subtle and always disabled under prefers-reduced-motion.
+// =============================================================================
+
+:root {
+  color-scheme: dark; // dark-only site: scrollbars and native controls too
+
+  // ---------------------------------------------------------------------------
+  // PALETTE (raw values). Existing hexes preserved; greys generated with
+  // `.claude/styleguide-book/tools/palette.py grey 266 --grey` (the bg's hue).
+  // ---------------------------------------------------------------------------
+  --slate-bg: #202530; //        oklch(26% 0.022 266)
+  --slate-surface: #212a3e; //   oklch(29% 0.039 265)
+  --slate-raised: #394258; //    oklch(38% 0.040 267)
+  --slate-sunken: oklch(22% 0.02 266);
+
+  --grey-200: oklch(92% 0.013 266);
+  --grey-300: oklch(85% 0.02 266); // 9.7:1 on bg · 6.3:1 on raised
+  --grey-400: oklch(72% 0.03 266); // 6.2:1 on bg · 5.8:1 on surface · 4.0:1 on raised (✗)
+  --grey-500: oklch(60% 0.035 266);
+  --grey-700: oklch(42% 0.042 266);
+
+  --cyan-500: #1f9ea1; //  oklch(64% 0.102 197)
+  --cyan-800: #0d5658; //  oklch(41% 0.066 198)
+  --mint-300: #9ce2bd; //  oklch(86% 0.087 161)
+  --straw-300: #e2dd9c; // oklch(89% 0.084 104)
+
+  // Categories: decorative (underlines) or large text only (console, 30px)
+  --cat-magenta: #dc2a99;
+  --cat-blue: #2c49d8;
+  --cat-orange: #ff6b2b;
+
+  // ---------------------------------------------------------------------------
+  // ROLES: what components use
+  // ---------------------------------------------------------------------------
+  --color-bg: var(--slate-bg);
+  --color-surface: var(--slate-surface); //        cards
+  --color-surface-raised: var(--slate-raised); //  hovered card, language selector
+  --color-surface-sunken: var(--slate-sunken); //  expertise cards
+
+  // Text: three levels, never opacity
+  --color-text: #fff; //                         primary   15.3:1
+  --color-text-secondary: var(--grey-300); //    secondary  9.7:1
+  --color-text-tertiary: var(--grey-400); //     tertiary   6.2:1 (not on surface-raised)
+  --color-text-on-accent: var(--slate-bg); //    text on mint/straw pills (10–11:1)
+
+  --color-primary: var(--cyan-500); // halo, bars, accent borders. NOT small text (4.4:1 on surface)
+  --color-primary-deep: var(--cyan-800);
+  --color-highlight: var(--mint-300); //   job title, highlighted links, "read more"
+  --color-highlight-2: var(--straw-300); // dates
+
+  --color-border: var(--grey-700); // subtle dividers
+  --color-border-strong: var(--grey-500);
+  --color-focus: var(--mint-300); //  focus ring: 10:1 on bg
+
+  --gradient-brand: linear-gradient(90deg, var(--cyan-500), var(--mint-300));
+  --scrim: oklch(14% 0.02 266 / 0.7); //         behind the modal
+  --scrim-strong: oklch(10% 0.02 266 / 0.9); //  lightbox
+
+  // ---------------------------------------------------------------------------
+  // TYPOGRAPHY: the styleguide scale, only the steps this site uses
+  // ---------------------------------------------------------------------------
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-display: "Poppins", var(--font-sans);
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, "SF Mono", Menlo,
+    monospace;
+
+  --fs-xs: 0.75rem; //    12  date pill, badge
+  --fs-sm: 0.875rem; //   14  expertise code, company, "read more"
+  --fs-base: 1rem; //     16  body
+  --fs-lg: 1.125rem; //   18  section subtitle
+  --fs-xl: 1.25rem; //    20  card title / job title
+  --fs-2xl: 1.5rem; //    24  expertise name
+  --fs-3xl: 1.875rem; //  30  console; section title on mobile
+  --fs-4xl: 2.25rem; //   36  section title on desktop; name on mobile
+  --fs-5xl: 3rem; //      48  name on desktop
+
+  --fs-hero: clamp(var(--fs-4xl), 1.5rem + 4vw, var(--fs-5xl)); //       36→48
+  --fs-section: clamp(var(--fs-3xl), 1.25rem + 2vw, var(--fs-4xl)); //  30→36 (always < hero)
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  --lh-tight: 1.1; //  ≥ 36px
+  --lh-snug: 1.25; //  20–30px
+  --lh-body: 1.6; //   body text
+
+  --measure: 65ch;
+
+  // ---------------------------------------------------------------------------
+  // SPACE AND SIZE: the styleguide scale (name = px)
+  // ---------------------------------------------------------------------------
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-96: 6rem;
+
+  --section-gap: var(--space-96); // between home sections
+  --page-gutter: var(--space-16); // <main> side padding
+
+  --size-container: 75rem; //  1200px (expertises, card fan)
+  --size-modal: 35rem; //      560px
+  --size-avatar: 25rem; //     400px (hero photo)
+  --size-icon-sm: 2rem; //     32px contact icons
+  --size-icon-md: 2.5rem; //   40px expertise icons
+  --size-target: 2.75rem; //   44px minimum touch target
+
+  // ---------------------------------------------------------------------------
+  // RADIUS, BORDER, SHADOW
+  // ---------------------------------------------------------------------------
+  --radius-md: 0.5rem; //    thumbnails, hover highlight, inner pieces
+  --radius-lg: 1rem; //      cards and modal
+  --radius-full: 9999px; //  pills, avatar, logos
+
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --border-accent: 3px; //   bar under titles, timeline line
+
+  --shadow-lift: 0 12px 28px oklch(0% 0 0 / 0.45);
+  --glow-primary: 0 0 10px oklch(64% 0.102 197 / 0.4);
+
+  // ---------------------------------------------------------------------------
+  // MOTION AND LAYERS (not covered by the styleguide; normalized from usage)
+  // ---------------------------------------------------------------------------
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  --z-raised: 1;
+  --z-overlay-hint: 2;
+  --z-card-lifted: 100;
+  --z-modal: 1000;
+  --z-lightbox: 1100;
+}
