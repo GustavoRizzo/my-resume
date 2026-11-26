@@ -15,8 +15,10 @@ My personal resume as a website: fast, responsive, and always up to date.
 This repository holds the source code of my resume website — a bilingual
 (English / Portuguese) site built with **Astro** and fully **pre-rendered to
 static HTML**, published automatically to **GitHub Pages and Cloudflare** on
-every update to the `main` branch. The few interactive pieces (profile-photo
-easter egg, hobby modal) hydrate as small React islands.
+every update to the `main` branch. The first screen ships no framework at all
+(the profile-photo easter egg and console animation are a few lines of vanilla
+TypeScript); only the hobby modal is a React island, loaded when it scrolls
+into view.
 
 Each language gets its own URL prefix (`/en/…`, `/pt/…`), and every page is
 pre-rendered at build time so crawlers and no-JS visitors get fully-rendered,
@@ -31,10 +33,10 @@ the presentation layer. Short UI strings live in [`src/locales/`](src/locales/).
 
 | Layer        | Technologies                                            |
 | ------------ | ------------------------------------------------------- |
-| **Core**     | Astro 7 (SSG) · TypeScript · React 19 islands            |
+| **Core**     | Astro 7 (SSG) · TypeScript · React 19 island            |
 | **Build**    | Astro/Vite · content collections (Zod) · `astro check`   |
 | **i18n**     | Route-based (`/en`, `/pt`) · zero-dependency `t()` helper |
-| **Styling**  | SCSS (Sass)                                             |
+| **Styling**  | SCSS (Sass) · self-hosted fonts (Fontsource)            |
 | **Testing**  | Vitest · Testing Library · jsdom                        |
 | **Quality**  | ESLint · typescript-eslint                              |
 | **Security** | DOMPurify (HTML sanitization)                           |
