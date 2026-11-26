@@ -1,12 +1,12 @@
 // Shared component recipes built only from tokens (_tokens.scss), so every
 // card on the site looks like the same family.
 
-// Card surface: one background, one subtle border, one radius. No white
-// borders: the surface already differs from the page; the 1px edge just keeps
-// overlapping cards (the hobby fan) apart. Padding is per component.
+// Card surface: one background, one chunky 2px border, one radius. The
+// border is a soft grey, not white, so it frames without shouting; it also
+// keeps overlapping cards (the hobby fan) apart. Padding is per component.
 @mixin card {
   background: var(--color-surface);
-  border: var(--border-thin) solid var(--color-border);
+  border: var(--border-thick) solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   color: var(--color-text);
   text-align: start;

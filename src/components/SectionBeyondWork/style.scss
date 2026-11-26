@@ -44,6 +44,7 @@
 @mixin lifted {
   transform: rotate(var(--rot)) translateY(-40px) scale(1.05);
   background: var(--color-surface-raised);
+  border-color: var(--color-highlight);
   box-shadow: var(--shadow-lift);
   z-index: var(--z-card-lifted);
 }
@@ -71,7 +72,8 @@
   transform-origin: 50% var(--pivot);
   transform: rotate(var(--rot));
   transition: transform var(--duration-base) ease,
-    box-shadow var(--duration-base) ease, background var(--duration-base) ease;
+    box-shadow var(--duration-base) ease, background var(--duration-base) ease,
+    border-color var(--duration-base) ease;
 
   // Keyboard focus lands on the stretched button; the ring is drawn on the card.
   &:has(.hobby-card__open:focus-visible) {
@@ -179,6 +181,12 @@
   // gains/loses a scrollbar (its width becomes indirectly scroll-dependent).
   // `vw` is fixed to the viewport regardless of any scrollbar, so the modal's
   // width stays stable no matter what the rest of the page is doing.
+  // Extra-chunky frame in the brand gradient (cyan → mint). Two background
+  // layers instead of border-image, which would ignore the border-radius.
+  border: var(--border-heavy) solid transparent;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--gradient-brand) border-box;
   width: min(92vw, var(--size-modal));
   max-width: calc(100vw - 2 * var(--space-16));
   min-width: 0;
@@ -201,10 +209,19 @@
     border: none;
     border-radius: var(--radius-full);
     color: var(--color-text-secondary);
-    font-size: var(--fs-xl);
-    line-height: 1;
     cursor: pointer;
     transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+
+    .hobby-icon {
+      width: var(--space-24);
+      height: var(--space-24);
+      transition: transform var(--duration-base) ease;
+    }
+
+    // a little spin before closing
+    &:hover .hobby-icon {
+      transform: rotate(90deg);
+    }
 
     &:hover,
     &:focus-visible {
@@ -346,9 +363,14 @@
     border: var(--border-thick) solid var(--color-border-strong);
     border-radius: var(--radius-full);
     color: var(--color-text);
-    line-height: 1;
     cursor: pointer;
     transition: border-color var(--duration-fast) ease;
+
+    .hobby-icon {
+      width: var(--space-24);
+      height: var(--space-24);
+      transition: transform var(--duration-base) ease;
+    }
 
     &:hover,
     &:focus-visible {
@@ -359,20 +381,31 @@
   &__close {
     top: var(--space-16);
     right: var(--space-16);
-    font-size: var(--fs-xl);
+
+    &:hover .hobby-icon {
+      transform: rotate(90deg);
+    }
   }
 
   &__nav {
     top: 50%;
     transform: translateY(-50%);
-    font-size: var(--fs-3xl);
 
+    // the arrow nudges towards where it will take you
     &--prev {
       left: var(--space-16);
+
+      &:hover .hobby-icon {
+        transform: translateX(-3px);
+      }
     }
 
     &--next {
       right: var(--space-16);
+
+      &:hover .hobby-icon {
+        transform: translateX(3px);
+      }
     }
   }
 }
@@ -385,4 +418,16 @@
 @keyframes hobby-scale-in {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hobby-icon {
+    transition: none;
+  }
+
+  .hobby-modal__close:hover .hobby-icon,
+  .hobby-lightbox__close:hover .hobby-icon,
+  .hobby-lightbox__nav:hover .hobby-icon {
+    transform: none;
+  }
 }

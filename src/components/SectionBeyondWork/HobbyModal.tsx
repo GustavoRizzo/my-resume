@@ -3,6 +3,33 @@ import type { HobbyTopic } from "../../types/Hobby";
 import type { BeyondWorkLabels } from "./labels";
 import { withBase } from "../../utils/withBase";
 
+// Stroke icons drawn around the viewBox centre, so they sit dead-centre in
+// the round buttons (text glyphs like ‹ › ✕ ride on each font's baseline and
+// never centre reliably).
+const ICON_PATHS = {
+    close: "M6 6l12 12M18 6 6 18",
+    previous: "M15 5l-7 7 7 7",
+    next: "M9 5l7 7-7 7",
+} as const;
+
+function Icon({ name }: { name: keyof typeof ICON_PATHS }) {
+    return (
+        <svg
+            className="hobby-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <path d={ICON_PATHS[name]} />
+        </svg>
+    );
+}
+
 interface HobbyModalProps {
     topic: HobbyTopic;
     onClose: () => void;
@@ -56,7 +83,7 @@ export default function HobbyModal({ topic, onClose, labels }: HobbyModalProps) 
                     onClick={onClose}
                     aria-label={labels.close}
                 >
-                    ✕
+                    <Icon name="close" />
                 </button>
 
                 <h2 className="hobby-modal__title">
@@ -123,7 +150,7 @@ export default function HobbyModal({ topic, onClose, labels }: HobbyModalProps) 
                             onClick={() => setExpandedIndex(null)}
                             aria-label={labels.close}
                         >
-                            ✕
+                            <Icon name="close" />
                         </button>
 
                         {topic.images.length > 1 && (
@@ -138,7 +165,7 @@ export default function HobbyModal({ topic, onClose, labels }: HobbyModalProps) 
                                 }}
                                 aria-label={labels.previousImage}
                             >
-                                ‹
+                                <Icon name="previous" />
                             </button>
                         )}
 
@@ -159,7 +186,7 @@ export default function HobbyModal({ topic, onClose, labels }: HobbyModalProps) 
                                 }}
                                 aria-label={labels.nextImage}
                             >
-                                ›
+                                <Icon name="next" />
                             </button>
                         )}
 
