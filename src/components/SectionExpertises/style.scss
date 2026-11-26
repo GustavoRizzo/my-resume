@@ -181,12 +181,12 @@
     border-radius: var(--space-4);
     transition: background var(--duration-fast) ease;
 
+    // Anchored by its RIGHT edge (numbers right-aligned in the gutter), so a
+    // breakpoint dot added as left padding grows leftwards, hugging the number.
     &::before {
       content: counter(line) / "";
       position: absolute; // vertical: stays on the line; horizontal: gutter
-      left: 0;
-      width: calc(var(--gutter) - var(--space-12));
-      text-align: right;
+      right: calc(100% - var(--gutter) + var(--space-12));
       color: var(--syntax-gutter);
       user-select: none;
     }
@@ -200,6 +200,40 @@
   &__tag {
     display: block;
     user-select: none;
+  }
+
+  // ---- breakpoints: click a line number to toggle one (easter egg, session
+  // only — see src/scripts/breakpoints.ts). The dot is painted in the left
+  // padding of the number's own ::before, right next to the number: it hangs
+  // into the card's padding, so the default layout doesn't reserve any room
+  // for an easter egg most visitors will never find. One pseudo-element per
+  // line also keeps the dot on the line's first row when the line wraps. ----
+  &__item.is-over-gutter {
+    cursor: pointer;
+  }
+
+  .is-gutter-hover::before,
+  .is-breakpoint::before {
+    padding-left: calc(0.6em + 3px); // dot + a hairline gap
+    background: radial-gradient(circle closest-side, var(--bp-dot) 80%, transparent)
+      left center / 0.6em 0.6em no-repeat;
+  }
+
+  .is-gutter-hover::before {
+    --bp-dot: color-mix(in oklch, var(--syntax-breakpoint) 55%, transparent);
+  }
+
+  .is-breakpoint {
+    background: color-mix(in oklch, var(--syntax-breakpoint) 14%, transparent);
+
+    &::before {
+      --bp-dot: var(--syntax-breakpoint);
+    }
+  }
+
+  // the tab's dot stays red while the file has breakpoints
+  &__item.has-breakpoints &__tab-state::after {
+    color: var(--syntax-breakpoint);
   }
 
   .tok-punct {

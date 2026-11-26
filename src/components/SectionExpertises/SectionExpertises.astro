@@ -126,5 +126,7 @@ const items = expertises.map((item, index) => {
 
 <script>
   import { revealOnScroll } from "../../scripts/revealOnScroll";
+  import { setupBreakpoints } from "../../scripts/breakpoints";
   revealOnScroll(".expertise-v3__grid[data-reveal]", 0.2);
+  setupBreakpoints();
 </script>
