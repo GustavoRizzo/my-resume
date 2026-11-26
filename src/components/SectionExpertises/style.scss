@@ -33,7 +33,7 @@
   }
 
   // "Active window" (hover / keyboard focus inside): the tab's accent lights
-  // up, the unsaved-dot turns into a close ×, the caret starts blinking.
+  // up, its dot turns breakpoint-red, the caret starts blinking.
   &__item:hover,
   &__item:focus-within {
     border-color: var(--color-text-tertiary);
@@ -42,6 +42,7 @@
   // One compact VS Code-style tab: as short as possible (mobile!).
   &__tabs {
     display: flex;
+    padding: var(--space-4) var(--space-8) 0;
     background: var(--editor-bar);
     user-select: none;
   }
@@ -52,6 +53,7 @@
     gap: var(--space-8);
     min-width: 0;
     padding: var(--space-4) var(--space-12);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     background: var(--editor-bg);
     border-top: var(--border-thick) solid var(--color-border-strong);
     color: var(--syntax-text);
@@ -66,11 +68,12 @@
     font-weight: var(--fw-bold);
   }
 
-  // "●" = unsaved changes (it's a résumé: always a work in progress);
-  // in the active window it becomes the tab's close button "×".
+  // A status dot. Grey at rest; in the active window it turns red like a
+  // debugger breakpoint (a color change only: an "×" would invite a click).
   &__tab-state::after {
     content: "●" / "";
     color: var(--syntax-gutter);
+    transition: color var(--duration-base) ease;
   }
 
   &__item:hover &__tab,
@@ -80,8 +83,7 @@
 
   &__item:hover &__tab-state::after,
   &__item:focus-within &__tab-state::after {
-    content: "×" / "";
-    color: var(--syntax-text);
+    color: var(--syntax-breakpoint);
   }
 
   &__body {
