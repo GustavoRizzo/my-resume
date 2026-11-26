@@ -63,16 +63,26 @@ const SEO: Record<Lang, Record<PageKey, { title: string; description: string }>>
   },
 };
 
+// Only the per-language home page (the full résumé) is meant for search
+// engines. The per-section pages (about, career, …) exist for internal testing,
+// so they get `noindex` and stay out of the sitemap (see astro.config.mjs).
+export const INDEXABLE_PAGES: readonly PageKey[] = ["home"];
+
+// Every route is a directory (`/pt/career/index.html`), so URLs end in "/".
+// A canonical without it would point at a redirect, not at the page itself.
+const pageUrl = (lang: string, path: string) => `${SITE}/${lang}${path}/`;
+
 export function pageSeo(lang: Lang, page: PageKey, path: string) {
   const { title, description } = SEO[lang][page];
   return {
     title,
     description,
-    url: `${SITE}/${lang}${path}`,
+    url: pageUrl(lang, path),
     ogImage: OG_IMAGE,
+    indexable: INDEXABLE_PAGES.includes(page),
     alternates: [
-      ...SUPPORTED_LANGS.map((l) => ({ hreflang: l as string, href: `${SITE}/${l}${path}` })),
-      { hreflang: "x-default", href: `${SITE}/en${path}` },
+      ...SUPPORTED_LANGS.map((l) => ({ hreflang: l as string, href: pageUrl(l, path) })),
+      { hreflang: "x-default", href: pageUrl("en", path) },
     ],
   };
 }

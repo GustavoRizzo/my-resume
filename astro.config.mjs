@@ -21,7 +21,18 @@ export default defineConfig({
   base: target.base,
   // _headers (security + immutable cache for /_astro/*) only where the host
   // reads it — Cloudflare. GitHub Pages can't set response headers.
-  integrations: [react(), sitemap(), cloudflareHeaders({ enabled: targetName === "cloudflare" })],
+  integrations: [
+    react(),
+    sitemap({
+      // Only the per-language home pages (the full résumé) go to search
+      // engines; the per-section pages are noindex (INDEXABLE_PAGES in
+      // src/i18n/seo.ts) and the "/" language redirect is noindex too.
+      filter: (page) => /\/(en|pt)\/$/.test(page),
+      // Adds <xhtml:link hreflang> so Google pairs /en/ and /pt/ as translations.
+      i18n: { defaultLocale: "en", locales: { en: "en", pt: "pt" } },
+    }),
+    cloudflareHeaders({ enabled: targetName === "cloudflare" }),
+  ],
   build: {
     // The site's CSS is small; inlining it removes the render-blocking
     // stylesheet requests that delayed the first paint (and the LCP photo).

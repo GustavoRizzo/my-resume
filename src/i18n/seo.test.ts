@@ -3,7 +3,17 @@ import { pageSeo } from "./seo";
 
 describe("pageSeo", () => {
   it("builds canonical URL on the canonical host, under the language prefix", () => {
-    expect(pageSeo("pt", "career", "/career").url).toBe(`${__CANONICAL_SITE__}/pt/career`);
+    expect(pageSeo("pt", "career", "/career").url).toBe(`${__CANONICAL_SITE__}/pt/career/`);
+  });
+
+  it("ends the home canonical with a slash (the real URL, not a redirect)", () => {
+    expect(pageSeo("pt", "home", "").url).toBe(`${__CANONICAL_SITE__}/pt/`);
+    expect(pageSeo("en", "home", "").alternates.every((a) => a.href.endsWith("/"))).toBe(true);
+  });
+
+  it("only lets the home page be indexed", () => {
+    expect(pageSeo("en", "home", "").indexable).toBe(true);
+    expect(pageSeo("pt", "career", "/career").indexable).toBe(false);
   });
 
   it("points hreflang alternates at the canonical host too", () => {
