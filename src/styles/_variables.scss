@@ -17,8 +17,6 @@ $secound-highlight-color-timeline: #e2dd9c;
 $logo-radio: 20px;
 $logo-border-width: 7px;
 $logo-scale: calc( ($logo-radio + $logo-border-width) / $logo-radio);
-// Languages Selector
-$gap-between-buttons: 0.8rem;
 
 // Fonts — legacy names, now pointing at the tokens in _tokens.scss
 $default-font-family: var(--font-sans);

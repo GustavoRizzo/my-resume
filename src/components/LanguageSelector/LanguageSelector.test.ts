@@ -12,20 +12,31 @@ describe("LanguageSelector.astro", () => {
     });
   };
 
-  it("marks the current language as checked", async () => {
+  const linkFor = (html: string, code: string) =>
+    html.match(new RegExp(`<a[^>]*data-lang="${code}"[^>]*>`))?.[0] ?? "";
+
+  it("marks only the current language with aria-current", async () => {
     const html = await render("pt", "/my-resume/pt/career");
-    expect(html).toMatch(/value="pt"[^>]*checked/);
-    expect(html).not.toMatch(/value="en"[^>]*checked/);
+    expect(linkFor(html, "pt")).toContain('aria-current="page"');
+    expect(linkFor(html, "en")).not.toContain("aria-current");
   });
 
-  it("points each option to the same sub-path in the other language", async () => {
+  it("points each link to the same sub-path in that language", async () => {
     const html = await render("en", "/my-resume/en/career");
-    expect(html).toContain('data-href="/my-resume/pt/career"');
-    expect(html).toContain('data-href="/my-resume/en/career"');
+    expect(linkFor(html, "pt")).toContain('href="/my-resume/pt/career"');
+    expect(linkFor(html, "en")).toContain('href="/my-resume/en/career"');
   });
 
-  it("renders one option per supported language", async () => {
+  it("gives every link an accessible name in its own language", async () => {
     const html = await render("en", "/my-resume/en");
-    expect(html.match(/type="radio"/g)).toHaveLength(2);
+    expect(linkFor(html, "pt")).toMatch(/aria-label="Português"/);
+    expect(linkFor(html, "pt")).toMatch(/hreflang="pt"/);
+    expect(linkFor(html, "en")).toMatch(/aria-label="English"/);
+  });
+
+  it("wraps the links in a labelled nav, one link per supported language", async () => {
+    const html = await render("pt", "/my-resume/pt");
+    expect(html).toMatch(/<nav[^>]*aria-label="Idioma"/);
+    expect(html.match(/data-lang="/g)).toHaveLength(2);
   });
 });
