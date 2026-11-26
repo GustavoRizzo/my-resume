@@ -23,7 +23,12 @@ const expertise = z.object({
   html_text: z.string(),
   url_img: z.string(),
   underline_class_css: z.string(),
-  code_tag: z.string().optional(),
+  // Fake HTML tag framing the card's code, e.g. "p" or 'dl class="stack"'
+  // (a tag name plus optional name="value" attributes).
+  code_tag: z
+    .string()
+    .regex(/^[a-z][a-z0-9-]*(\s+[a-z][a-z0-9-]*="[^"]*")*$/, 'code_tag: a tag name plus optional name="value" attributes')
+    .optional(),
   icon: z.string().optional(),
   initial_date: z.string().optional(),
 });

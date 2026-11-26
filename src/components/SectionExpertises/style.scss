@@ -32,57 +32,56 @@
     }
   }
 
-  // "Active window" (hover / keyboard focus inside): traffic lights light up,
-  // the caret starts blinking — like a focused editor.
+  // "Active window" (hover / keyboard focus inside): the tab's accent lights
+  // up, the unsaved-dot turns into a close ×, the caret starts blinking.
   &__item:hover,
   &__item:focus-within {
     border-color: var(--color-text-tertiary);
   }
 
-  &__titlebar {
+  // One compact VS Code-style tab: as short as possible (mobile!).
+  &__tabs {
     display: flex;
-    align-items: flex-end;
-    gap: var(--space-16);
-    padding: var(--space-8) var(--space-12) 0;
     background: var(--editor-bar);
     user-select: none;
   }
 
-  &__dots {
-    display: flex;
-    gap: var(--space-8);
-    align-self: center;
-    padding-bottom: var(--space-8);
-
-    span {
-      width: var(--space-12);
-      height: var(--space-12);
-      border-radius: var(--radius-full);
-      background: var(--color-border-strong); // inactive window: grey
-      transition: background var(--duration-base) ease;
-    }
-  }
-
-  &__item:hover &__dots,
-  &__item:focus-within &__dots {
-    span:nth-child(1) { background: var(--window-close); }
-    span:nth-child(2) { background: var(--window-minimize); }
-    span:nth-child(3) { background: var(--window-zoom); }
-  }
-
-  // the active tab: same color as the editor, as if it opened onto the code
   &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: var(--space-8) var(--space-12);
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: var(--space-4) var(--space-12);
     background: var(--editor-bg);
-    border-top: var(--border-thick) solid var(--color-primary);
+    border-top: var(--border-thick) solid var(--color-border-strong);
     color: var(--syntax-text);
     font-family: var(--font-mono);
     font-size: var(--fs-xs);
+    white-space: nowrap;
+    transition: border-color var(--duration-base) ease;
+  }
+
+  &__tab-icon {
+    color: var(--cat-orange); // VS Code's orange HTML file icon
+    font-weight: var(--fw-bold);
+  }
+
+  // "●" = unsaved changes (it's a résumé: always a work in progress);
+  // in the active window it becomes the tab's close button "×".
+  &__tab-state::after {
+    content: "●" / "";
+    color: var(--syntax-gutter);
+  }
+
+  &__item:hover &__tab,
+  &__item:focus-within &__tab {
+    border-top-color: var(--color-primary);
+  }
+
+  &__item:hover &__tab-state::after,
+  &__item:focus-within &__tab-state::after {
+    content: "×" / "";
+    color: var(--syntax-text);
   }
 
   &__body {
@@ -94,7 +93,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-16);
-    margin-bottom: var(--space-24);
+    margin-bottom: var(--space-16);
   }
 
   &__icon {
@@ -174,7 +173,8 @@
 
   &__tag,
   &__text p,
-  &__text li {
+  &__text li,
+  &__text:not(:has(p, li)) {
     counter-increment: line;
     border-radius: var(--space-4);
     transition: background var(--duration-fast) ease;
@@ -206,6 +206,15 @@
 
   .tok-tag {
     color: var(--syntax-tag);
+  }
+
+  .tok-attr {
+    margin-left: 1ch; // the space between tag name and attribute
+    color: var(--syntax-key);
+  }
+
+  .tok-string {
+    color: var(--syntax-string);
   }
 
   // blinking block caret after the closing tag, only in the active window
@@ -242,10 +251,6 @@
     :is(b, strong) {
       color: var(--syntax-key);
       font-weight: var(--fw-regular);
-    }
-
-    span {
-      color: var(--syntax-string);
     }
 
     ul {

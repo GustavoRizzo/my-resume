@@ -16,7 +16,7 @@ const expertises = [
     html_text: "<p>Numbers</p>",
     url_img: "https://example.test/icon.png",
     underline_class_css: "underline-data",
-    code_tag: "h3",
+    code_tag: 'dl class="toolbox"',
   },
 ];
 
@@ -66,15 +66,21 @@ describe("SectionExpertises.astro", () => {
     expect(html).toContain('src="https://example.test/icon.png"');
   });
 
-  it("wraps the description in the configured code tag", async () => {
+  it("wraps the description in the configured code tag (div by default)", async () => {
     const html = await render();
-    expect(html).toContain('<span class="tok-tag">h3</span>');
     expect(html).toContain('<span class="tok-tag">div</span>');
+    expect(html.match(/<span class="tok-tag">dl<\/span>/g)).toHaveLength(2); // open + close
+  });
+
+  it("syntax-highlights the code tag's attributes", async () => {
+    const html = await render();
+    expect(html).toContain('<span class="tok-attr">class</span>');
+    expect(html).toContain('<span class="tok-string">"toolbox"</span>');
   });
 
   it("names each editor tab after the expertise, as an .html file", async () => {
     const html = await render();
-    expect(html).toContain('<span class="expertise-v3__tab">web-development.html</span>');
-    expect(html).toContain('<span class="expertise-v3__tab">data-analysis.html</span>');
+    expect(html).toMatch(/expertise-v3__tab"[^]*?web-development\.html/);
+    expect(html).toMatch(/expertise-v3__tab"[^]*?data-analysis\.html/);
   });
 });
