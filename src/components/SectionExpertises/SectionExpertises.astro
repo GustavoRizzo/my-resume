@@ -19,9 +19,14 @@ type Expertise = {
 interface Props {
   lang: Lang;
   expertises: Expertise[];
+  /** Heading level of the section title: 1 on its own page, 2 inside the home. */
+  level?: 1 | 2;
 }
 
-const { lang, expertises } = Astro.props;
+const { lang, expertises, level = 1 } = Astro.props;
+// Document structure decides the tags; the visual size comes from the classes.
+const SectionHeading = `h${level}` as const;
+const CardHeading = level === 1 ? "h2" : "h3";
 
 // Map an icon key (from the content JSON) to the raw SVG markup of its file.
 // To edit an icon, just change the corresponding file in ./icons/.
@@ -48,31 +53,29 @@ const items = expertises.map((item, index) => {
 ---
 
 <section class="expertise-v3">
-  <h1 class="section-title">{t(lang, "sections.myExpertise")}</h1>
+  <SectionHeading class="section-title">{t(lang, "sections.myExpertise")}</SectionHeading>
 
   <div class="expertise-v3__grid" data-reveal>
     {
       items.map((item) => (
         <article class="expertise-v3__item" style={`--reveal-delay: ${item.delay}`}>
           <div class="expertise-v3__headline">
-            <div class="expertise-v3__icon">
-              {item.svg ? (
-                <span role="img" aria-label={item.title} set:html={item.svg} />
-              ) : (
-                <img src={item.imgSrc} alt={item.title} />
-              )}
+            {/* Decorative: the heading next to it already names the card. */}
+            <div class="expertise-v3__icon" aria-hidden="true">
+              {item.svg ? <span set:html={item.svg} /> : <img src={item.imgSrc} alt="" />}
             </div>
-            <h2 class="expertise-v3__name">
+            <CardHeading class="expertise-v3__name">
               <span class={`expertise-v3__underline ${item.underline_class_css}`}>{item.firstWord}</span>
               <br />
               {item.restOfTitle}
-            </h2>
+            </CardHeading>
           </div>
 
           <div class="expertise-v3__code">
-            <span class="expertise-v3__tag">&lt;{item.codeTag}&gt;</span>
+            {/* The <tag> frame is decoration; screen readers skip it. */}
+            <span class="expertise-v3__tag" aria-hidden="true">&lt;{item.codeTag}&gt;</span>
             <div class="expertise-v3__text" set:html={item.cleanHtml} />
-            <span class="expertise-v3__tag">&lt;/{item.codeTag}&gt;</span>
+            <span class="expertise-v3__tag" aria-hidden="true">&lt;/{item.codeTag}&gt;</span>
           </div>
         </article>
       ))

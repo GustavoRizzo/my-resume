@@ -20,9 +20,9 @@ const expertises = [
   },
 ];
 
-const render = async () => {
+const render = async (level?: 1 | 2) => {
   const container = await AstroContainer.create();
-  return container.renderToString(SectionExpertises, { props: { lang: "en", expertises } });
+  return container.renderToString(SectionExpertises, { props: { lang: "en", expertises, level } });
 };
 
 describe("SectionExpertises.astro", () => {
@@ -33,10 +33,25 @@ describe("SectionExpertises.astro", () => {
     expect(html).toContain("--reveal-delay: 150ms");
   });
 
-  it("titles each card with an h2 (no skipped levels under the section h1)", async () => {
+  it("titles each card one level below the section title (h1 > h2 by default)", async () => {
     const html = await render();
+    expect(html).toMatch(/<h1 class="section-title"/);
     expect(html.match(/<h2 class="expertise-v3__name"/g)).toHaveLength(2);
     expect(html).not.toContain("<h5");
+  });
+
+  it("shifts both levels down when nested in the home (h2 > h3)", async () => {
+    const html = await render(2);
+    expect(html).toMatch(/<h2 class="section-title"/);
+    expect(html.match(/<h3 class="expertise-v3__name"/g)).toHaveLength(2);
+    expect(html).not.toContain("<h1");
+  });
+
+  it("hides the decorative icon and <tag> frame from screen readers", async () => {
+    const html = await render();
+    expect(html.match(/class="expertise-v3__icon" aria-hidden="true"/g)).toHaveLength(2);
+    expect(html.match(/class="expertise-v3__tag" aria-hidden="true"/g)).toHaveLength(4);
+    expect(html).not.toContain('role="img"');
   });
 
   it("sanitizes html_text at build time", async () => {
