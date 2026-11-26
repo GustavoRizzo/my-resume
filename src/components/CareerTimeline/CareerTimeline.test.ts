@@ -39,6 +39,11 @@ describe("CareerTimeline.astro", () => {
     expect(html.match(/sub-title-link/g)?.length).toBeGreaterThanOrEqual(1);
   });
 
+  it("gives the logo link an accessible name (it has no text of its own)", async () => {
+    const html = await render("en");
+    expect(html).toMatch(/<a class="company-logo"[^>]*aria-label="Acme Inc"/);
+  });
+
   it("anchors logo URLs to the site base", async () => {
     const html = await render("en");
     expect(html).toContain("url(/logo-acme.jpg)");

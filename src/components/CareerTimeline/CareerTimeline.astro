@@ -48,6 +48,7 @@ const items = experiences.map((exp, index) => ({
                 class="company-logo"
                 style={`background-image: url(${exp.logoUrl})`}
                 href={exp.company_url}
+                aria-label={exp.subtitle}
                 target="_blank"
                 rel="noreferrer"
               />

@@ -33,6 +33,12 @@ describe("SectionExpertises.astro", () => {
     expect(html).toContain("--reveal-delay: 150ms");
   });
 
+  it("titles each card with an h2 (no skipped levels under the section h1)", async () => {
+    const html = await render();
+    expect(html.match(/<h2 class="expertise-v3__name"/g)).toHaveLength(2);
+    expect(html).not.toContain("<h5");
+  });
+
   it("sanitizes html_text at build time", async () => {
     const html = await render();
     expect(html).toContain("<b>sites</b>");
