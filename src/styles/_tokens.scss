@@ -89,13 +89,15 @@
   --fs-base: 1rem; //     16  body
   --fs-lg: 1.125rem; //   18  section subtitle
   --fs-xl: 1.25rem; //    20  card title / job title
-  --fs-2xl: 1.5rem; //    24  expertise name
-  --fs-3xl: 1.875rem; //  30  console; section title on mobile
-  --fs-4xl: 2.25rem; //   36  section title on desktop; name on mobile
+  --fs-2xl: 1.5rem; //    24  expertise name; section title on mobile
+  --fs-3xl: 1.875rem; //  30  console; name on mobile
+  --fs-4xl: 2.25rem; //   36  section title on desktop
   --fs-5xl: 3rem; //      48  name on desktop
 
-  --fs-hero: clamp(var(--fs-4xl), 1.5rem + 4vw, var(--fs-5xl)); //       36→48
-  --fs-section: clamp(var(--fs-3xl), 1.25rem + 2vw, var(--fs-4xl)); //  30→36 (always < hero)
+  // Fluid titles; the hero always stays above section titles
+  // (375px: 33 vs 24 · 768px: 47 vs 31 · ≥1100px: 48 vs 36).
+  --fs-hero: clamp(var(--fs-3xl), 1.25rem + 3.5vw, var(--fs-5xl)); //  30→48
+  --fs-section: clamp(var(--fs-2xl), 1rem + 2vw, var(--fs-4xl)); //    24→36
 
   --fw-regular: 400;
   --fw-bold: 700;
