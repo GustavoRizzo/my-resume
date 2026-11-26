@@ -14,7 +14,7 @@ My personal resume as a website: fast, responsive, and always up to date.
 
 This repository holds the source code of my resume website — a bilingual
 (English / Portuguese) site built with **Astro** and fully **pre-rendered to
-static HTML**, hosted for free on GitHub Pages and published automatically on
+static HTML**, published automatically to **GitHub Pages and Cloudflare** on
 every update to the `main` branch. The few interactive pieces (profile-photo
 easter egg, hobby modal) hydrate as small React islands.
 
@@ -38,7 +38,7 @@ the presentation layer. Short UI strings live in [`src/locales/`](src/locales/).
 | **Testing**  | Vitest · Testing Library · jsdom                        |
 | **Quality**  | ESLint · typescript-eslint                              |
 | **Security** | DOMPurify (HTML sanitization)                           |
-| **Deploy**   | GitHub Actions → GitHub Pages                           |
+| **Deploy**   | GitHub Actions → GitHub Pages + Cloudflare Workers      |
 
 ## 🚀 Running locally
 
@@ -61,12 +61,41 @@ npm run lint:fix   # automatically fix what's possible
 
 ## 📦 Deploy
 
-Deployment is automatic: the [workflow](.github/workflows/deploy.yml) runs lint, tests,
-and build on every push to `main`, publishing `dist/` to GitHub Pages.
+The site is published to **two independent hosts**, and either can be switched
+off at any time without affecting the other:
 
-The build pre-renders every language × page to a real static HTML file under
-the `/my-resume/` sub-path, so deep links and refreshes just work — no SPA
-redirect tricks needed.
+| Host | URL | Base path |
+| --- | --- | --- |
+| GitHub Pages | `https://gustavorizzo.github.io/my-resume/` | `/my-resume` |
+| Cloudflare Workers (static assets) | `https://resume.bygus.dev/` | `/` |
+
+`curriculo.bygus.dev` is a Cloudflare redirect rule pointing to the Portuguese
+version (`resume.bygus.dev/pt/`).
+
+On every push to `main`, the [workflow](.github/workflows/deploy.yml) runs lint
+and tests once, then two **parallel** jobs that each build `dist/` for their
+own host (`DEPLOY_TARGET`, see [`deploy-targets.mjs`](deploy-targets.mjs)) and
+publish it. A failure in one never blocks the other. Both copies declare the
+same canonical host (`CANONICAL_TARGET`, Cloudflare by default) so search
+engines index only one of them.
+
+```bash
+npm run build:gh-pages      # dist/ for GitHub Pages
+npm run build:cloudflare    # dist/ for resume.bygus.dev
+npm run deploy:cloudflare   # wrangler deploy (needs Cloudflare credentials)
+```
+
+Repository settings that control the deploy (Settings → Secrets and variables → Actions):
+
+| Name | Kind | Purpose |
+| --- | --- | --- |
+| `DEPLOY_GH_PAGES` | variable | `false` turns the GitHub Pages job off (on by default) |
+| `DEPLOY_CLOUDFLARE` | variable | `true` turns the Cloudflare job on |
+| `CANONICAL_TARGET` | variable | `cloudflare` (default) or `gh-pages` |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | credentials for `wrangler deploy` |
+
+Every language × page is pre-rendered to a real static HTML file, so deep links
+and refreshes just work on both hosts — no SPA redirect tricks needed.
 
 > **Gotcha:** Astro's `import.meta.env.BASE_URL` has **no trailing slash**
 > (`/my-resume`). Any URL built from it must go through

@@ -1,0 +1,20 @@
+// Cloudflare deploy: a static-assets-only Worker (no server code) serving the
+// `DEPLOY_TARGET=cloudflare` build of dist/ at https://resume.bygus.dev/.
+// Independent of the GitHub Pages deploy — see deploy-targets.mjs.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-resume",
+  "compatibility_date": "2026-11-20",
+  "assets": {
+    "directory": "./dist",
+    // Astro emits /en/index.html etc.; /en → /en/ like GitHub Pages does.
+    "html_handling": "auto-trailing-slash",
+    // Unknown paths get dist/404.html with a real 404 status.
+    "not_found_handling": "404-page"
+  },
+  // Custom domain: wrangler creates/updates the DNS record in the bygus.dev zone.
+  "routes": [{ "pattern": "resume.bygus.dev", "custom_domain": true }],
+  // Only the custom domain serves the site — no stray *.workers.dev copy.
+  "workers_dev": false,
+  "preview_urls": false
+}

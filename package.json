@@ -10,7 +10,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "build:gh-pages": "DEPLOY_TARGET=gh-pages npm run build",
+    "build:cloudflare": "DEPLOY_TARGET=cloudflare npm run build",
+    "deploy:cloudflare": "wrangler deploy"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.9",
@@ -34,6 +37,7 @@
     "sass": "^1.101.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.63.0",
-    "vitest": "^5.1.2"
+    "vitest": "^5.1.2",
+    "wrangler": "^4.168.0"
   }
 }
