@@ -12,9 +12,15 @@
     gap: var(--space-24);
   }
 
+  // ---- the editor window ----
   &__item {
     @include card;
-    padding: var(--space-32);
+    // the card frame, painted as a dark editor theme
+    background: var(--editor-bg);
+    overflow: clip; // title bar follows the rounded corners
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--duration-base) ease;
 
     // start hidden, then reveal one-by-one once the grid is in view
     opacity: 0;
@@ -24,6 +30,63 @@
       animation: expertise-v3-reveal var(--duration-slow) ease forwards;
       animation-delay: var(--reveal-delay, 0ms);
     }
+  }
+
+  // "Active window" (hover / keyboard focus inside): traffic lights light up,
+  // the caret starts blinking — like a focused editor.
+  &__item:hover,
+  &__item:focus-within {
+    border-color: var(--color-text-tertiary);
+  }
+
+  &__titlebar {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-16);
+    padding: var(--space-8) var(--space-12) 0;
+    background: var(--editor-bar);
+    user-select: none;
+  }
+
+  &__dots {
+    display: flex;
+    gap: var(--space-8);
+    align-self: center;
+    padding-bottom: var(--space-8);
+
+    span {
+      width: var(--space-12);
+      height: var(--space-12);
+      border-radius: var(--radius-full);
+      background: var(--color-border-strong); // inactive window: grey
+      transition: background var(--duration-base) ease;
+    }
+  }
+
+  &__item:hover &__dots,
+  &__item:focus-within &__dots {
+    span:nth-child(1) { background: var(--window-close); }
+    span:nth-child(2) { background: var(--window-minimize); }
+    span:nth-child(3) { background: var(--window-zoom); }
+  }
+
+  // the active tab: same color as the editor, as if it opened onto the code
+  &__tab {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    background: var(--editor-bg);
+    border-top: var(--border-thick) solid var(--color-primary);
+    color: var(--syntax-text);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  &__body {
+    padding: var(--space-24);
   }
 
   // ---- headline: icon on the left + two-line title ----
@@ -93,53 +156,109 @@
     background: var(--cat-orange);
   }
 
-  // ---- code-editor styled description ----
+  // ---- the code: gutter with line numbers + syntax colors ----
+  // Each "line" (the tags, every <p> and <li> of the content) bumps a counter
+  // shown in the left gutter. Line numbers are decoration: `/ ""` gives them
+  // an empty alt text so screen readers skip them.
   &__code {
+    --gutter: 2.25rem;
+    position: relative;
+    counter-reset: line;
+    padding-left: var(--gutter);
+    margin-inline: calc(-1 * var(--space-8));
     font-family: var(--font-mono);
     font-size: var(--fs-sm);
     line-height: var(--lh-body);
+    color: var(--syntax-text);
+  }
+
+  &__tag,
+  &__text p,
+  &__text li {
+    counter-increment: line;
+    border-radius: var(--space-4);
+    transition: background var(--duration-fast) ease;
+
+    &::before {
+      content: counter(line) / "";
+      position: absolute; // vertical: stays on the line; horizontal: gutter
+      left: 0;
+      width: calc(var(--gutter) - var(--space-12));
+      text-align: right;
+      color: var(--syntax-gutter);
+      user-select: none;
+    }
+
+    // current-line highlight, like an editor
+    &:hover {
+      background: color-mix(in oklch, var(--syntax-text) 7%, transparent);
+    }
   }
 
   &__tag {
     display: block;
-    color: var(--color-text-tertiary);
     user-select: none;
   }
 
+  .tok-punct {
+    color: var(--syntax-punct);
+  }
+
+  .tok-tag {
+    color: var(--syntax-tag);
+  }
+
+  // blinking block caret after the closing tag, only in the active window
+  &__caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-left: var(--space-4);
+    vertical-align: text-bottom;
+    background: var(--syntax-text);
+    opacity: 0;
+  }
+
+  &__item:hover &__caret,
+  &__item:focus-within &__caret {
+    animation: expertise-v3-caret 1s steps(1) infinite;
+  }
+
+  // content HTML: indent guide + "keys" (bold labels) + "strings" (spans)
   &__text {
     padding-left: var(--space-16);
-    margin: var(--space-4) 0;
-    border-left: var(--border-thick) solid var(--color-border);
-    color: var(--color-text-secondary);
+    border-left: var(--border-thin) solid var(--color-border);
 
     p {
-      margin: 0 0 var(--space-8);
+      margin: 0;
     }
 
-    b {
-      color: var(--color-text);
-      font-weight: var(--fw-bold);
+    // empty paragraphs and trailing <br>s left over by the content's HTML
+    p:empty,
+    br:last-child {
+      display: none;
+    }
+
+    :is(b, strong) {
+      color: var(--syntax-key);
+      font-weight: var(--fw-regular);
+    }
+
+    span {
+      color: var(--syntax-string);
     }
 
     ul {
       list-style: none;
-      margin: var(--space-4) 0 var(--space-12);
-      padding-left: 0;
-    }
-
-    li {
-      position: relative;
+      margin: 0;
       padding-left: var(--space-16);
-      margin-bottom: var(--space-4);
-
-      &::before {
-        content: "›";
-        position: absolute;
-        left: 0;
-        color: var(--color-text-tertiary);
-      }
     }
   }
+}
+
+@keyframes expertise-v3-caret {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 @keyframes expertise-v3-reveal {
@@ -149,11 +268,17 @@
   }
 }
 
-// respect users who prefer reduced motion: show cards immediately
+// respect users who prefer reduced motion: show cards immediately and keep
+// the caret steady instead of blinking
 @media (prefers-reduced-motion: reduce) {
   .expertise-v3__item {
     opacity: 1;
     transform: none;
     animation: none;
+  }
+
+  .expertise-v3__item:is(:hover, :focus-within) .expertise-v3__caret {
+    animation: none;
+    opacity: 1;
   }
 }

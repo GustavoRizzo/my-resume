@@ -68,7 +68,13 @@ describe("SectionExpertises.astro", () => {
 
   it("wraps the description in the configured code tag", async () => {
     const html = await render();
-    expect(html).toContain("&lt;h3&gt;");
-    expect(html).toContain("&lt;div&gt;");
+    expect(html).toContain('<span class="tok-tag">h3</span>');
+    expect(html).toContain('<span class="tok-tag">div</span>');
+  });
+
+  it("names each editor tab after the expertise, as an .html file", async () => {
+    const html = await render();
+    expect(html).toContain('<span class="expertise-v3__tab">web-development.html</span>');
+    expect(html).toContain('<span class="expertise-v3__tab">data-analysis.html</span>');
   });
 });

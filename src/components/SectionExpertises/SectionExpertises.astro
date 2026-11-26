@@ -36,6 +36,15 @@ const ICONS: Record<string, string> = {
   engine: engineIcon,
 };
 
+// "Software Developer" → "software-developer.html" (the editor tab's file name).
+const toFileName = (title: string) =>
+  title
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "") + ".html";
+
 const items = expertises.map((item, index) => {
   const [firstWord, ...rest] = item.title.split(" ");
   return {
@@ -43,6 +52,7 @@ const items = expertises.map((item, index) => {
     firstWord,
     restOfTitle: rest.join(" "),
     codeTag: item.code_tag ?? "div",
+    fileName: toFileName(item.title),
     svg: item.icon ? ICONS[item.icon] : undefined,
     // Fallback icon path from content JSON is public/-relative; anchor it to the base.
     imgSrc: /^https?:/.test(item.url_img) ? item.url_img : withBase(item.url_img),
@@ -59,6 +69,17 @@ const items = expertises.map((item, index) => {
     {
       items.map((item) => (
         <article class="expertise-v3__item" style={`--reveal-delay: ${item.delay}`}>
+          {/* Each card parodies a code-editor window: title bar, tab, gutter. */}
+          <div class="expertise-v3__titlebar" aria-hidden="true">
+            <span class="expertise-v3__dots">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span class="expertise-v3__tab">{item.fileName}</span>
+          </div>
+
+          <div class="expertise-v3__body">
           <div class="expertise-v3__headline">
             {/* Decorative: the heading next to it already names the card. */}
             <div class="expertise-v3__icon" aria-hidden="true">
@@ -73,9 +94,14 @@ const items = expertises.map((item, index) => {
 
           <div class="expertise-v3__code">
             {/* The <tag> frame is decoration; screen readers skip it. */}
-            <span class="expertise-v3__tag" aria-hidden="true">&lt;{item.codeTag}&gt;</span>
+            <span class="expertise-v3__tag" aria-hidden="true">
+              <span class="tok-punct">&lt;</span><span class="tok-tag">{item.codeTag}</span><span class="tok-punct">&gt;</span>
+            </span>
             <div class="expertise-v3__text" set:html={item.cleanHtml} />
-            <span class="expertise-v3__tag" aria-hidden="true">&lt;/{item.codeTag}&gt;</span>
+            <span class="expertise-v3__tag" aria-hidden="true">
+              <span class="tok-punct">&lt;/</span><span class="tok-tag">{item.codeTag}</span><span class="tok-punct">&gt;</span><span class="expertise-v3__caret" />
+            </span>
+          </div>
           </div>
         </article>
       ))
