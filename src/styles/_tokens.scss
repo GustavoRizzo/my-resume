@@ -5,10 +5,15 @@
 // =============================================================================
 //
 // PERSONALITY ("friendly terminal")
+//   Purpose ... a humorous résumé, not a commercial app: it tells a story.
+//               Personality beats uniformity — the styleguide applies through
+//               its principles (contrast, legibility, hierarchy, a11y,
+//               tokens), not to make every section look alike.
 //   Theme ..... dark only. Slate-blue background; no light theme.
-//   Tone ...... technical with playful touches (typing console, easter egg,
-//               fanned cards). Play lives in the hero and the finishing
-//               touches; content (timeline, expertises) stays sober.
+//   Tone ...... technical and playful. Each section keeps its own metaphor:
+//               typing console + easter egg (hero), code editor (expertises),
+//               a "bead" timeline, a hand of cards (beyond work), a terminal
+//               (404). Small useless-but-fun touches are welcome.
 //   Fonts ..... Poppins 700/800 = display/titles · system-ui = body ·
 //               system monospace = console, code, dates.
 //   Color ..... primary cyan (halo, bars, focus); mint for text highlights;
@@ -17,7 +22,9 @@
 //   Radius .... 8px small pieces, 16px cards and modals, pill for chips,
 //               circle for avatars and logos.
 //   Voice ..... first person, direct and casual.
-//   Motion .... subtle and always disabled under prefers-reduced-motion.
+//   Borders ... chunky: 2px on cards, 4px (brand gradient) on modals.
+//   Motion .... playful micro-animations, always disabled under
+//               prefers-reduced-motion.
 // =============================================================================
 
 :root {
@@ -43,6 +50,21 @@
   --mint-300: #9ce2bd; //  oklch(86% 0.087 161)
   --straw-300: #e2dd9c; // oklch(89% 0.084 104)
 
+  // Code editor theme (expertise cards parody a VS Code window).
+  // Contrast on --editor-bg: text 11.8 · key 11.7 · string 6.6 · tag 5.9 ·
+  // punct 5.2 · gutter 4.7 (decorative, hidden from screen readers).
+  --editor-bg: #1a191d;
+  --editor-bar: #26252b;
+  --syntax-text: #d4d4d4;
+  --syntax-key: #9cdcfe;
+  --syntax-string: #ce9178;
+  --syntax-tag: #569cd6;
+  --syntax-punct: #8c8c8c;
+  --syntax-gutter: #858585;
+  --window-close: #ff5f57;
+  --window-minimize: #febc2e;
+  --window-zoom: #28c840;
+
   // Categories: decorative (underlines) or large text only (console, 30px)
   --cat-magenta: #dc2a99;
   --cat-blue: #2c49d8;
@@ -54,7 +76,7 @@
   --color-bg: var(--slate-bg);
   --color-surface: var(--slate-surface); //        cards
   --color-surface-raised: var(--slate-raised); //  hovered card, language selector
-  --color-surface-sunken: var(--slate-sunken); //  expertise cards
+  --color-surface-sunken: var(--slate-sunken); //  hover wash, insets
 
   // Text: three levels, never opacity
   --color-text: #fff; //                         primary   15.3:1
@@ -141,6 +163,7 @@
   --border-thin: 1px;
   --border-thick: 2px;
   --border-accent: 3px; //   bar under titles, timeline line
+  --border-heavy: 4px; //    modals
 
   --shadow-lift: 0 12px 28px oklch(0% 0 0 / 0.45);
   --glow-primary: 0 0 10px oklch(64% 0.102 197 / 0.4);
