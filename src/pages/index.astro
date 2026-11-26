@@ -16,14 +16,22 @@ const fallback = withBase(`${DEFAULT_LANG}/`);
     <meta name="robots" content="noindex" />
     <meta http-equiv="refresh" content={`0; url=${fallback}`} />
     <title>Gustavo Rizzo — Résumé</title>
+    <!-- Build-time values travel as data-* attributes (not define:vars, whose
+         injected names `astro check` can't see and flags as undefined). -->
     <script
       is:inline
-      define:vars={{ base, langs: SUPPORTED_LANGS, fallbackLang: DEFAULT_LANG }}
+      data-base={base}
+      data-langs={SUPPORTED_LANGS.join(",")}
+      data-fallback={DEFAULT_LANG}
     >
-      const saved = window.localStorage.getItem("resume.lang");
-      const browser = (navigator.language || "").slice(0, 2);
-      const lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : fallbackLang;
-      window.location.replace(base + lang + "/");
+      (function () {
+        const data = document.currentScript.dataset;
+        const langs = data.langs.split(",");
+        const saved = window.localStorage.getItem("resume.lang");
+        const browser = (navigator.language || "").slice(0, 2);
+        const lang = langs.indexOf(saved) >= 0 ? saved : langs.indexOf(browser) >= 0 ? browser : data.fallback;
+        window.location.replace(data.base + lang + "/");
+      })();
     </script>
   </head>
   <body></body>
