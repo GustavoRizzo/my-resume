@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { file } from "astro/loaders";
 
 // Schemas mirror the shapes the React app declared in src/types/ (see main
