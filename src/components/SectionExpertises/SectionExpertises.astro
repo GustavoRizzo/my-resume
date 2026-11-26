@@ -48,9 +48,11 @@ const toFileName = (title: string) =>
 // 'dl class="stack"' → { name: "dl", attrs: [{ name: "class", value: "stack" }] },
 // so the fake tag can be syntax-highlighted (format validated in content.config).
 const parseTag = (raw: string) => {
-  const [, name, rest = ""] = raw.trim().match(/^(\S+)\s*(.*)$/) ?? [, "div"];
+  const match = raw.trim().match(/^(\S+)\s*(.*)$/);
+  const name = match?.[1] ?? "div";
+  const rest = match?.[2] ?? "";
   const attrs = [...rest.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, n, v]) => ({ name: n, value: v }));
-  return { name: name ?? "div", attrs };
+  return { name, attrs };
 };
 
 const items = expertises.map((item, index) => {
