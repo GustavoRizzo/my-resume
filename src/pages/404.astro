@@ -1,6 +1,8 @@
 ---
-// Served by GitHub Pages for any unknown URL under the repo path. Every real
-// route is a prerendered HTML file, so no SPA-restore trickery is needed.
+// Served by GitHub Pages (and the Cloudflare Worker) for any unknown URL.
+// Every real route is a prerendered HTML file, so no SPA-restore trickery is
+// needed. One page for both languages, so the copy is bilingual. In keeping
+// with the site's console/IDE jokes, it is a terminal where `cd` fails.
 import "../styles/global.scss";
 import { DEFAULT_LANG } from "../i18n";
 import { withBase } from "../utils/withBase";
@@ -18,11 +20,131 @@ const home = withBase(`${DEFAULT_LANG}/`);
   </head>
   <body>
     <div id="root">
-      <main style="padding: 2rem; text-align: center;">
+      <main class="not-found">
         <h1 class="hero-title">404</h1>
-        <p>There's nothing here!</p>
-        <p><a href={home} style="color: inherit;">← Gustavo Rizzo — Résumé</a></p>
+
+        <div class="not-found__terminal">
+          <div class="not-found__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="not-found__line">
+            <span class="not-found__prompt" aria-hidden="true">~$</span>
+            cd <span data-path>this-page</span>
+          </p>
+          <p class="not-found__line not-found__error">
+            bash: cd: <span data-path>this-page</span>: No such file or directory
+          </p>
+          <p class="not-found__line" lang="pt-BR">
+            <span class="not-found__comment"># Não tem nada aqui! / There's nothing here!</span>
+          </p>
+          <p class="not-found__line">
+            <span class="not-found__prompt" aria-hidden="true">~$</span>
+            <a href={home}>cd ~/résumé</a><span class="not-found__caret" aria-hidden="true"></span>
+          </p>
+        </div>
       </main>
     </div>
+
+    <script is:inline>
+      // Show the path the visitor actually tried (textContent: never parsed as HTML).
+      const path = decodeURIComponent(location.pathname);
+      document.querySelectorAll("[data-path]").forEach((el) => {
+        el.textContent = path;
+      });
+    </script>
   </body>
 </html>
+
+<style>
+  .not-found {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: var(--space-24);
+    min-height: 100svh;
+    padding: var(--space-32) var(--page-gutter);
+    box-sizing: border-box;
+  }
+
+  .not-found__terminal {
+    width: min(100%, 40rem);
+    box-sizing: border-box;
+    padding-bottom: var(--space-16);
+    border: var(--border-thick) solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    overflow: clip;
+    background: var(--editor-bg);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
+    color: var(--syntax-text);
+  }
+
+  .not-found__bar {
+    display: flex;
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+    padding: var(--space-12);
+    background: var(--editor-bar);
+  }
+
+  .not-found__bar span {
+    width: var(--space-12);
+    height: var(--space-12);
+    border-radius: var(--radius-full);
+    background: var(--window-close);
+  }
+
+  .not-found__bar span:nth-child(2) {
+    background: var(--window-minimize);
+  }
+
+  .not-found__bar span:nth-child(3) {
+    background: var(--window-zoom);
+  }
+
+  .not-found__line {
+    margin: 0;
+    padding-inline: var(--space-16);
+    overflow-wrap: anywhere;
+    text-wrap: wrap;
+  }
+
+  .not-found__prompt {
+    margin-right: 1ch; // HTML compression eats the space before the command
+    color: var(--color-highlight);
+  }
+
+  .not-found__error {
+    color: var(--syntax-string);
+  }
+
+  .not-found__comment {
+    color: var(--syntax-punct);
+  }
+
+  .not-found a {
+    color: var(--syntax-key);
+    text-underline-offset: 0.2em;
+  }
+
+  .not-found__caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-left: var(--space-4);
+    vertical-align: text-bottom;
+    background: var(--syntax-text);
+    animation: not-found-caret 1s steps(1) infinite;
+  }
+
+  @keyframes not-found-caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .not-found__caret {
+      animation: none;
+    }
+  }
+</style>
