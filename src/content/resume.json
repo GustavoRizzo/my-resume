@@ -27,7 +27,7 @@
     "expertises": [
       {
         "title": "Software Developer",
-        "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS)</li></ul></p>",
+        "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS, Cloudflare)</li></ul></p>",
         "url_img": "images/icon-9423061.png",
         "icon": "web",
         "underline_class_css": "underline-megenta",
@@ -144,7 +144,7 @@
     "expertises": [
       {
         "title": "Desenvolvedor de Software",
-        "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS)</li></ul></p>",
+        "html_text": "<p><b>Backend:</b><br><ul><li>Python (Django, FastAPI)</li><li>C# (.Net Core)</li></ul></p><p><b>Frontend:</b><ul><li>JavaScript/Typescript (VUE, React, NextJS)</li></ul></p><p><b>DevOps:</b><ul><li>Docker</li><li>Cloud (Azure, AWS, Cloudflare)</li></ul></p>",
         "url_img": "images/icon-9423061.png",
         "icon": "web",
         "underline_class_css": "underline-megenta",
