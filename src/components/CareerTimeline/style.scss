@@ -1,15 +1,19 @@
 @use "../../styles/variables" as *;
 
+// Logo "bead" geometry ($logo-*) stays in Sass: it drives offsets via math.
+$logo-offset: $logo-radio + $logo-border-width;
+
 .rb-container {
-    font-family: $default-font-family;
-    text-align: justify;
-    width: min(95%, 800px);
+    text-align: start;
+    // Sized to the reading measure (+ the logo column), not to the viewport:
+    // the description never runs past ~65 characters per line.
+    width: min(95%, calc(var(--measure) + #{$logo-offset * 2 + 12px}));
     display: block;
     position: relative;
 
     ul.rb {
         margin-bottom: 2.5em;
-        margin-left: ($logo-radio+$logo-border-width);
+        margin-left: $logo-offset;
         padding: 0;
         display: inline-block;
         position: relative;
@@ -21,21 +25,21 @@
             top: 0;
             bottom: $logo-radio;
             left: 0;
-            width: 2px;
-            border-radius: 2px;
+            width: var(--border-thick);
+            border-radius: var(--radius-full);
             background: linear-gradient(
                 to bottom,
-                $highlight-color-timeline,
-                $secound-highlight-color-timeline
+                var(--color-highlight),
+                var(--color-highlight-2)
             );
         }
 
         li {
             list-style: none;
             margin: auto;
-            min-height: 50px;
-            padding-left: 12px+($logo-radio+$logo-border-width);
-            padding-bottom: 50px;
+            min-height: var(--space-48);
+            padding-left: 12px + $logo-offset;
+            padding-bottom: var(--space-48);
             position: relative;
 
             // start hidden, reveal one-by-one once the list scrolls into view
@@ -52,15 +56,13 @@
 
             .company-logo {
                 position: absolute;
-                left: -($logo-radio+$logo-border-width);
+                left: -$logo-offset;
                 top: -$logo-border-width;
-                content: " ";
                 border: $logo-border-width solid $border-color-timeline;
-                border-radius: 500%;
-                background: $highlight-color-timeline;
+                border-radius: var(--radius-full);
+                background-color: var(--color-highlight);
                 width: $logo-radio*2;
                 aspect-ratio: 1/1;
-                background-image: url(https://media.licdn.com/dms/image/D4D0BAQEtWByVQ99IBA/company-logo_200_200/0/1667215242490?e=2147483647&v=beta&t=uqvZyEa7rij57GkghRugBr6dPjvySTzX3cyd5h_uM5s);
                 background-position: center center;
                 background-size: contain;
                 // animate only GPU-friendly props (transform + border colour) to avoid jank
@@ -76,63 +78,62 @@
             }
 
             .paragraph {
-                // padding cancelled by equal negative margin so layout doesn't shift,
-                // leaving room for a subtle darkening highlight on hover
-                padding: 0.4rem 0.9rem;
-                margin: -0.6rem -0.9rem;
-                border-radius: 8px;
-                transition: background 300ms ease;
+                // padding cancelled by an equal negative margin so layout doesn't
+                // shift, leaving room for a subtle darkening highlight on hover
+                padding: var(--space-8) var(--space-16);
+                margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-16));
+                border-radius: var(--radius-md);
+                transition: background var(--duration-base) ease;
             }
 
             &:hover .paragraph {
                 background: linear-gradient(
                     to right,
-                    rgba(0, 0, 0, 0.45),
-                    rgba(0, 0, 0, 0)
+                    color-mix(in oklch, var(--color-surface-sunken) 75%, transparent),
+                    transparent
                 );
             }
 
             .date-pill {
                 display: inline-block;
-                margin-bottom: 0.5rem;
-                padding: 0.15rem 0.7rem;
-                border-radius: 999px;
-                font-family: $font-console;
-                font-size: 0.7rem;
-                font-weight: 700;
+                margin-bottom: var(--space-8);
+                padding: var(--space-4) var(--space-12);
+                border-radius: var(--radius-full);
+                font-family: var(--font-mono);
+                font-size: var(--fs-xs);
+                font-weight: var(--fw-bold);
+                line-height: var(--lh-snug);
                 letter-spacing: 0.05em;
-                color: $background-color;
-                background: $secound-highlight-color-timeline;
+                color: var(--color-text-on-accent);
+                background: var(--color-highlight-2);
             }
 
+            // Role: the primary line of each entry
             .title {
-                color: $highlight-color-timeline;
-                position: relative;
-                font-family: $default-font-family; // mono / "tech" feel
-                font-size: 1.25rem;
-                font-weight: 700;
-                letter-spacing: 0.03em;
-                line-height: 1.25;
+                color: var(--color-highlight);
+                font-size: var(--fs-xl);
+                font-weight: var(--fw-bold);
+                line-height: var(--lh-snug);
             }
 
+            // Company: secondary, eyebrow-style (uppercase needs 0.05–0.1em)
             .sub-title {
-                color: rgba($highlight-color-timeline, 0.65);
-                position: relative;
-                font-family: $default-font-family;
-                font-size: 0.7rem;
-                font-weight: 400;
+                color: var(--color-text-secondary);
+                font-size: var(--fs-sm);
+                font-weight: var(--fw-regular);
                 text-transform: uppercase;
-                letter-spacing: 0.22em;
-                margin-top: 0.15rem;
+                letter-spacing: 0.08em;
+                margin-top: var(--space-4);
 
                 .sub-title-link {
                     color: inherit;
                     text-decoration: none;
-                    transition: color 250ms ease;
+                    text-underline-offset: 0.2em;
+                    transition: color var(--duration-base) ease;
 
                     &:hover,
                     &:focus-visible {
-                        color: $highlight-color-timeline;
+                        color: var(--color-highlight);
                         text-decoration: underline;
                     }
                 }
@@ -141,13 +142,11 @@
     }
 
     .text {
-        // editorial body contrasting with the mono headings
-        color: rgba(#fff, 0.82);
-        font-family: $font-family-experience;
-        font-size: 0.98rem;
-        font-weight: 400;
-        line-height: 1.65;
-        margin-top: 0.5rem;
+        color: var(--color-text-secondary);
+        font-size: var(--fs-base);
+        line-height: var(--lh-body);
+        max-inline-size: var(--measure);
+        margin-top: var(--space-8);
     }
 }
 

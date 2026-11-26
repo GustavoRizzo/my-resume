@@ -181,7 +181,7 @@
   }
 
   &__body {
-    text-align: justify;
+    text-align: start;
     overflow-wrap: anywhere;
   }
 
@@ -242,7 +242,7 @@
   }
 
   &__badge {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     padding: 0.1rem 0.5rem;
     border-radius: 1em;
     background: $highlight-color-timeline;
