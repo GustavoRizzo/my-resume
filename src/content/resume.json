@@ -31,6 +31,7 @@
         "url_img": "images/icon-9423061.png",
         "icon": "web",
         "underline_class_css": "underline-megenta",
+        "code_tag": "dl class=\"stack\"",
         "initial_date": "2023-02-01"
       },
       {
@@ -39,6 +40,7 @@
         "url_img": "images/icon-2329087.png",
         "icon": "presentation",
         "underline_class_css": "underline-blue",
+        "code_tag": "dl class=\"toolbox\"",
         "initial_date": "2023-02-01"
       },
       {
@@ -47,6 +49,7 @@
         "url_img": "images/icon-1556324.png",
         "icon": "engine",
         "underline_class_css": "underline-orange",
+        "code_tag": "p",
         "initial_date": "2023-02-01"
       }
     ],
@@ -148,6 +151,7 @@
         "url_img": "images/icon-9423061.png",
         "icon": "web",
         "underline_class_css": "underline-megenta",
+        "code_tag": "dl class=\"stack\"",
         "initial_date": "2023-02-01"
       },
       {
@@ -156,6 +160,7 @@
         "url_img": "images/icon-2329087.png",
         "icon": "presentation",
         "underline_class_css": "underline-blue",
+        "code_tag": "dl class=\"toolbox\"",
         "initial_date": "2023-02-01"
       },
       {
@@ -164,6 +169,7 @@
         "url_img": "images/icon-1556324.png",
         "icon": "engine",
         "underline_class_css": "underline-orange",
+        "code_tag": "p",
         "initial_date": "2023-02-01"
       }
     ],

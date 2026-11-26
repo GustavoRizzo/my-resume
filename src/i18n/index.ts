@@ -20,6 +20,13 @@ export const LOCALE_BY_LANG: Record<Lang, string> = {
   pt: "pt-BR",
 };
 
+// Each language's name in itself (endonym), for the language selector: a
+// Portuguese speaker looks for "Português" even on the English page.
+export const LANG_NAME: Record<Lang, string> = {
+  en: "English",
+  pt: "Português",
+};
+
 const UI: Record<Lang, unknown> = { en, pt };
 
 /**

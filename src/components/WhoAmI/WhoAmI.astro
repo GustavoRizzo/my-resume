@@ -47,14 +47,14 @@ const easterEggFrames = [easterEgg2.src, easterEgg3.src];
   <h1 class="hero-title">{name}</h1>
   <div class="console-container" data-console-phrases={JSON.stringify(console_phrases)}>
     <span id="console-text-id"></span>
-    <div class="console-underscore hidden" id="console-cursor">▊</div>
+    <div class="console-underscore hidden" id="console-cursor" aria-hidden="true">▊</div>
   </div>
   <div class="list_contato">
     <a href={url_linkedin} aria-label="LinkedIn">
-      <img class="linkedin" src={linkedinIcon.src} alt="" width="30" height="30" />
+      <img class="linkedin" src={linkedinIcon.src} alt="" width="32" height="32" />
     </a>
     <a href={url_github} aria-label="GitHub">
-      <img class="github" src={githubIcon.src} alt="" width="30" height="30" />
+      <img class="github" src={githubIcon.src} alt="" width="32" height="32" />
     </a>
   </div>
 </section>

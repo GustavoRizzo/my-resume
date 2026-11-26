@@ -15,9 +15,14 @@ type Experience = {
 interface Props {
   lang: Lang;
   experiences: Experience[];
+  /** Heading level of the section title: 1 on its own page, 2 inside the home. */
+  level?: 1 | 2;
 }
 
-const { lang, experiences } = Astro.props;
+const { lang, experiences, level = 1 } = Astro.props;
+// Document structure decides the tags; the visual size comes from the classes.
+const SectionHeading = `h${level}` as const;
+const RoleHeading = level === 1 ? "h2" : "h3";
 const locale = LOCALE_BY_LANG[lang];
 
 // Dates are formatted at build time, per language ("JUN 2024" / "JUN. 2024").
@@ -36,8 +41,8 @@ const items = experiences.map((exp, index) => ({
 }));
 ---
 
-<section style="display: grid; justify-items: center; align-content: center;">
-  <h1 class="section-title">{t(lang, "sections.careerTimeline")}</h1>
+<section class="career">
+  <SectionHeading class="section-title">{t(lang, "sections.careerTimeline")}</SectionHeading>
   <div class="rb-container">
     <ul class="rb" data-reveal>
       {
@@ -56,8 +61,8 @@ const items = experiences.map((exp, index) => ({
               <div class="company-logo" style={`background-image: url(${exp.logoUrl})`} />
             )}
             <div class="paragraph">
-              <span class="date-pill">{exp.date}</span>
-              <div class="title">{exp.title}</div>
+              <time class="date-pill" datetime={exp.initial_date}>{exp.date}</time>
+              <RoleHeading class="title">{exp.title}</RoleHeading>
               <div class="sub-title">
                 {exp.company_url ? (
                   <a class="sub-title-link" href={exp.company_url} target="_blank" rel="noreferrer">

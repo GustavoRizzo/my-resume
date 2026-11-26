@@ -15,7 +15,7 @@ const resume = (await getEntry("resume", lang))!.data;
 
 <BaseLayout lang={lang} page="about" path="/about">
   <LanguageSelector lang={lang} />
-  <main style="padding: 0 1rem">
+  <main>
     <WhoAmI {...resume.about} />
   </main>
 </BaseLayout>

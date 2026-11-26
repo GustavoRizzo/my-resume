@@ -1,46 +1,112 @@
-@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .expertise-v3 {
-  width: min(95%, 1200px);
-  margin: 0 auto 6em;
+  width: min(100%, var(--size-container));
+  margin: 0 auto var(--section-gap);
 
+  // Auto-fit columns with a minimum card width: 3 across on desktop, fewer as
+  // space shrinks, 1 on phones — no breakpoint to maintain.
   &__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-24);
   }
 
+  // ---- the editor window ----
   &__item {
-    padding: 2rem 1.75rem;
-    border: 1px solid $default-text-color;
-    border-radius: 0.4rem;
-    background: #1a191d;
+    @include card;
+    // the card frame, painted as a dark editor theme
+    background: var(--editor-bg);
+    overflow: clip; // title bar follows the rounded corners
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--duration-base) ease;
 
     // start hidden, then reveal one-by-one once the grid is in view
     opacity: 0;
     transform: translateY(28px);
 
     .is-visible & {
-      animation: expertise-v3-reveal 0.6s ease forwards;
+      animation: expertise-v3-reveal var(--duration-slow) ease forwards;
       animation-delay: var(--reveal-delay, 0ms);
     }
+  }
+
+  // "Active window" (hover / keyboard focus inside): the tab's accent lights
+  // up, its dot turns breakpoint-red, the caret starts blinking.
+  &__item:hover,
+  &__item:focus-within {
+    border-color: var(--color-text-tertiary);
+  }
+
+  // One compact VS Code-style tab: as short as possible (mobile!).
+  &__tabs {
+    display: flex;
+    padding: var(--space-4) var(--space-8) 0;
+    background: var(--editor-bar);
+    user-select: none;
+  }
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    min-width: 0;
+    padding: var(--space-4) var(--space-12);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    background: var(--editor-bg);
+    border-top: var(--border-thick) solid var(--color-border-strong);
+    color: var(--syntax-text);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    transition: border-color var(--duration-base) ease;
+  }
+
+  &__tab-icon {
+    color: var(--cat-orange); // VS Code's orange HTML file icon
+    font-weight: var(--fw-bold);
+  }
+
+  // A status dot. Grey at rest; in the active window it turns red like a
+  // debugger breakpoint (a color change only: an "×" would invite a click).
+  &__tab-state::after {
+    content: "●" / "";
+    color: var(--syntax-gutter);
+    transition: color var(--duration-base) ease;
+  }
+
+  &__item:hover &__tab,
+  &__item:focus-within &__tab {
+    border-top-color: var(--color-primary);
+  }
+
+  &__item:hover &__tab-state::after,
+  &__item:focus-within &__tab-state::after {
+    color: var(--syntax-breakpoint);
+  }
+
+  &__body {
+    padding: var(--space-24);
   }
 
   // ---- headline: icon on the left + two-line title ----
   &__headline {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: var(--space-16);
+    margin-bottom: var(--space-16);
   }
 
   &__icon {
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    // Icons weigh more than text: a softer tone than the title.
+    color: var(--color-text-secondary);
 
     img {
       width: 100%;
@@ -49,23 +115,17 @@
       filter: invert(1);
     }
 
-    // inline SVG icons inherit the white text color via currentColor
-    span[role="img"] {
+    // inline SVG icons inherit the color above via currentColor
+    span {
       display: inline-flex;
       width: 100%;
       height: 100%;
-      color: $default-text-color;
     }
   }
 
   &__name {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1.15;
-    text-align: left;
-    color: $default-text-color;
+    @include card-title;
+    font-size: var(--fs-2xl);
     // To keep each title on a single line instead of breaking, remove the
     // <br /> in SectionExpertises.astro and add: white-space: nowrap;
   }
@@ -88,72 +148,158 @@
   }
 
   .underline-megenta::after {
-    background: #dc2a99;
+    background: var(--cat-magenta);
   }
   .underline-blue::after {
-    background: #2c49d8;
+    background: var(--cat-blue);
   }
   .underline-orange::after {
-    background: #ff6b2b;
+    background: var(--cat-orange);
   }
 
-  // ---- code-editor styled description ----
+  // ---- the code: gutter with line numbers + syntax colors ----
+  // Each "line" (the tags, every <p> and <li> of the content) bumps a counter
+  // shown in the left gutter. Line numbers are decoration: `/ ""` gives them
+  // an empty alt text so screen readers skip them.
   &__code {
-    font-family: $font-console;
-    font-size: 0.92rem;
-    line-height: 1.55;
-    text-align: left;
+    --gutter: 2.25rem;
+    position: relative;
+    counter-reset: line;
+    padding-left: var(--gutter);
+    margin-inline: calc(-1 * var(--space-8));
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
+    color: var(--syntax-text);
+  }
+
+  &__tag,
+  &__text p,
+  &__text li,
+  &__text:not(:has(p, li)) {
+    counter-increment: line;
+    border-radius: var(--space-4);
+    transition: background var(--duration-fast) ease;
+
+    // Anchored by its RIGHT edge (numbers right-aligned in the gutter), so a
+    // breakpoint dot added as left padding grows leftwards, hugging the number.
+    &::before {
+      content: counter(line) / "";
+      position: absolute; // vertical: stays on the line; horizontal: gutter
+      right: calc(100% - var(--gutter) + var(--space-12));
+      color: var(--syntax-gutter);
+      user-select: none;
+    }
+
+    // current-line highlight, like an editor
+    &:hover {
+      background: color-mix(in oklch, var(--syntax-text) 7%, transparent);
+    }
   }
 
   &__tag {
     display: block;
-    color: rgba($default-text-color, 0.35);
-    font-family: $font-console;
-    font-size: 0.92rem;
-    text-align: left;
     user-select: none;
   }
 
-  &__text {
-    padding-left: 1.1rem;
-    margin: 0.2rem 0;
-    border-left: 2px solid rgba($default-text-color, 0.18);
-    color: rgba($default-text-color, 0.85);
-    text-align: left;
+  // ---- breakpoints: click a line number to toggle one (easter egg, session
+  // only — see src/scripts/breakpoints.ts). The dot is painted in the left
+  // padding of the number's own ::before, right next to the number: it hangs
+  // into the card's padding, so the default layout doesn't reserve any room
+  // for an easter egg most visitors will never find. One pseudo-element per
+  // line also keeps the dot on the line's first row when the line wraps. ----
+  &__item.is-over-gutter {
+    cursor: pointer;
+  }
 
-    // override inline text-align coming from the data HTML
-    ul[style] {
-      text-align: left !important;
+  .is-gutter-hover::before,
+  .is-breakpoint::before {
+    padding-left: calc(0.6em + 3px); // dot + a hairline gap
+    background: radial-gradient(circle closest-side, var(--bp-dot) 80%, transparent)
+      left center / 0.6em 0.6em no-repeat;
+  }
+
+  .is-gutter-hover::before {
+    --bp-dot: color-mix(in oklch, var(--syntax-breakpoint) 55%, transparent);
+  }
+
+  .is-breakpoint {
+    background: color-mix(in oklch, var(--syntax-breakpoint) 14%, transparent);
+
+    &::before {
+      --bp-dot: var(--syntax-breakpoint);
     }
+  }
+
+  // the tab's dot stays red while the file has breakpoints
+  &__item.has-breakpoints &__tab-state::after {
+    color: var(--syntax-breakpoint);
+  }
+
+  .tok-punct {
+    color: var(--syntax-punct);
+  }
+
+  .tok-tag {
+    color: var(--syntax-tag);
+  }
+
+  .tok-attr {
+    margin-left: 1ch; // the space between tag name and attribute
+    color: var(--syntax-key);
+  }
+
+  .tok-string {
+    color: var(--syntax-string);
+  }
+
+  // blinking block caret after the closing tag, only in the active window
+  &__caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-left: var(--space-4);
+    vertical-align: text-bottom;
+    background: var(--syntax-text);
+    opacity: 0;
+  }
+
+  &__item:hover &__caret,
+  &__item:focus-within &__caret {
+    animation: expertise-v3-caret 1s steps(1) infinite;
+  }
+
+  // content HTML: indent guide + "keys" (bold labels) + "strings" (spans)
+  &__text {
+    padding-left: var(--space-16);
+    border-left: var(--border-thin) solid var(--color-border);
 
     p {
-      margin: 0 0 0.6rem;
+      margin: 0;
     }
 
-    b {
-      color: $default-text-color;
-      font-weight: 700;
+    // empty paragraphs and trailing <br>s left over by the content's HTML
+    p:empty,
+    br:last-child {
+      display: none;
+    }
+
+    :is(b, strong) {
+      color: var(--syntax-key);
+      font-weight: var(--fw-regular);
     }
 
     ul {
       list-style: none;
-      margin: 0.2rem 0 0.8rem;
-      padding-left: 0;
-    }
-
-    li {
-      position: relative;
-      padding-left: 1rem;
-      margin-bottom: 0.25rem;
-
-      &::before {
-        content: "›";
-        position: absolute;
-        left: 0;
-        color: rgba($default-text-color, 0.45);
-      }
+      margin: 0;
+      padding-left: var(--space-16);
     }
   }
+}
+
+@keyframes expertise-v3-caret {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 @keyframes expertise-v3-reveal {
@@ -163,23 +309,17 @@
   }
 }
 
-// respect users who prefer reduced motion: show cards immediately
+// respect users who prefer reduced motion: show cards immediately and keep
+// the caret steady instead of blinking
 @media (prefers-reduced-motion: reduce) {
   .expertise-v3__item {
     opacity: 1;
     transform: none;
     animation: none;
   }
-}
 
-// stack into a single column on narrow screens
-@media (max-width: 820px) {
-  .expertise-v3__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .expertise-v3__item {
-    border: 1px solid $default-text-color;
-    border-radius: 0.4rem;
+  .expertise-v3__item:is(:hover, :focus-within) .expertise-v3__caret {
+    animation: none;
+    opacity: 1;
   }
 }

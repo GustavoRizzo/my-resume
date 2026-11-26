@@ -1,30 +1,36 @@
-@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .beyond-work {
   display: grid;
   justify-items: center;
-  margin-bottom: 5em;
+  margin-bottom: var(--section-gap);
 
   &__subtitle {
-    max-width: min(95%, 720px);
+    max-inline-size: 45ch;
     text-align: center;
-    opacity: 0.8;
-    margin-top: -0.5rem;
-    margin-bottom: 2rem;
+    font-size: var(--fs-lg);
+    color: var(--color-text-secondary);
+    // pulls the subtitle towards the title it belongs to
+    margin-top: calc(-1 * var(--space-16));
+    margin-bottom: var(--space-32);
   }
 
   /* The fan container. Cards are absolutely positioned and rotate around a
      pivot point well below the deck, so they spread out like a hand of cards.
-     At rest the fan is slightly closed; on hover/focus-within it opens wider. */
+     At rest the fan is slightly closed; on hover/keyboard focus it opens wider. */
   &__fan {
     --angle-step: 9deg;
     --pivot: 460px; // how far below the cards the rotation pivot sits
     position: relative;
-    width: min(95%, 1000px);
+    width: min(100%, 1000px);
     height: 380px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+
+    &:has(:focus-visible) {
+      --angle-step: 15deg;
+    }
 
     @media (hover: hover) {
       &:hover {
@@ -35,67 +41,102 @@
 }
 
 /* --- Card (presentation layer — fan/deck reskin target) --- */
+@mixin lifted {
+  transform: rotate(var(--rot)) translateY(-40px) scale(1.05);
+  background: var(--color-surface-raised);
+  border-color: var(--color-highlight);
+  box-shadow: var(--shadow-lift);
+  z-index: var(--z-card-lifted);
+}
+
 .hobby-card {
   // Offset from the centre of the fan, e.g. -1, 0, 1 for three cards.
   --offset: calc(var(--i) - (var(--total) - 1) / 2);
   --rot: calc(var(--offset) * var(--angle-step));
 
+  @include card;
   position: absolute;
   bottom: 0;
   width: 220px;
   height: 300px;
   box-sizing: border-box;
+  padding: var(--space-24);
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
-  text-align: left;
-  cursor: pointer;
-  color: $default-text-color;
-  background: $first-perfil-color;
-  border: 2px solid $card-border-color-expertise;
-  border-radius: 1em;
-  padding: 1.5rem;
-  font-family: inherit;
+  gap: var(--space-8);
+  // separates overlapping cards in the fan
+  box-shadow: 0 4px 12px oklch(0% 0 0 / 0.3);
 
   transform-origin: 50% var(--pivot);
   transform: rotate(var(--rot));
-  transition: transform 0.3s ease, box-shadow 0.2s ease-in-out,
-    background 0.2s ease-in-out;
+  transition: transform var(--duration-base) ease,
+    box-shadow var(--duration-base) ease, background var(--duration-base) ease,
+    border-color var(--duration-base) ease;
 
+  // Keyboard focus lands on the stretched button; the ring is drawn on the card.
+  &:has(.hobby-card__open:focus-visible) {
+    outline: var(--border-thick) solid var(--color-focus);
+    outline-offset: var(--space-4);
+  }
+
+  // Lift the card outward along its own rotated axis and bring it forward:
+  // on mouse hover, and on keyboard focus.
   @media (hover: hover) {
-    &:hover,
-    &:focus-visible {
-      // Lift the card outward along its own rotated axis and bring it forward.
-      transform: rotate(var(--rot)) translateY(-40px) scale(1.05);
-      background: $secound-perfil-color;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-      z-index: 100;
+    &:hover {
+      @include lifted;
     }
   }
 
+  &:has(.hobby-card__open:focus-visible) {
+    @include lifted;
+  }
+
   &__emoji {
-    font-size: 2.5rem;
+    font-size: var(--fs-4xl);
     line-height: 1;
   }
 
   &__title {
-    margin: 0;
-    font-size: 1.2rem;
+    @include card-title;
+    font-size: var(--fs-xl);
+  }
+
+  // The real control: a plain-text button whose ::after covers the card,
+  // so a click anywhere opens the topic.
+  &__open {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    &:focus-visible {
+      outline: none; // drawn on the whole card instead (see above)
+    }
   }
 
   &__summary {
     margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.85;
+    font-size: var(--fs-sm);
+    color: var(--color-text-secondary);
   }
 
   &__hint {
     margin-top: auto;
-    padding-top: 0.5rem;
-    font-size: 0.85rem;
-    color: $highlight-color-timeline;
+    padding-top: var(--space-8);
+    font-size: var(--fs-sm);
+    color: var(--color-highlight);
   }
 }
 
@@ -107,12 +148,13 @@
     height: auto;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-16);
   }
 
   .hobby-card {
-    position: static;
-    width: min(95%, 360px);
+    --rot: 0deg; // no fan: focus lifts straight up instead of rotating
+    position: relative; // anchors the stretched open button
+    width: min(100%, 360px);
     height: auto;
     transform: none;
   }
@@ -122,74 +164,102 @@
 .hobby-modal__overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  animation: hobby-fade-in 0.15s ease-out;
+  padding: var(--space-16);
+  background: var(--scrim);
+  animation: hobby-fade-in var(--duration-fast) ease-out;
 }
 
 .hobby-modal {
+  @include card;
   position: relative;
   // Sized off `vw`, not `%` of the flex overlay — `%` is relative to the
   // overlay's own content box, which can shift a few pixels when the page
   // gains/loses a scrollbar (its width becomes indirectly scroll-dependent).
   // `vw` is fixed to the viewport regardless of any scrollbar, so the modal's
   // width stays stable no matter what the rest of the page is doing.
-  width: min(92vw, 560px);
-  max-width: calc(100vw - 2rem);
+  // Extra-chunky frame in the brand gradient (cyan → mint). Two background
+  // layers instead of border-image, which would ignore the border-radius.
+  border: var(--border-heavy) solid transparent;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--gradient-brand) border-box;
+  width: min(92vw, var(--size-modal));
+  max-width: calc(100vw - 2 * var(--space-16));
   min-width: 0;
   max-height: 85vh;
   overflow-y: auto;
-  background: $background-color;
-  color: $default-text-color;
-  border: 2px solid $card-border-color-expertise;
-  border-radius: 1em;
-  padding: 2rem;
-  animation: hobby-scale-in 0.15s ease-out;
+  padding: var(--space-32);
+  box-shadow: var(--shadow-lift);
+  animation: hobby-scale-in var(--duration-fast) ease-out;
 
   &__close {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+    top: var(--space-8);
+    right: var(--space-8);
+    display: grid;
+    place-items: center;
+    width: var(--size-target);
+    height: var(--size-target);
+    padding: 0;
     background: transparent;
     border: none;
-    color: $default-text-color;
-    font-size: 1.25rem;
-    line-height: 1;
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
     cursor: pointer;
-    opacity: 0.7;
+    transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+
+    .hobby-icon {
+      width: var(--space-24);
+      height: var(--space-24);
+      transition: transform var(--duration-base) ease;
+    }
+
+    // a little spin before closing
+    &:hover .hobby-icon {
+      transform: rotate(90deg);
+    }
 
     &:hover,
     &:focus-visible {
-      opacity: 1;
+      color: var(--color-text);
+      background: var(--color-surface-raised);
     }
   }
 
   &__title {
+    @include card-title;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 0;
+    gap: var(--space-8);
+    font-size: var(--fs-2xl);
+    // leaves room for the close button
+    padding-right: var(--size-target);
+    margin-bottom: var(--space-16);
   }
 
   &__emoji {
-    font-size: 1.75rem;
+    font-size: var(--fs-3xl);
     line-height: 1;
   }
 
   &__body {
-    text-align: justify;
+    color: var(--color-text-secondary);
     overflow-wrap: anywhere;
+
+    :is(b, strong) {
+      color: var(--color-text);
+    }
   }
 
   &__gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1.5rem;
+    gap: var(--space-12);
+    margin-top: var(--space-24);
   }
 
   &__photo-button {
@@ -197,11 +267,11 @@
     border: none;
     background: transparent;
     cursor: zoom-in;
-    border-radius: 0.75em;
+    border-radius: var(--radius-md);
 
     &:hover .hobby-modal__photo,
     &:focus-visible .hobby-modal__photo {
-      border-color: $highlight-color-timeline;
+      border-color: var(--color-highlight);
     }
   }
 
@@ -210,43 +280,43 @@
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    border: 2px solid $card-border-color-expertise;
-    border-radius: 0.75em;
-    transition: border-color 0.15s ease-in-out;
+    border: var(--border-thick) solid transparent;
+    border-radius: var(--radius-md);
+    transition: border-color var(--duration-fast) ease-in-out;
   }
 
   &__links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
+    gap: var(--space-12);
+    margin-top: var(--space-24);
   }
 
   &__link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
     max-width: 100%;
-    border: 2px solid $highlight-color-timeline;
-    border-radius: 2em;
-    color: $default-text-color;
+    border: var(--border-thick) solid var(--color-highlight);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition: background 0.15s ease-in-out;
+    transition: background var(--duration-fast) ease-in-out;
 
     &:hover,
     &:focus-visible {
-      background: rgba(156, 226, 189, 0.15);
+      background: color-mix(in oklch, var(--color-highlight) 15%, transparent);
     }
   }
 
   &__badge {
-    font-size: 0.7rem;
-    padding: 0.1rem 0.5rem;
-    border-radius: 1em;
-    background: $highlight-color-timeline;
-    color: $background-color;
+    font-size: var(--fs-xs);
+    padding: 0.125rem var(--space-8);
+    border-radius: var(--radius-full);
+    background: var(--color-highlight);
+    color: var(--color-text-on-accent);
     white-space: nowrap;
   }
 }
@@ -255,76 +325,87 @@
 .hobby-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 1100;
+  z-index: var(--z-lightbox);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.85);
-  animation: hobby-fade-in 0.15s ease-out;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  background: var(--scrim-strong);
+  animation: hobby-fade-in var(--duration-fast) ease-out;
   cursor: zoom-out;
 
   &__image {
     max-width: min(92vw, 1100px);
     max-height: 80vh;
-    border-radius: 0.75em;
+    border-radius: var(--radius-md);
     cursor: default;
-    animation: hobby-scale-in 0.15s ease-out;
+    animation: hobby-scale-in var(--duration-fast) ease-out;
   }
 
   &__caption {
     margin: 0;
-    color: #fff;
-    opacity: 0.85;
+    color: var(--color-text-secondary);
     text-align: center;
   }
 
-  &__close {
+  // Close and prev/next share one round control style
+  &__close,
+  &__nav {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    line-height: 1;
+    display: grid;
+    place-items: center;
+    width: var(--size-target);
+    height: var(--size-target);
+    padding: 0;
+    background: color-mix(in oklch, var(--color-bg) 70%, transparent);
+    border: var(--border-thick) solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
     cursor: pointer;
-    opacity: 0.8;
+    transition: border-color var(--duration-fast) ease;
+
+    .hobby-icon {
+      width: var(--space-24);
+      height: var(--space-24);
+      transition: transform var(--duration-base) ease;
+    }
 
     &:hover,
     &:focus-visible {
-      opacity: 1;
+      border-color: var(--color-text);
+    }
+  }
+
+  &__close {
+    top: var(--space-16);
+    right: var(--space-16);
+
+    &:hover .hobby-icon {
+      transform: rotate(90deg);
     }
   }
 
   &__nav {
-    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    width: 2.75rem;
-    height: 2.75rem;
-    color: #fff;
-    font-size: 1.75rem;
-    line-height: 1;
-    cursor: pointer;
-    opacity: 0.8;
 
-    &:hover,
-    &:focus-visible {
-      opacity: 1;
-    }
-
+    // the arrow nudges towards where it will take you
     &--prev {
-      left: 1rem;
+      left: var(--space-16);
+
+      &:hover .hobby-icon {
+        transform: translateX(-3px);
+      }
     }
 
     &--next {
-      right: 1rem;
+      right: var(--space-16);
+
+      &:hover .hobby-icon {
+        transform: translateX(3px);
+      }
     }
   }
 }
@@ -337,4 +418,16 @@
 @keyframes hobby-scale-in {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hobby-icon {
+    transition: none;
+  }
+
+  .hobby-modal__close:hover .hobby-icon,
+  .hobby-lightbox__close:hover .hobby-icon,
+  .hobby-lightbox__nav:hover .hobby-icon {
+    transform: none;
+  }
 }

@@ -51,6 +51,6 @@ describe("WhoAmI.astro", () => {
     expect(html).toContain('<h1 class="hero-title">Test Name</h1>');
     expect(html).toContain('href="https://linkedin.test" aria-label="LinkedIn"');
     expect(html).toContain('href="https://github.test" aria-label="GitHub"');
-    expect(html.match(/width="30" height="30"/g)).toHaveLength(2);
+    expect(html.match(/width="32" height="32"/g)).toHaveLength(2);
   });
 });

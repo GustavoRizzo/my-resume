@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "../../styles/variables" as *;
 
 // Easter-egg hint timing: edit these; everything below derives from them.
 $hint-hidden: 3s; // fully invisible
@@ -11,14 +10,6 @@ $hint-cycle: $hint-hidden + $hint-visible;
 @function hint-stop($time) {
   @return math.percentage(math.div($time, $hint-cycle));
 }
-
-
-  /* No `background` here: the page background lives on :root/body::before in
-     global.scss (dot grid); an opaque body background would paint over it. */
-  body {
-    color: $default-text-color;
-    font-family: $default-font-family;
-  }
 
   .about {
     display: grid;
@@ -32,13 +23,14 @@ $hint-cycle: $hint-hidden + $hint-visible;
     justify-items: center;
     align-content: center;
     min-height: 90vh;
+    min-height: 90svh; // mobile: ignore the collapsing browser toolbar
     width: 100%;
-    padding-top: 60px;
+    padding-top: var(--space-64);
 
     &_perfil_wrap {
       position: relative;
       cursor: pointer;
-      width: min(90%, 400px);
+      width: min(90%, var(--size-avatar));
       aspect-ratio: 1/1;
       border-radius: 50%;
 
@@ -51,11 +43,11 @@ $hint-cycle: $hint-hidden + $hint-visible;
         border-radius: 50%;
         background: conic-gradient(
           from 0deg,
-          $perfil-glow-cyan-dark,
-          $perfil-glow-cyan,
-          $perfil-glow-cyan-dark,
-          $perfil-glow-cyan,
-          $perfil-glow-cyan-dark
+          var(--color-primary-deep),
+          var(--color-primary),
+          var(--color-primary-deep),
+          var(--color-primary),
+          var(--color-primary-deep)
         );
         filter: blur(9px);
         z-index: 0;
@@ -75,13 +67,14 @@ $hint-cycle: $hint-hidden + $hint-visible;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border: 2px rgba($perfil-glow-cyan, 0.85) solid;
-      box-shadow: 0 0 10px rgba($perfil-glow-cyan, 0.4);
+      border: var(--border-thick) solid
+        color-mix(in oklch, var(--color-primary) 85%, transparent);
+      box-shadow: var(--glow-primary);
       filter: contrast(110%);
       background-image: linear-gradient(
         to bottom,
-        $first-perfil-color,
-        $secound-perfil-color
+        var(--color-surface),
+        var(--color-surface-raised)
       );
     }
   }
@@ -105,10 +98,10 @@ $hint-cycle: $hint-hidden + $hint-visible;
     inset: calc(-1 * var(--hint-offset));
     width: calc(100% + 2 * var(--hint-offset));
     height: calc(100% + 2 * var(--hint-offset));
-    z-index: 2; // above the photo (z-index 1) and halo (z-index 0)
+    z-index: var(--z-overlay-hint); // above the photo (1) and halo (0)
     pointer-events: none; // clicks fall through to the photo
-    fill: $highlight-color-timeline;
-    font-family: $font-console;
+    fill: var(--color-highlight);
+    font-family: var(--font-mono);
     font-size: 3.4px; // viewBox units — scales with the photo
     letter-spacing: 0.2em;
     opacity: 0;
@@ -149,12 +142,13 @@ $hint-cycle: $hint-hidden + $hint-visible;
     opacity: 0;
   }
   .console-container {
-    font-family: $font-console;
-    font-size: 1.9em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-3xl);
+    line-height: var(--lh-snug);
     text-align: center;
     height: 2em;
     display: block;
-    color: white;
+    color: var(--color-text);
     margin: auto;
     // The typed phrase is a single unbroken line growing letter by letter.
     // As a grid item its automatic min-width defaults to its content's
@@ -169,29 +163,31 @@ $hint-cycle: $hint-hidden + $hint-visible;
     white-space: nowrap;
   }
   .console-underscore {
-    font-family: $font-console;
-    color: $color-cursor-console;
+    color: var(--color-text);
     display: inline-block;
-    top: -0.14em;
-    left: 10px;
   }
 
   // Contact
 
   .list_contato {
     display: flex;
-    gap: 30px;
+    gap: var(--space-24);
 
-    // LinkedIn's white comes from a <rect> inside the svg (see WhoAmI.tsx);
+    a {
+      display: block;
+      border-radius: var(--radius-md);
+    }
+
+    // LinkedIn's white comes from a <rect> inside the svg (see WhoAmI.astro);
     // GitHub is the white cat drawing on a black rounded tile.
-    .linkedin {
-      width: 30px;
+    img {
+      display: block;
+      width: var(--size-icon-sm);
+      height: var(--size-icon-sm);
     }
 
     .github {
-      width: 30px;
-      height: 30px;
       border-radius: 15%;
-      background: white;
+      background: var(--color-text);
     }
   }

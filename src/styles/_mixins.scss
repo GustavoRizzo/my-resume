@@ -1,0 +1,22 @@
+// Shared component recipes built only from tokens (_tokens.scss), so every
+// card on the site looks like the same family.
+
+// Card surface: one background, one chunky 2px border, one radius. The
+// border is a soft grey, not white, so it frames without shouting; it also
+// keeps overlapping cards (the hobby fan) apart. Padding is per component.
+@mixin card {
+  background: var(--color-surface);
+  border: var(--border-thick) solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  text-align: start;
+}
+
+// Title inside a card: display font, bold, snug.
+@mixin card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--color-text);
+}

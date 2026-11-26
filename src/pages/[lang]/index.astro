@@ -18,10 +18,10 @@ const resume = (await getEntry("resume", lang))!.data;
 
 <BaseLayout lang={lang} page="home" path="">
   <LanguageSelector lang={lang} />
-  <main style="padding: 0 1rem">
+  <main>
     <WhoAmI {...resume.about} />
-    <SectionExpertises lang={lang} expertises={resume.expertises} />
-    <CareerTimeline lang={lang} experiences={resume.experiences} />
-    <BeyondWork lang={lang} />
+    <SectionExpertises lang={lang} expertises={resume.expertises} level={2} />
+    <CareerTimeline lang={lang} experiences={resume.experiences} level={2} />
+    <BeyondWork lang={lang} level={2} />
   </main>
 </BaseLayout>
