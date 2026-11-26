@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import perfil from "../../assets/perfil.png";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import githubIcon from "../../assets/icons/github.svg";
@@ -11,7 +10,8 @@ import "./style.scss";
 // Hero: profile photo (with click easter egg), name, console typewriter and
 // contact links. Static HTML + a small vanilla script (below) — no framework
 // runtime on the first fold. The photo is the page's LCP element, hence the
-// responsive WebP srcset, eager load and high fetch priority.
+// eager load and high fetch priority. It is served as the original PNG on
+// purpose: the astro:assets WebP conversion visibly lowered its quality.
 
 type Props = Omit<About, "perfil_img">;
 
@@ -22,13 +22,12 @@ const easterEggFrames = [easterEgg2.src, easterEgg3.src];
 
 <section class="about" data-who-am-i>
   <div class="about_perfil_wrap" data-easter-egg-frames={JSON.stringify(easterEggFrames)}>
-    <Image
+    <img
       class="about_img_perfil"
-      src={perfil}
+      src={perfil.src}
       alt={name}
-      format="webp"
-      widths={[400, 600, 800]}
-      sizes="(max-width: 444px) 90vw, 400px"
+      width={perfil.width}
+      height={perfil.height}
       loading="eager"
       fetchpriority="high"
       decoding="async"

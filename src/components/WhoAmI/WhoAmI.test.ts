@@ -26,10 +26,10 @@ describe("WhoAmI.astro", () => {
     expect(img).not.toContain('loading="lazy"');
   });
 
-  it("serves the photo as a responsive srcset with sizes and dimensions", async () => {
+  it("serves the original PNG photo (no re-encoding) with its dimensions", async () => {
     const img = photoTag(await render());
-    expect(img).toMatch(/srcset="[^"]*400w[^"]*800w/);
-    expect(img).toContain('sizes="(max-width: 444px) 90vw, 400px"');
+    expect(img).toMatch(/src="[^"]*perfil[^"]*\.png/);
+    expect(img).not.toContain("srcset");
     expect(img).toMatch(/width="\d+"/);
     expect(img).toMatch(/height="\d+"/);
   });
