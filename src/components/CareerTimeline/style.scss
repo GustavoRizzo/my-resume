@@ -1,6 +1,6 @@
 @use "../../styles/variables" as *;
 
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+@import "@fontsource/pt-sans/latin-400.css"; // self-hosted, see global.scss
 
 /* No `background` here: the page background lives on :root/body::before in
    global.scss (dot grid); an opaque body background would paint over it. */

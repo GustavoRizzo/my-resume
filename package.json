@@ -18,6 +18,8 @@
   "dependencies": {
     "@astrojs/react": "^7.1.9",
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/poppins": "^5.3.0",
+    "@fontsource/pt-sans": "^5.3.0",
     "astro": "^7.0.6",
     "isomorphic-dompurify": "^4.9.0",
     "react": "^19.2.7",

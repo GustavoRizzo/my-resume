@@ -1,5 +1,4 @@
 @use "../../styles/variables" as *;
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap");
 
 .expertise-v3 {
   width: min(95%, 1200px);
@@ -68,7 +67,7 @@
     text-align: left;
     color: $default-text-color;
     // To keep each title on a single line instead of breaking, remove the
-    // <br /> in SectionExpertisesV3.tsx and add: white-space: nowrap;
+    // <br /> in SectionExpertises.astro and add: white-space: nowrap;
   }
 
   // colored "chonky" underline behind the first word
