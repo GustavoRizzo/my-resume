@@ -1,1 +1,0 @@
-import{t as e}from"./revealOnScroll.BKxoo2aT.js";e(`.expertise-v3__grid[data-reveal]`,.2);
