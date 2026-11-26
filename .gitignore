@@ -37,3 +37,9 @@ CLAUDE.md
 
 # Cloudflare wrangler local state (wrangler dev)
 .wrangler/
+
+# Local secrets (wrangler loads .env automatically). Only the example is versioned.
+.env
+.env.*
+!.env.example
+.dev.vars

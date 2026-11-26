@@ -94,6 +94,12 @@ Repository settings that control the deploy (Settings → Secrets and variables 
 | `CANONICAL_TARGET` | variable | `cloudflare` (default) or `gh-pages` |
 | `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | credentials for `wrangler deploy` |
 
+The Cloudflare API token needs, on the **account**: **Workers Scripts › Edit**
+(marked *Legacy* in the dashboard, but still required: the newer *Workers ›
+Editor* alone is denied the static-assets upload); and on the **`bygus.dev`
+zone**: **Zone › Read** + **Workers Routes › Edit** (to attach the custom domain). To deploy from your machine, copy
+[`.env.example`](.env.example) to `.env` and fill it in.
+
 Every language × page is pre-rendered to a real static HTML file, so deep links
 and refreshes just work on both hosts — no SPA redirect tricks needed.
 
