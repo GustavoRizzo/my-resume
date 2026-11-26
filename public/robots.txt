@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://gustavorizzo.github.io/my-resume/sitemap-index.xml

@@ -7,6 +7,11 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
   {
-    ignores: ["dist/", ".astro/", "node_modules/"],
+    ignores: ["dist/", ".astro/", ".wrangler/", "node_modules/"],
+  },
+  {
+    // Root config files run in Node (they read DEPLOY_TARGET & co. from the env).
+    files: ["*.config.{js,mjs,ts}"],
+    languageOptions: { globals: { process: "readonly" } },
   },
 );

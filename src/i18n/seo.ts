@@ -1,11 +1,13 @@
 import perfil from "../assets/perfil.png";
 import { SUPPORTED_LANGS, type Lang } from "./index";
 
-// Canonical site origin (GitHub Pages project page).
-const ORIGIN = "https://gustavorizzo.github.io";
-const SITE = `${ORIGIN}/my-resume`;
-// perfil.src already carries the /my-resume/ base and content hash.
-const OG_IMAGE = `${ORIGIN}${perfil.src}`;
+// The site is deployed to two hosts (see deploy-targets.mjs). canonical and
+// hreflang point at the CANONICAL host in every copy, so search engines index
+// one of them; the OG image points at THIS build's own host, so each copy is
+// self-sufficient if the other host disappears.
+const SITE = __CANONICAL_SITE__;
+// perfil.src already carries this build's base and content hash.
+const OG_IMAGE = `${new URL(import.meta.env.SITE).origin}${perfil.src}`;
 export const AUTHOR = "Gustavo Rizzo S. M. de Albuquerque";
 
 export type PageKey = "home" | "about" | "expertises" | "career" | "beyondWork";

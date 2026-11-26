@@ -2,10 +2,13 @@ import { describe, expect, it } from "vitest";
 import { pageSeo } from "./seo";
 
 describe("pageSeo", () => {
-  it("builds canonical URL under the language prefix", () => {
-    expect(pageSeo("pt", "career", "/career").url).toBe(
-      "https://gustavorizzo.github.io/my-resume/pt/career",
-    );
+  it("builds canonical URL on the canonical host, under the language prefix", () => {
+    expect(pageSeo("pt", "career", "/career").url).toBe(`${__CANONICAL_SITE__}/pt/career`);
+  });
+
+  it("points hreflang alternates at the canonical host too", () => {
+    const { alternates } = pageSeo("en", "home", "");
+    expect(alternates.every((a) => a.href.startsWith(`${__CANONICAL_SITE__}/`))).toBe(true);
   });
 
   it("lists en, pt and x-default alternates for the same path", () => {
@@ -19,7 +22,8 @@ describe("pageSeo", () => {
     expect(pageSeo("pt", "home", "").title).toContain("Desenvolvedor de Software");
   });
 
-  it("uses an absolute OG image URL", () => {
-    expect(pageSeo("en", "home", "").ogImage).toMatch(/^https:\/\/gustavorizzo\.github\.io\//);
+  it("serves the OG image from this build's own host, so each copy stands alone", () => {
+    const own = new URL(import.meta.env.SITE).origin;
+    expect(pageSeo("en", "home", "").ogImage).toMatch(new RegExp(`^${own.replace(/\./g, "\\.")}/`));
   });
 });
