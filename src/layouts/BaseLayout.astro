@@ -15,13 +15,25 @@ const { lang, page, path } = Astro.props;
 const seo = pageSeo(lang, page, path);
 const favicon = withBase("favicon.svg");
 
-const GTM = `(function (w, d, s, l, i) {
+// Google Tag Manager, deferred. The dataLayer and the gtm.start timestamp are
+// set right away (so GTM still sees the real page start and any early pushes),
+// but gtm.js itself (~300 KiB with GA4, the page's heaviest main-thread cost)
+// is only fetched after `load`, when the browser is idle — keeping it off the
+// critical path of the first paint / LCP.
+const GTM = `(function (w, d, l, i) {
   w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-  var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
-    dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true;
-  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-  f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'dataLayer', 'GTM-W6HR4FW5');`;
+  function inject() {
+    var j = d.createElement('script'); j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + (l != 'dataLayer' ? '&l=' + l : '');
+    d.head.appendChild(j);
+  }
+  function schedule() {
+    if ('requestIdleCallback' in w) w.requestIdleCallback(inject, { timeout: 3000 });
+    else setTimeout(inject, 1500);
+  }
+  if (d.readyState === 'complete') schedule();
+  else w.addEventListener('load', schedule, { once: true });
+})(window, document, 'dataLayer', 'GTM-W6HR4FW5');`;
 ---
 
 <html lang={lang}>
