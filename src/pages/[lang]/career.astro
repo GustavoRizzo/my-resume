@@ -15,7 +15,7 @@ const resume = (await getEntry("resume", lang))!.data;
 
 <BaseLayout lang={lang} page="career" path="/career">
   <LanguageSelector lang={lang} />
-  <main style="padding: 0 1rem">
+  <main>
     <CareerTimeline lang={lang} experiences={resume.experiences} />
   </main>
 </BaseLayout>

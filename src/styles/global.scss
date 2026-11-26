@@ -37,6 +37,7 @@ body {
    viewport, where `clip` downgrades to `hidden` and stays scrollable.) */
 main {
   overflow-x: clip;
+  padding-inline: var(--page-gutter);
 }
 
 /* Subtle "aurora" backdrop over the flat --color-bg: two very diffuse radial
@@ -63,9 +64,10 @@ body::before {
     );
 }
 
+/* Text aligns to the start by default; only titles and short blocks
+   (hero, section titles, subtitles) center themselves. */
 #root {
   margin: 0 auto;
-  text-align: center;
   width: 100%;
 }
 
@@ -119,6 +121,7 @@ p {
   font-size: var(--fs-hero);
   letter-spacing: -0.02em;
   line-height: var(--lh-tight);
+  text-align: center;
   margin: var(--space-24) 0;
 }
 
@@ -129,6 +132,7 @@ p {
   font-size: var(--fs-section);
   letter-spacing: -0.02em;
   line-height: var(--lh-snug);
+  text-align: center;
   position: relative;
   margin: 0 auto var(--space-32);
   padding-bottom: var(--space-12);

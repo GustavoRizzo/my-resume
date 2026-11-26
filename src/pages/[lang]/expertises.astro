@@ -15,7 +15,7 @@ const resume = (await getEntry("resume", lang))!.data;
 
 <BaseLayout lang={lang} page="expertises" path="/expertises">
   <LanguageSelector lang={lang} />
-  <main style="padding: 0 1rem">
+  <main>
     <SectionExpertises lang={lang} expertises={resume.expertises} />
   </main>
 </BaseLayout>
